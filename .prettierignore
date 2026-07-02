@@ -1,0 +1,9 @@
+dist
+node_modules
+이미지_생성결과
+이미지_래퍼런스
+참고 자료 이미지
+ITC Avant Garde
+manifest
+*.md
+package-lock.json

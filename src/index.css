@@ -1,0 +1,108 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+/* ── 디자인 토큰 — "계측기 / 실측 로그" 정체성 ────────────────────────────────
+   Tailwind v4 @theme → bg- · text- · font- · ease- 유틸리티로 노출.
+   의미 축: 개입 전(회색 --claimed) → 검증 후(틸 --signal). */
+@theme {
+  --color-base: #F6F7F9;         /* 차가운 오프화이트 배경 */
+  --color-panel: #FFFFFF;
+  --color-soft: #EEF1F5;         /* 옅은 패널/구획 */
+  --color-ink: #101A2C;          /* 본문 딥네이비 텍스트 */
+  --color-navy: #1A2B4A;         /* 시그니처 앵커 — 히어로·섹션 헤더 */
+  --color-line: #DCE1E9;         /* 헤어라인 */
+  --color-line-strong: #C3CAD6;
+
+  --color-text-sub: #586173;     /* 서브 텍스트 (--muted) */
+  --color-text-muted: #586173;
+  --color-text-faint: #8A93A3;
+
+  /* 시그널 — "검증됨/측정됨" */
+  --color-signal: #0E7C86;       /* 딥 틸 액센트 */
+  --color-signal-soft: #E1F3F4;
+  --color-signal-bright: #3FD0E0; /* 네이비 배경 위 액센트 */
+  --color-claimed: #9AA6B4;      /* "주장값/개입 전"의 회색 — 재측정 모티프 */
+
+  /* 연락처 브랜드색 */
+  --color-github: #5B6472;
+  --color-github-bright: #AEB7C4; /* 다크 배경 호버용 */
+  --color-velog: #0E7C86;
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* 타입 스케일 → text-hero 등 유틸리티 */
+  --text-hero: clamp(64px, 10vw, 156px);
+  --text-room-title: clamp(56px, 9vw, 132px);
+  --text-h1: clamp(44px, 6vw, 88px);
+  --text-h2: clamp(34px, 4.5vw, 64px);
+  --text-h3: 28px;
+  --text-body-lg: 20px;
+
+  /* 모션 이징 */
+  --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-paper: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-room: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-flip: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 레이아웃·모션·프레임 토큰 (GSAP/inline 참조용) */
+:root {
+  --motion-fast: 160ms;
+  --motion-base: 280ms;
+  --motion-slow: 600ms;
+  --motion-room: 900ms;
+  --motion-room-long: 1200ms;
+
+  --section-padding-y: clamp(96px, 12vw, 180px);
+  --section-padding-x: clamp(20px, 5vw, 80px);
+
+  --room-min-height: 100svh;
+  --room-padding-x: clamp(24px, 6vw, 96px);
+  --room-padding-y: clamp(80px, 10vw, 140px);
+  --room-padding-y-tight: clamp(48px, 6vw, 88px);
+
+  /* 헤어라인 프레임 — 종이 콜라주 그림자를 절제된 계측기 프레임으로 */
+  --frame-radius: 14px;
+  --frame-border: 1px solid var(--color-line);
+  --shadow-frame: 0 18px 44px rgba(16, 26, 44, 0.08);
+  --shadow-soft: 0 10px 30px rgba(16, 26, 44, 0.06);
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 컨테이너 가로 패딩 */
+.container-pad {
+  padding-inline: var(--section-padding-x);
+}
+
+/* 숫자·지표·타임스탬프·파일명 전용 — 실측 로그 정체성 */
+.font-mono,
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 키보드 포커스 가시성 (a11y) */
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+}
+
+/* 가드레일: reduced-motion 필수 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
