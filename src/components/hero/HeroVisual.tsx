@@ -127,10 +127,11 @@ export default function HeroVisual() {
             opacity={0.4}
           />
 
-          {/* 회귀선 */}
+          {/* 회귀선 — initial로 y1/y2 기본값 지정(reduced-motion 시 undefined 좌표 방지) */}
           <motion.line
             x1={lineX0}
             x2={lineX1}
+            initial={{ y1: lineY0, y2: lineY1 }}
             animate={{ y1: lineY0, y2: lineY1, stroke: color }}
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
             strokeWidth={2.2}
@@ -144,6 +145,7 @@ export default function HeroVisual() {
               <motion.circle
                 key={i}
                 cx={px(p.x)}
+                initial={{ cy: py(y) }}
                 animate={{ cy: py(y), fill: color }}
                 transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: i * 0.012 }}
                 r={4.4}

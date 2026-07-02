@@ -10,7 +10,15 @@ export interface EvidenceItem {
 export interface EvidenceGroup {
   label: string
   desc?: string
+  /** gallery: 균일 썸네일 + 클릭 확대(그래프 벽 방지). 기본은 대형 프레임. */
+  layout?: 'gallery' | 'feature'
   items: EvidenceItem[]
+}
+
+/** 대표 화면 옆 핵심 수치 — 포스터/이미지를 못 읽어도 결론이 전달되게(모노 병기). */
+export interface HeroStat {
+  value: string
+  label: string
 }
 
 /** 세로 내러티브 비트(번호형 프로세스에도 재사용). 이미지는 있는 비트만. */
@@ -46,6 +54,8 @@ export interface RoomData {
   entranceDetail?: string
   mainWallSize?: 'default' | 'compact'
   mainWall: EvidenceItem
+  /** 대표 화면 아래 핵심 수치 스트립(모노). */
+  heroStats?: HeroStat[]
   /** 있으면 flat evidence 대신 라벨 그룹 단위로 렌더. */
   evidenceGroups?: EvidenceGroup[]
   /** 그리드 밀도. */
@@ -163,13 +173,9 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     evidenceGroups: [
       {
         label: '핵심 결과: 오디오 의존 회복',
-        desc: '오디오 길이에 출력이 따라붙는 정도(상관)와, 길이를 통제했을 때의 CER로 회복을 확인했습니다.',
+        layout: 'gallery',
+        desc: '대표 화면의 상관 회복(0.128 → 0.755)에 더해, 길이를 통제했을 때도 CER 역전이 사라진 것으로 회복을 확인했습니다. 썸네일을 누르면 원본 크기로 볼 수 있습니다.',
         items: [
-          {
-            src: '/images/evidence/voice/hero_correlation.png',
-            alt: '오디오 길이 대비 출력 길이 상관 산점도 — base 0.024, attention 0.128, 융합 통로 0.755, 정답 0.737',
-            caption: '상관 r: base 0.024, 융합 통로 LoRA 0.755, 정답 0.737',
-          },
           {
             src: '/images/evidence/voice/length_controlled_cer.png',
             alt: '길이 통제 CER — 융합 통로 재학습 후 역전 해소',
@@ -179,13 +185,9 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
       },
       {
         label: '문제 진단',
-        desc: '발화 길이에 따른 CER과 환각률, 그리고 평균과 중앙값의 괴리로 환각 폭발의 구조를 드러냈습니다.',
+        layout: 'gallery',
+        desc: '발화가 짧을수록 터지는 환각률과, 평균과 중앙값의 괴리로 환각 폭발의 구조를 드러냈습니다. 썸네일을 누르면 원본 크기로 볼 수 있습니다.',
         items: [
-          {
-            src: '/images/evidence/voice/ref_len_vs_cer.png',
-            alt: '참조 발화 길이 대비 CER 분포',
-            caption: '발화가 짧을수록 CER이 튀는 길이 의존성',
-          },
           {
             src: '/images/evidence/voice/hall_rate_by_length.png',
             alt: '발화 길이 구간별 환각률 — 10자 이하 70.5%',
@@ -200,6 +202,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
       },
       {
         label: '원인 분리와 검증',
+        layout: 'gallery',
         desc: '양자화·섭동·개입 단계를 통제해 오디오 입력 경로가 원인임을 좁혔습니다.',
         items: [
           {
@@ -221,6 +224,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
       },
       {
         label: '한계 규명·부수 발견',
+        layout: 'gallery',
         desc: '표현층 개입의 한계와, 오디오 임베딩에 실제로 정보가 담겨 있음을 외부 대조로 확인했습니다.',
         items: [
           {
@@ -274,9 +278,14 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
       '학습-추론 라벨 간극을 모델 오류가 아니라 라벨링 방식의 한계로 보고, 검증 지표 두 개를 정의해 데이터 단에서 원인을 규명했습니다.',
     mainWall: {
       src: '/images/evidence/eeg/ieie_poster.png',
-      alt: 'IEIE 학회 포스터 — Dual-Stream Transformer for Single 14-Channel EEG Emotion Recognition',
-      caption: 'IEIE 학회에 발표한 이중 스트림 트랜스포머 연구 포스터',
+      alt: 'IEIE 학회 포스터 — Dual-Stream Transformer for Single 14-Channel EEG Emotion Recognition and Analysis of the Label-Inference Gap',
+      caption: 'IEIE 학회 발표 포스터 (Park et al., 서경대) — 눌러서 원본 크기로 볼 수 있습니다',
     },
+    heroStats: [
+      { value: '75.1%', label: 'trial 정확도 · 14채널 EEG 단독' },
+      { value: '+6.9%p', label: '5종 생체신호 LightGBM(68.2%) 대비' },
+      { value: '83.1%', label: '비중첩 인접 segment 일관성' },
+    ],
     casePanels: [
       {
         eyebrow: 'problem framing',
@@ -295,19 +304,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
       },
     ],
     evidence: [],
-    evidenceGroups: [
-      {
-        label: '핵심 결과',
-        desc: '14채널 EEG 단독으로 5종 생체신호 베이스라인을 앞서고, 비중첩 재측정에서도 일관성이 유지됐습니다.',
-        items: [
-          {
-            src: '/images/evidence/eeg/ieie_results.png',
-            alt: 'IEIE 결과 표 — trial 75.1%, 베이스라인 68.2%, 인접 일관성 91.1%/83.1%',
-            caption: 'trial 75.1%(베이스라인 68.2% 대비 +6.9%p), 비중첩 일관성 83.1%',
-          },
-        ],
-      },
-    ],
+    evidenceGroups: [],
     infoDock: {
       problem:
         '60초 영상 하나에 라벨 하나를 붙이는 방식은 1초 단위 추론과 어긋납니다. 감정은 60초 내내 변하기 때문입니다.',

@@ -2,13 +2,15 @@
 // 증거가 주인공: 실제 화면·사진을 큰 액자로, 스크롤 리빌로 드러남(§8 — 전시관처럼 살아있게).
 // 진입: 커버 persist 아래 마운트 → 엔트런스 fade-up 0.4s (§6③). 뒤로가기 = 0.3s 크로스페이드.
 import gsap from 'gsap'
-import { useEffect, useRef } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Label from '../components/Label'
 import AiUsageSection from '../components/room/AiUsageSection'
 import CardNewsStack from '../components/room/CardNewsStack'
 import SlideViewer from '../components/room/SlideViewer'
 import EvidenceFrame from '../components/room/EvidenceFrame'
+import Lightbox from '../components/room/Lightbox'
 import OriginStoryView from '../components/room/OriginStory'
 import Reveal from '../components/room/Reveal'
 import { PROJECTS, type ProjectKey } from '../data/projects'
@@ -46,6 +48,7 @@ export default function ProjectRoom() {
   const { key } = useParams()
   const navigate = useNavigate()
   const root = useRef<HTMLElement>(null)
+  const [zoom, setZoom] = useState<EvidenceItem | null>(null)
   const index = PROJECTS.findIndex((p) => p.key === (key as ProjectKey))
   const project = index >= 0 ? PROJECTS[index] : undefined
   const room = project ? ROOMS[project.key] : undefined
@@ -191,6 +194,23 @@ export default function ProjectRoom() {
           <Reveal>
             <EvidenceFrame item={room.mainWall} large />
           </Reveal>
+          {room.heroStats && (
+            <Reveal delay={0.1}>
+              <dl className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-line bg-line sm:grid-cols-3">
+                {room.heroStats.map((s) => (
+                  <div key={s.label} className="bg-panel px-5 py-5">
+                    <dt
+                      className="font-display font-bold tabular-nums tracking-[-0.03em] text-[30px] leading-none"
+                      style={{ color: project.ink }}
+                    >
+                      {s.value}
+                    </dt>
+                    <dd className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-2 m-0">{s.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+          )}
         </div>
       </section>
 
@@ -292,23 +312,34 @@ export default function ProjectRoom() {
                   )}
                 </Reveal>
               )}
-              <div className={`${evidenceGridClass} ${group.label ? 'mt-8' : ''}`}>
-                {group.items.map((item, i) => (
-                  <Reveal
-                    key={item.src}
-                    delay={i * 0.08}
-                    className={[
-                      // 지그재그는 margin으로 — GSAP transform(Reveal)과의 합성 충돌 방지
-                      evidenceCols === 2 && i % 2 === 1 ? 'md:mt-10' : '',
-                      evidenceLayoutClass(item, evidenceCols, group.items.length),
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                  >
-                    <EvidenceFrame item={item} tiltDir={i % 2 === 0 ? 1 : -1} />
-                  </Reveal>
-                ))}
-              </div>
+              {group.layout === 'gallery' ? (
+                /* 갤러리 — 균일 썸네일 + 클릭 확대(그래프 벽 방지) */
+                <div className={`grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 ${group.label ? 'mt-8' : ''}`}>
+                  {group.items.map((item, i) => (
+                    <Reveal key={item.src} delay={i * 0.06}>
+                      <EvidenceFrame item={item} thumb onExpand={() => setZoom(item)} />
+                    </Reveal>
+                  ))}
+                </div>
+              ) : (
+                <div className={`${evidenceGridClass} ${group.label ? 'mt-8' : ''}`}>
+                  {group.items.map((item, i) => (
+                    <Reveal
+                      key={item.src}
+                      delay={i * 0.08}
+                      className={[
+                        // 지그재그는 margin으로 — GSAP transform(Reveal)과의 합성 충돌 방지
+                        evidenceCols === 2 && i % 2 === 1 ? 'md:mt-10' : '',
+                        evidenceLayoutClass(item, evidenceCols, group.items.length),
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                    >
+                      <EvidenceFrame item={item} tiltDir={i % 2 === 0 ? 1 : -1} />
+                    </Reveal>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -465,6 +496,10 @@ export default function ProjectRoom() {
         </div>
       </section>
       </div>{/* ── 콘텐츠 래퍼 끝 ── */}
+
+      <AnimatePresence>
+        {zoom && <Lightbox item={zoom} onClose={() => setZoom(null)} />}
+      </AnimatePresence>
     </main>
   )
 }
