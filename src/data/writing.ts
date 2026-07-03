@@ -122,7 +122,7 @@ export const WRITING_SERIES: WritingSeries[] = [
         note: '문서 참조(Context7)와 GitHub 워크플로를 하나의 흐름으로 묶었습니다.',
       },
       {
-        title: '4-MCP 콤보 자동화 파이프라인',
+        title: 'Memory + Playwright + Notion + GitHub 4 MCP 콤보',
         date: '2026.04.01',
         href: 'https://velog.io/@xorms/Memory-Playwright-Notion-GitHub-4-MCP-%EC%BD%A4%EB%B3%B4',
         note: 'velog 변화 감지부터 백업·기록까지 네 개 도구로 자동화했습니다.',

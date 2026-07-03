@@ -8,6 +8,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import Label from '../components/Label'
 import AiUsageSection from '../components/room/AiUsageSection'
 import CardNewsStack from '../components/room/CardNewsStack'
+import ComparisonTable from '../components/room/ComparisonTable'
 import SlideViewer from '../components/room/SlideViewer'
 import EvidenceFrame from '../components/room/EvidenceFrame'
 import Lightbox from '../components/room/Lightbox'
@@ -340,6 +341,11 @@ export default function ProjectRoom() {
                     </Reveal>
                   ))}
                 </div>
+              )}
+              {group.comparisonTable && (
+                <Reveal className={group.items.length > 0 ? 'mt-12' : group.label ? 'mt-8' : ''}>
+                  <ComparisonTable table={group.comparisonTable} ink={project.ink} />
+                </Reveal>
               )}
             </div>
           ))}

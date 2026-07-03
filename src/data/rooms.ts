@@ -9,12 +9,28 @@ export interface EvidenceItem {
   captionMultiline?: boolean
 }
 
+/** 유사 제품 기능 비교표 — 발표자료 원본 비교표를 사이트 톤(네이티브 table)으로 재현. */
+export interface ComparisonTable {
+  /** 비교 대상 열 — 순서 유지. */
+  columns: string[]
+  /** 자사(딥틸 하이라이트) 열 인덱스. */
+  highlightCol: number
+  /** 행: 기능명 + 열별 지원 여부(columns와 같은 길이). */
+  rows: { feature: string; cells: boolean[] }[]
+  /** 각주(제품 모델 출처 등). */
+  note?: string
+  /** 표 아래 해설(선언형 산문). */
+  caption?: string
+}
+
 export interface EvidenceGroup {
   label: string
   desc?: string
   /** gallery: 균일 썸네일 + 클릭 확대(그래프 벽 방지). 기본은 대형 프레임. */
   layout?: 'gallery' | 'feature'
   items: EvidenceItem[]
+  /** 이미지 대신(또는 함께) 렌더하는 네이티브 비교표. */
+  comparisonTable?: ComparisonTable
 }
 
 /** 대표 화면 옆 핵심 수치 — 포스터/이미지를 못 읽어도 결론이 전달되게(모노 병기). */
@@ -412,14 +428,20 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
               'React로 대시보드를 자체 구현했습니다. 초인종, 노크, 화재경보 세 소리를 구분해 안내합니다. 화재경보에는 대피 수칙과 함께 119 수어 영상통화나 문자 신고 경로를 띄웁니다. 소리를 듣지 못하는 사용자가 위급 상황에서 화면만 보고 따라갈 수 있게 했습니다.',
             captionMultiline: true,
           },
-          {
-            src: '/images/evidence/ddingdong/uniqueness.png',
-            alt: '작품의 독창성 비교표: ML 소리 분류·스마트폰 알림·현관 외부 감지·사진 자막 전달 기능을 유사 제품과 비교',
-            caption:
-              '표의 네 기능(ML 소리 분류, 스마트폰 알림, 현관 외부 감지, 사진·자막 전달)을 모두 채운 건 띵동뿐입니다. Ring·Nest는 소리를 분류하지 못하고 사진·자막도 보내지 않습니다. Amazon Echo는 현관 외부를 감지하지 못하고, 국내 제품은 소리 분류와 스마트폰 알림이 없습니다. 사진·자막 전달은 띵동만 지원합니다.',
-            captionMultiline: true,
-          },
         ],
+        comparisonTable: {
+          columns: ['국내 제품', 'Ring·Nest', 'Amazon Echo', '띵동'],
+          highlightCol: 3,
+          rows: [
+            { feature: 'ML 소리 분류', cells: [false, false, true, true] },
+            { feature: '스마트폰 알림', cells: [false, true, true, true] },
+            { feature: '현관 외부 감지', cells: [true, true, false, true] },
+            { feature: '사진 + 자막 전달', cells: [false, false, false, true] },
+          ],
+          note: '국내 제품: BF 초인등벨 / HC-013 / Syscall 무선 초인등',
+          caption:
+            '표의 네 기능(ML 소리 분류, 스마트폰 알림, 현관 외부 감지, 사진·자막 전달)을 모두 채운 건 띵동뿐입니다. Ring·Nest는 소리를 분류하지 못하고 사진·자막도 보내지 않습니다. Amazon Echo는 현관 외부를 감지하지 못하고, 국내 제품은 소리 분류와 스마트폰 알림이 없습니다. 사진·자막 전달은 띵동만 지원합니다.',
+        },
       },
     ],
     infoDock: {
