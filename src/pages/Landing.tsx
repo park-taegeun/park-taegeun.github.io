@@ -10,7 +10,7 @@ import Label, { labelEnClass as labelEn } from '../components/Label'
 import FlipTitle, { type FlipTitleHandle } from '../components/transition/FlipTitle'
 import { useRef } from 'react'
 import { PROJECTS, type Project } from '../data/projects'
-import { SIDE_WORKS, type SideWork, type SideWorkImage } from '../data/sideWorks'
+import { SIDE_WORKS, type SideWork, type SideWorkImage, type SideWorkVideo } from '../data/sideWorks'
 import { VELOG_PROFILE, VELOG_URL, WRITING_SERIES, type WritingSeries } from '../data/writing'
 import { onImgError } from '../lib/placeholder'
 import { Sentences, SentencesAfterLabel } from '../components/Sentences'
@@ -515,7 +515,11 @@ function SideWorkItem({ work, index }: { work: SideWork; index: number }) {
             viewport={{ once: true, margin: '-12%' }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <SideImageFrame image={work.primaryImage} large />
+            {work.demoVideo ? (
+              <SideDemoVideo video={work.demoVideo} />
+            ) : work.primaryImage ? (
+              <SideImageFrame image={work.primaryImage} large />
+            ) : null}
           </motion.div>
         </div>
 
@@ -597,6 +601,88 @@ function SideImageFrame({ image, large = false }: { image: SideWorkImage; large?
       </div>
       <figcaption className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-2.5 px-1 text-center">
         {image.caption}
+      </figcaption>
+    </figure>
+  )
+}
+
+// 세로(9:16) 데모 영상 — lite-embed: 처음엔 썸네일 + 재생 버튼, 클릭 시에만 iframe 주입(경량·쿠키 절제).
+function SideDemoVideo({ video }: { video: SideWorkVideo }) {
+  const [active, setActive] = useState(false)
+
+  return (
+    <figure>
+      <div className="mx-auto w-full" style={{ maxWidth: 320 }}>
+        <div
+          className="relative overflow-hidden bg-panel"
+          style={{
+            aspectRatio: '9 / 16',
+            borderRadius: 'var(--frame-radius)',
+            border: 'var(--frame-border)',
+            boxShadow: 'var(--shadow-frame)',
+          }}
+        >
+          {active ? (
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?autoplay=1&rel=0`}
+              title={video.title}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full"
+              style={{ border: 0 }}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setActive(true)}
+              aria-label="PICKL 데모 영상 재생"
+              className="group absolute inset-0 h-full w-full cursor-pointer"
+            >
+              <img
+                src={video.thumb}
+                alt=""
+                onError={onImgError}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <span
+                aria-hidden
+                className="absolute inset-0 bg-ink/10 transition-colors duration-300 group-hover:bg-ink/[0.02]"
+                style={{ transitionTimingFunction: 'var(--ease-default)' }}
+              />
+              <span
+                aria-hidden
+                className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full transition-transform duration-300 group-hover:scale-105"
+                style={{
+                  background: 'var(--color-signal)',
+                  boxShadow: '0 6px 20px rgba(14,124,134,0.42)',
+                  transitionTimingFunction: 'var(--ease-default)',
+                }}
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </button>
+          )}
+        </div>
+      </div>
+      <figcaption className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-2.5 px-1 text-center max-w-[320px] mx-auto">
+        <Sentences text={video.caption} />
+        {video.href && (
+          <>
+            {' '}
+            <a
+              href={video.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whitespace-nowrap underline underline-offset-2 hover:text-ink transition-colors"
+            >
+              전체 데모 보기 →
+            </a>
+          </>
+        )}
       </figcaption>
     </figure>
   )
