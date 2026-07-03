@@ -3,6 +3,7 @@
 // thumb 모드: 그래프 벽을 피하려 균일 높이 썸네일 + 클릭 확대(Lightbox)로 압축.
 import type { EvidenceItem } from '../../data/rooms'
 import { onImgError } from '../../lib/placeholder'
+import { Sentences } from '../Sentences'
 
 interface EvidenceFrameProps {
   item: EvidenceItem
@@ -59,7 +60,7 @@ export default function EvidenceFrame({ item, tiltDir = 1, large = false, thumb 
           </div>
         </button>
         <figcaption className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-2.5 px-0.5">
-          {item.caption}
+          {item.captionMultiline ? <Sentences text={item.caption} /> : item.caption}
         </figcaption>
       </figure>
     )
@@ -97,7 +98,7 @@ export default function EvidenceFrame({ item, tiltDir = 1, large = false, thumb 
         </div>
       </div>
       <figcaption className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-3 px-1">
-        {item.caption}
+        {item.captionMultiline ? <Sentences text={item.caption} /> : item.caption}
       </figcaption>
     </figure>
   )

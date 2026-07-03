@@ -5,6 +5,8 @@ export interface EvidenceItem {
   alt: string
   caption: string
   layout?: 'wide' | 'compact'
+  /** 다문장 캡션을 문장 단위로 줄바꿈(Sentences). 미설정이면 기존처럼 한 줄 문자열로 렌더. */
+  captionMultiline?: boolean
 }
 
 export interface EvidenceGroup {
@@ -334,7 +336,9 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     mainWall: {
       src: '/images/evidence/ddingdong/system_diagram.png',
       alt: '소리 알림 시스템 구성도 — 센서·펌웨어·서버·ML·알림·대시보드 전 계층',
-      caption: '센서에서 알림까지 전 계층을 잇는 시스템 구성',
+      caption:
+        '현관 부착 IoT 디바이스부터 스마트폰 알림까지 전 계층을 1인 설계·구현했습니다. ESP32-S3가 오디오와 ToF를 1차 POST로, 사진을 2차 POST로 나눠 전송합니다. 서버는 YAMNet으로 소리를 분류한 뒤 ToF 기반 클래스별 분기를 처리합니다. 카카오톡으로 1차 텍스트와 2차 사진·자막을 보내고, 웹 대시보드는 3초 폴링으로 로그를 조회합니다.',
+      captionMultiline: true,
     },
     casePanels: [
       {
@@ -398,18 +402,22 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     evidence: [],
     evidenceGroups: [
       {
-        label: '시스템',
-        desc: '센서·서버·ML·알림·대시보드 전 계층의 화면과 흐름입니다. (이미지 준비 중)',
+        label: '구현과 차별점',
+        desc: '실제 대시보드 화면과 유사 제품과의 기능 비교입니다.',
         items: [
           {
             src: '/images/evidence/ddingdong/dashboard.png',
-            alt: 'React 대시보드 화면 — 감지 이벤트와 알림 상태',
-            caption: 'React 대시보드: 감지 이벤트·알림 상태 (준비 중)',
+            alt: 'React 대시보드 화면 — 초인종·노크·화재경보 안내와 대피 수칙',
+            caption:
+              'React로 대시보드를 자체 구현했습니다. 초인종, 노크, 화재경보 세 소리를 구분해 안내합니다. 화재경보에는 대피 수칙과 함께 119 수어 영상통화나 문자 신고 경로를 띄웁니다. 소리를 듣지 못하는 사용자가 위급 상황에서 화면만 보고 따라갈 수 있게 했습니다.',
+            captionMultiline: true,
           },
           {
-            src: '/images/evidence/ddingdong/flow.png',
-            alt: '데이터 흐름도 — 마이크 수집부터 YAMNet 추론, 검증, 알림 발송까지',
-            caption: '수집에서 알림까지의 데이터 흐름 (준비 중)',
+            src: '/images/evidence/ddingdong/uniqueness.png',
+            alt: '작품의 독창성 비교표: ML 소리 분류·스마트폰 알림·현관 외부 감지·사진 자막 전달 기능을 유사 제품과 비교',
+            caption:
+              '표의 네 기능(ML 소리 분류, 스마트폰 알림, 현관 외부 감지, 사진·자막 전달)을 모두 채운 건 띵동뿐입니다. Ring·Nest는 소리를 분류하지 못하고 사진·자막도 보내지 않습니다. Amazon Echo는 현관 외부를 감지하지 못하고, 국내 제품은 소리 분류와 스마트폰 알림이 없습니다. 사진·자막 전달은 띵동만 지원합니다.',
+            captionMultiline: true,
           },
         ],
       },
