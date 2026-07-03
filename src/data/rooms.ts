@@ -325,14 +325,14 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     },
   },
 
-  thingdong: {
-    key: 'thingdong',
+  ddingdong: {
+    key: 'ddingdong',
     entranceLine:
       '놓치면 안 되는 소리를 실시간 감지해 알리는, 센서부터 ML·서버·알림까지 전 계층을 1인 설계·구현한 시스템으로, 현재 진행 중입니다.',
     entranceDetail:
       '한 단계라도 끊기면 알림이 무의미해지므로, 모델 정확도가 아니라 데이터가 흐르는 전 구간을 책임지고 설계했습니다.',
     mainWall: {
-      src: '/images/evidence/thingdong/system_diagram.png',
+      src: '/images/evidence/ddingdong/system_diagram.png',
       alt: '소리 알림 시스템 구성도 — 센서·펌웨어·서버·ML·알림·대시보드 전 계층',
       caption: '센서에서 알림까지 전 계층을 잇는 시스템 구성',
     },
@@ -402,12 +402,12 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
         desc: '센서·서버·ML·알림·대시보드 전 계층의 화면과 흐름입니다. (이미지 준비 중)',
         items: [
           {
-            src: '/images/evidence/thingdong/dashboard.png',
+            src: '/images/evidence/ddingdong/dashboard.png',
             alt: 'React 대시보드 화면 — 감지 이벤트와 알림 상태',
             caption: 'React 대시보드: 감지 이벤트·알림 상태 (준비 중)',
           },
           {
-            src: '/images/evidence/thingdong/flow.png',
+            src: '/images/evidence/ddingdong/flow.png',
             alt: '데이터 흐름도 — 마이크 수집부터 YAMNet 추론, 검증, 알림 발송까지',
             caption: '수집에서 알림까지의 데이터 흐름 (준비 중)',
           },

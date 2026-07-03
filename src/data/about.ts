@@ -91,7 +91,7 @@ const SIGNAL = '#0E7C86'
 
 const VOICE_LINK: TimelineLink = { label: '음성인식 환각 연구', anchorId: 'selected-voice', color: SIGNAL, suffix: '에서 보기' }
 const EEG_LINK: TimelineLink = { label: 'EEG 감정인식', anchorId: 'selected-eeg', color: SIGNAL, suffix: '에서 보기' }
-const THINGDONG_LINK: TimelineLink = { label: '소리 알림 시스템', anchorId: 'selected-thingdong', color: SIGNAL, suffix: '에서 보기' }
+const DDINGDONG_LINK: TimelineLink = { label: '소리 알림 시스템', anchorId: 'selected-ddingdong', color: SIGNAL, suffix: '에서 보기' }
 const PICKL_LINK: TimelineLink = { label: 'PICKL', anchorId: 'side', color: SIGNAL, suffix: '에서 보기' }
 
 export const TIMELINE: TimelineGroup[] = [
@@ -120,7 +120,7 @@ export const TIMELINE: TimelineGroup[] = [
         period: '진행 중 · 11월 전시',
         ongoing: true,
         note: '센서부터 알림까지 전 계층을 1인 설계·구현.',
-        link: THINGDONG_LINK,
+        link: DDINGDONG_LINK,
       },
       {
         title: '멋쟁이사자처럼 13기 중앙 해커톤 · PICKL',

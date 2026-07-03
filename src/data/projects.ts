@@ -1,4 +1,4 @@
-export type ProjectKey = 'voice' | 'eeg' | 'thingdong'
+export type ProjectKey = 'voice' | 'eeg' | 'ddingdong'
 
 export interface Project {
   key: ProjectKey
@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
       '5-fold 교차검증, 1D CNN 제거 시 정확도 급락(절제실험), 비중첩 재측정으로 결과를 검증했습니다.',
   },
   {
-    key: 'thingdong',
+    key: 'ddingdong',
     room: '03',
     name: '소리 알림 시스템',
     accent: SIGNAL,
@@ -114,7 +114,7 @@ export const PROJECTS: Project[] = [
     role: '졸업작품 · 센서부터 알림까지 전 계층 1인 설계·구현 · 진행 중',
     summary:
       '놓치면 안 되는 소리(초인종·노크·화재경보)를 실시간 감지해 스마트폰으로 알리는, 센서부터 ML·서버·알림까지 전 계층을 1인 설계·구현한 end-to-end 시스템입니다.',
-    anchorId: 'selected-thingdong',
+    anchorId: 'selected-ddingdong',
     tagline: '센서→알림',
     tenSecond:
       '놓치면 안 되는 소리(초인종·노크·화재경보)를 실시간 감지해 스마트폰으로 알리는, 센서부터 ML·서버·알림까지 end-to-end 시스템',
@@ -126,7 +126,7 @@ export const PROJECTS: Project[] = [
     impact:
       '소리(ML)와 위치(센서) 2중 검증으로 옆집 오탐을 차단하고, 초인종·화재경보 분리 마진 8.418로 화재경보 오탐을 걸러냈습니다. 서버 파이프라인은 100회 측정에서 평균 61.7ms였습니다.',
     previewImage: {
-      src: '/images/evidence/thingdong/system_diagram.png',
+      src: '/images/evidence/ddingdong/system_diagram.png',
       alt: '소리 알림 시스템 구성도 — 센서·펌웨어·서버·ML·알림·대시보드 전 계층',
       caption: '센서에서 알림까지 전 계층을 잇는 시스템 구성',
     },
