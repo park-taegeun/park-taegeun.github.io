@@ -54,32 +54,47 @@ const FlipTitle = forwardRef<FlipTitleHandle, FlipTitleProps>(function FlipTitle
         const card = (e.target as HTMLElement).closest<HTMLElement>('[data-letter-card]')
         onActivate(card ? Number(card.dataset.index) : 0)
       }}
-      className="block text-left font-display font-bold uppercase tracking-[-0.04em] text-h1 cursor-pointer"
-      style={{ lineHeight: 0.96 }}
+      className="block text-left font-body font-bold tracking-[-0.03em] text-h1 cursor-pointer"
+      style={{ lineHeight: 1.1 }}
     >
-      <span ref={wrap} aria-hidden className="flex flex-wrap" style={{ perspective: '800px' }}>
-        {name.split('').map((ch, i) => {
-          const glyph = ch === ' ' ? ' ' : ch
-          return (
+      {/* 글자별 카드는 유지하되 단어 단위로 묶어(whitespace-nowrap) 줄바꿈이 단어를 관통하지 않게 한다.
+         data-index는 전체 글자 기준 연속값을 유지해 플립 stagger·클릭 기점이 그대로 동작한다. */}
+      <span ref={wrap} aria-hidden className="flex flex-wrap items-baseline" style={{ perspective: '800px' }}>
+        {(() => {
+          const words = name.split(' ')
+          let idx = -1
+          return words.map((word, wi) => (
             <span
-              key={i}
-              data-letter-card
-              data-index={i}
-              className="relative inline-block will-change-transform"
-              style={{ transformStyle: 'preserve-3d' }}
+              key={`w-${wi}`}
+              className="inline-flex whitespace-nowrap"
+              style={{ marginRight: wi < words.length - 1 ? '0.28em' : undefined }}
             >
-              <span data-letter-front className="block text-ink" style={{ backfaceVisibility: 'hidden' }}>
-                {glyph}
-              </span>
-              <span
-                className="absolute inset-0"
-                style={{ color: ink, backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
-              >
-                {glyph}
-              </span>
+              {word.split('').map((ch) => {
+                idx += 1
+                const i = idx
+                return (
+                  <span
+                    key={i}
+                    data-letter-card
+                    data-index={i}
+                    className="relative inline-block will-change-transform"
+                    style={{ transformStyle: 'preserve-3d' }}
+                  >
+                    <span data-letter-front className="block text-ink" style={{ backfaceVisibility: 'hidden' }}>
+                      {ch}
+                    </span>
+                    <span
+                      className="absolute inset-0"
+                      style={{ color: ink, backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
+                    >
+                      {ch}
+                    </span>
+                  </span>
+                )
+              })}
             </span>
-          )
-        })}
+          ))
+        })()}
       </span>
     </button>
   )

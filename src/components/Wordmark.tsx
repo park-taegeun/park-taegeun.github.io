@@ -1,13 +1,14 @@
 // Hero 워드마크 — PORTFOLIO(크게·타이트) / PARK TAEGEUN(같은 폭 바이라인) 두 줄을 동일 폭(1000)으로 잠근다.
 // Space Grotesk 디스플레이. textLength로 자간을 등폭 스택 락업.
-export default function Wordmark({ className = '' }: { className?: string }) {
+export default function Wordmark({ className = '', maxW = '820px' }: { className?: string; maxW?: string }) {
   return (
     <h1 aria-label="PORTFOLIO · PARK TAEGEUN" className={className}>
       <svg
         viewBox="0 0 1000 352"
         aria-hidden
         focusable="false"
-        className="block w-full max-w-[820px]"
+        className="block w-full"
+        style={{ maxWidth: maxW }}
       >
         <text
           x="0"

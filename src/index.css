@@ -79,6 +79,9 @@ body {
   font-family: var(--font-body);
   letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
+  /* 한글 가독성 — 어절(단어) 경계에서만 줄바꿈. 초장문 토큰(URL 등)만 예외로 분해. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* 컨테이너 가로 패딩 */

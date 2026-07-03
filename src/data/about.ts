@@ -17,7 +17,7 @@ export const PROFILE: Profile = {
   name: '박태근',
   romanized: 'Park Taegeun',
   role: 'AI · ML · Systems',
-  headline: '모델이 아니라 시스템 전체를 검증하고 책임지는 박태근입니다.',
+  headline: '모델이 아니라 시스템 전체를 검증하고 책임집니다.',
   portrait: '/images/portrait.png',
   email: 'taegeun1234@naver.com',
   github: 'https://github.com/park-taegeun',
@@ -89,9 +89,9 @@ export interface TimelineGroup {
 
 const SIGNAL = '#0E7C86'
 
-const VOICE_LINK: TimelineLink = { label: 'Multimodal ASR', anchorId: 'selected-voice', color: SIGNAL, suffix: '에서 보기' }
-const EEG_LINK: TimelineLink = { label: 'EEG Emotion', anchorId: 'selected-eeg', color: SIGNAL, suffix: '에서 보기' }
-const THINGDONG_LINK: TimelineLink = { label: 'Sound Alert', anchorId: 'selected-thingdong', color: SIGNAL, suffix: '에서 보기' }
+const VOICE_LINK: TimelineLink = { label: '음성인식 환각 연구', anchorId: 'selected-voice', color: SIGNAL, suffix: '에서 보기' }
+const EEG_LINK: TimelineLink = { label: 'EEG 감정인식', anchorId: 'selected-eeg', color: SIGNAL, suffix: '에서 보기' }
+const THINGDONG_LINK: TimelineLink = { label: '소리 알림 시스템', anchorId: 'selected-thingdong', color: SIGNAL, suffix: '에서 보기' }
 const PICKL_LINK: TimelineLink = { label: 'PICKL', anchorId: 'side', color: SIGNAL, suffix: '에서 보기' }
 
 export const TIMELINE: TimelineGroup[] = [
@@ -110,7 +110,7 @@ export const TIMELINE: TimelineGroup[] = [
         title: 'EEG 기반 실시간 감정 인식 연구',
         org: '학부연구생',
         award: 'IEIE 발표',
-        period: '2025',
+        period: '2026',
         note: '라벨링 한계를 지표로 규명하고 비중첩 조건으로 재검증.',
         link: EEG_LINK,
       },
@@ -138,14 +138,14 @@ export const TIMELINE: TimelineGroup[] = [
       {
         title: '전공 학업',
         period: '재학',
-        note: '3학년 2학기 과 수석(106명 중 1위), 4학년 1학기 전 과목 A+.',
+        note: '전체 4.17/4.5, 전공 4.21/4.5.',
       },
       {
-        title: '자격증 · 정보처리기사 · SQLD',
+        title: '자격증: 정보처리기사, SQLD',
         period: '취득',
       },
       {
-        title: '어학 · TOEIC 845',
+        title: '어학: TOEIC 845',
         period: '취득',
       },
     ],

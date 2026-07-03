@@ -2,6 +2,7 @@
 // 세로 spine(연결선 + 도트)으로 "한 줄로 읽히는" 시퀀스를 만들고, 비트별 패널을 스크롤 리빌로 드러낸다.
 // 가드레일(§8): transform/opacity만, 박스 남용 금지(라인/도트로 구분), break-keep.
 import type { OriginStory } from '../../data/rooms'
+import { Sentences } from '../Sentences'
 import EvidenceFrame from './EvidenceFrame'
 import Reveal from './Reveal'
 
@@ -58,7 +59,7 @@ export default function OriginStoryView({ story, ink }: OriginStoryViewProps) {
                     {beat.title}
                   </h3>
                   <p className="font-body text-text-sub text-[15px] leading-[1.75] mt-3 max-w-[52ch] break-keep">
-                    {beat.body}
+                    <Sentences text={beat.body} />
                   </p>
                   {beat.image && (
                     <div className="mt-6 max-w-[560px]">

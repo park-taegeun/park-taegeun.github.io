@@ -155,7 +155,7 @@ export default function HeroVisual() {
           })}
 
           {/* 축 라벨 (mono) */}
-          <text x={px(0.5)} y={H - 10} textAnchor="middle" fontSize={11} fill="var(--color-text-faint)" fontFamily="var(--font-mono)">
+          <text x={px(0.5)} y={H - 10} textAnchor="middle" fontSize={11} fill="var(--color-text-muted)" fontFamily="var(--font-mono)">
             audio length
           </text>
           <text
@@ -163,7 +163,7 @@ export default function HeroVisual() {
             y={py(0.5)}
             textAnchor="middle"
             fontSize={11}
-            fill="var(--color-text-faint)"
+            fill="var(--color-text-muted)"
             fontFamily="var(--font-mono)"
             transform={`rotate(-90 14 ${py(0.5)})`}
           >

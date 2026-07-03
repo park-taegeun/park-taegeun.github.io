@@ -16,6 +16,7 @@ import Reveal from '../components/room/Reveal'
 import { PROJECTS, type ProjectKey } from '../data/projects'
 import { ROOMS, type EvidenceItem } from '../data/rooms'
 import { scrollToId } from '../lib/lenis'
+import { Sentences } from '../components/Sentences'
 import { EASE_DEFAULT, prefersReducedMotion } from '../lib/motion'
 import { crossfadeToRoom, exitRoom } from '../lib/signature'
 
@@ -139,17 +140,17 @@ export default function ProjectRoom() {
           </p>
           <h1
             data-room-fade
-            className="font-display font-bold uppercase tracking-[-0.04em] text-room-title mt-3"
-            style={{ lineHeight: 0.96, color: project.ink }}
+            className="font-body font-bold tracking-[-0.03em] text-room-title mt-3"
+            style={{ lineHeight: 1.06, color: project.ink }}
           >
             {project.name}
           </h1>
-          <p data-room-fade className="font-body text-text-sub text-[16px] leading-[1.7] mt-6 max-w-[58ch]">
-            {room.entranceLine}
+          <p data-room-fade className="font-body text-text-sub text-[16px] leading-[1.7] mt-6 max-w-[58ch] break-keep">
+            <Sentences text={room.entranceLine} />
           </p>
           {room.entranceDetail && (
-            <p data-room-fade className="font-body text-text-muted text-[14px] leading-[1.75] mt-3 max-w-[54ch]">
-              {room.entranceDetail}
+            <p data-room-fade className="font-body text-text-muted text-[14px] leading-[1.75] mt-3 max-w-[54ch] break-keep">
+              <Sentences text={room.entranceDetail} />
             </p>
           )}
           <p data-room-fade className="font-body font-medium text-text-muted text-[12.5px] mt-3">{project.role}</p>
@@ -229,8 +230,8 @@ export default function ProjectRoom() {
                     {room.phaseFlow.title}
                   </h3>
                   {room.phaseFlow.intro && (
-                    <p className="font-body text-text-sub text-[14.5px] leading-[1.75] mt-3 max-w-[72ch]">
-                      {room.phaseFlow.intro}
+                    <p className="font-body text-text-sub text-[14.5px] leading-[1.75] mt-3 max-w-[72ch] break-keep">
+                      <Sentences text={room.phaseFlow.intro} />
                     </p>
                   )}
                 </Reveal>
@@ -274,8 +275,8 @@ export default function ProjectRoom() {
                       <h3 className="font-body font-bold text-ink text-[17px] leading-[1.42] mt-3">
                         {panel.title}
                       </h3>
-                      <p className="font-body text-text-sub text-[14px] leading-[1.78] mt-3">
-                        {panel.body}
+                      <p className="font-body text-text-sub text-[14px] leading-[1.78] mt-3 break-keep">
+                        <Sentences text={panel.body} />
                       </p>
                     </article>
                   </Reveal>
@@ -306,8 +307,8 @@ export default function ProjectRoom() {
                     {group.label}
                   </h2>
                   {group.desc && (
-                    <p className="font-body text-text-sub text-[14.5px] leading-[1.72] mt-3 max-w-[72ch]">
-                      {group.desc}
+                    <p className="font-body text-text-sub text-[14.5px] leading-[1.72] mt-3 max-w-[72ch] break-keep">
+                      <Sentences text={group.desc} />
                     </p>
                   )}
                 </Reveal>
@@ -410,7 +411,7 @@ export default function ProjectRoom() {
                       </h3>
                     </div>
                     <div>
-                      <p className="font-body text-text-sub text-[15px] leading-[1.7]">{ref.summary}</p>
+                      <p className="font-body text-text-sub text-[15px] leading-[1.7] break-keep"><Sentences text={ref.summary} /></p>
                       <p className="font-body text-text-muted text-[13.5px] leading-[1.65] mt-2">
                         {ref.application}
                       </p>
@@ -463,7 +464,7 @@ export default function ProjectRoom() {
                         ))}
                       </ul>
                     ) : (
-                      <p className="font-body text-text-sub text-[16px] leading-[1.75] m-0">{v}</p>
+                      <p className="font-body text-text-sub text-[16px] leading-[1.75] m-0 break-keep"><Sentences text={v} /></p>
                     )}
                   </dd>
                 </div>
@@ -480,8 +481,8 @@ export default function ProjectRoom() {
           <button
             type="button"
             onClick={() => void crossfadeToRoom(next, navigate)}
-            className="block text-left font-display font-bold uppercase tracking-[-0.04em] text-h2 mt-4 cursor-pointer transition-transform duration-300 hover:translate-x-2"
-            style={{ color: next.ink, lineHeight: 1 }}
+            className="block text-left font-body font-bold tracking-[-0.03em] text-h2 mt-4 cursor-pointer transition-transform duration-300 hover:translate-x-2"
+            style={{ color: next.ink, lineHeight: 1.08 }}
             aria-label={`다음 룸 ${next.name}으로 이동`}
           >
             {next.name} →

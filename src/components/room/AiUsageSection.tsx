@@ -7,6 +7,7 @@ import { useCallback, useState } from 'react'
 import type { Project } from '../../data/projects'
 import type { EvidenceItem, RoomData } from '../../data/rooms'
 import { prefersReducedMotion } from '../../lib/motion'
+import { Sentences } from '../Sentences'
 import Label from '../Label'
 import EvidenceFrame from './EvidenceFrame'
 import Lightbox from './Lightbox'
@@ -34,8 +35,8 @@ export default function AiUsageSection({ aiUsage, project }: { aiUsage: AiUsage;
   return (
     <div className="mx-auto max-w-[920px]">
       <Label as="h2" lang="ko" className="text-[15px]">AI 사용 방식</Label>
-      <p className="font-body text-text-sub text-[15.5px] leading-[1.75] mt-4 max-w-[72ch]">
-        {aiUsage.intro}
+      <p className="font-body text-text-sub text-[15.5px] leading-[1.75] mt-4 max-w-[72ch] break-keep">
+        <Sentences text={aiUsage.intro} />
       </p>
 
       {/* 프로세스 맵 — 10초 스캔용 한 줄 흐름(제작 과정의 순서) */}
@@ -210,9 +211,8 @@ export default function AiUsageSection({ aiUsage, project }: { aiUsage: AiUsage;
               <p className="font-body font-bold text-ink text-[18px] leading-[1.4] mt-2">
                 {aiUsage.fullStackProof.label}
               </p>
-              <p className="font-body text-text-sub text-[14px] leading-[1.7] mt-3">
-                AI가 빠르게 만든 결과도, 받쳐주는 데이터 구조가 있어야 실제로 동작합니다.
-                추천 요청부터 저장·피드백까지의 흐름을 직접 설계했습니다.
+              <p className="font-body text-text-sub text-[14px] leading-[1.7] mt-3 break-keep">
+                <Sentences text="AI가 빠르게 만든 결과도, 받쳐주는 데이터 구조가 있어야 실제로 동작합니다. 추천 요청부터 저장·피드백까지의 흐름을 직접 설계했습니다." />
               </p>
             </div>
             <button

@@ -56,20 +56,20 @@ export const SIDE_WORKS: SideWork[] = [
     primaryImage: {
       src: '/images/side/pickl_map.png',
       alt: 'PICKL 지도 화면 — 카카오 지도 위에 전통시장 위치와 거리 표시',
-      caption: '지도 화면 — 시장 위치와 거리 표시',
+      caption: '지도 화면: 시장 위치와 거리 표시',
       kind: 'wide',
     },
     supportingImages: [
       {
         src: '/images/side/pickl_main.png',
         alt: 'PICKL 대표 화면 — 식생활 큐레이션 홈',
-        caption: '대표 화면 — 식생활 큐레이션 홈',
+        caption: '대표 화면: 식생활 큐레이션 홈',
         kind: 'wide',
       },
       {
         src: '/images/side/pickl_mypage.png',
         alt: 'PICKL 마이페이지 화면 — 포인트 전환과 사용자 정보',
-        caption: '마이페이지 — 포인트 전환',
+        caption: '마이페이지: 포인트 전환',
         kind: 'wide',
       },
     ],

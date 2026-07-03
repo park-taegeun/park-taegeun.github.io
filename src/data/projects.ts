@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
   {
     key: 'voice',
     room: '01',
-    name: 'Multimodal ASR',
+    name: '음성인식 환각 연구',
     accent: SIGNAL,
     ink: NAVY,
     tone: '#E7EDF1',
@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
   {
     key: 'eeg',
     room: '02',
-    name: 'EEG Emotion',
+    name: 'EEG 감정인식',
     accent: SIGNAL,
     ink: NAVY,
     tone: '#E8ECF2',
@@ -106,7 +106,7 @@ export const PROJECTS: Project[] = [
   {
     key: 'thingdong',
     room: '03',
-    name: 'Sound Alert',
+    name: '소리 알림 시스템',
     accent: SIGNAL,
     ink: NAVY,
     tone: '#E6EDEC',
@@ -136,6 +136,6 @@ export const PROJECTS: Project[] = [
     decision:
       '초음파 센서는 소리를 내 마이크 수집에 간섭하므로 레이저 기반 ToF로 바꿨고, 코사인 단독은 누름 길이 차이에 흔들려 DTW로 시간축을 정렬한 뒤 코사인으로 주파수를 비교하도록 했습니다.',
     verification:
-      '발주 전 Claude Code로 간섭 시나리오를 코드 레벨로 먼저 돌려 설계 세 가지를 바꾸고, 예비 학습(test 88.7% / macro_f1 0.848, 공개 데이터 기준)까지 검증했습니다. 한국 환경음 자체 녹음 후 2차 파인튜닝으로 정확도 90%를 목표합니다.',
+      '발주 전 Claude Code로 간섭 시나리오를 코드 레벨로 먼저 돌려 설계 세 가지를 바꾸고, 예비 학습(test 88.7% / macro_f1 0.848, 공개 데이터 기준)까지 검증했습니다. 한국 환경음 자체 녹음 후 2차 파인튜닝으로 정확도 90%를 목표로 합니다.',
   },
 ]

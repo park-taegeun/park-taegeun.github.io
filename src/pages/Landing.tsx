@@ -13,6 +13,7 @@ import { PROJECTS, type Project } from '../data/projects'
 import { SIDE_WORKS, type SideWork, type SideWorkImage } from '../data/sideWorks'
 import { VELOG_PROFILE, VELOG_URL, WRITING_SERIES, type WritingSeries } from '../data/writing'
 import { onImgError } from '../lib/placeholder'
+import { Sentences, SentencesAfterLabel } from '../components/Sentences'
 import { scrollToId } from '../lib/lenis'
 import { enterRoom } from '../lib/signature'
 
@@ -147,10 +148,10 @@ function TenSecondSummary() {
                   aria-hidden
                 />
                 <span className="font-body text-[16px] leading-[1.6] text-text-sub group-hover:translate-x-1 transition-transform">
-                  <strong className="font-display font-semibold tracking-[-0.02em]" style={{ color: p.ink }}>
+                  <strong className="font-body font-bold tracking-[-0.02em]" style={{ color: p.ink }}>
                     {p.name}
                   </strong>
-                  <span className="text-text-muted"> — </span>
+                  <span className="text-text-muted">: </span>
                   {p.tenSecond}
                   {p.tenSecondCredit && <span className="text-text-muted"> ({p.tenSecondCredit})</span>}
                 </span>
@@ -212,8 +213,8 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
           viewport={{ once: true, margin: '-8%' }}
           transition={{ duration: 0.7, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className={`${labelEn} font-mono`}>
-            {p.room} · <span style={{ color: p.accent }}>{p.name}</span>
+          <p className={labelEn}>
+            {p.room} · <span style={{ color: p.accent }}>{p.tagline}</span>
           </p>
 
           <div className="mt-4">
@@ -238,11 +239,11 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
             ))}
           </ul>
 
-          <p className="font-body text-text-sub text-[16px] leading-[1.7] mt-6 max-w-[55ch]">{p.summary}</p>
-          <p className="font-body text-text-sub text-[14px] leading-[1.65] mt-4 max-w-[58ch]">
-            <span className="font-semibold text-ink">핵심 판단</span> — {p.decision}
+          <p className="font-body text-text-sub text-[16px] leading-[1.7] mt-6 max-w-[55ch] break-keep"><Sentences text={p.summary} /></p>
+          <p className="font-body text-text-sub text-[14px] leading-[1.65] mt-4 max-w-[58ch] break-keep">
+            <span className="font-semibold text-ink">핵심 판단</span>: <SentencesAfterLabel text={p.decision} />
           </p>
-          <p className="font-body text-text-muted text-[13.5px] leading-[1.65] mt-2 max-w-[58ch]">{p.verification}</p>
+          <p className="font-body text-text-muted text-[13.5px] leading-[1.65] mt-2 max-w-[58ch] break-keep"><Sentences text={p.verification} /></p>
 
           <button
             type="button"
@@ -303,8 +304,7 @@ function Writing() {
               글은 결과가 아니라 과정을 남기는 실측 로그입니다.
             </p>
             <p className="font-body text-text-sub text-[15.5px] leading-[1.75] mt-5 max-w-[68ch] break-keep">
-              velog에 음성·LLM 실험을 타임스탬프로 기록하고, 졸업작품 시스템의 설계 판단과 폐기한
-              접근, AI 생태계 탐험을 남깁니다. 성공한 결과만이 아니라 틀린 판단과 철회 과정까지 함께 씁니다.
+              <Sentences text="velog에 음성·LLM 실험을 타임스탬프로 기록하고, 졸업작품 시스템의 설계 판단과 폐기한 접근, AI 생태계 탐험을 남깁니다. 성공한 결과만이 아니라 틀린 판단과 철회 과정까지 함께 씁니다." />
             </p>
           </div>
 
@@ -328,63 +328,98 @@ function Writing() {
           </aside>
         </div>
 
-        <section aria-label="velog 시리즈" className="mt-14">
-          <Label as="h3" lang="ko">시리즈</Label>
-          <ul className="mt-6 grid gap-5 md:grid-cols-3">
-            {WRITING_SERIES.map((s, i) => (
-              <SeriesCard key={s.name} series={s} index={i} />
-            ))}
-          </ul>
+        <section aria-label="시리즈별 대표글" className="mt-14 grid gap-12">
+          {WRITING_SERIES.map((s, i) => (
+            <SeriesBlock key={s.name} series={s} index={i} />
+          ))}
         </section>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2">
+        <div className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-6">
           <a
             href={VELOG_URL}
             target="_blank"
             rel="noreferrer"
             className="group inline-flex items-center gap-2 font-body font-semibold text-[15px] tracking-[0.02em] text-signal"
           >
-            velog {VELOG_PROFILE.handle}에서 전체 보기
+            velog {VELOG_PROFILE.handle} 전체 글 보기
             <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span>
           </a>
-          <p className="font-body text-text-muted text-[13px]">음성·LLM 연구 / 졸업작품 시스템 / AI 생태계 탐험</p>
+          <p className="font-body text-text-muted text-[13px]">대표글은 각 시리즈에서 선정했고, 전체는 velog에 있습니다.</p>
         </div>
       </div>
     </section>
   )
 }
 
-function SeriesCard({ series: s, index }: { series: WritingSeries; index: number }) {
+function SeriesBlock({ series: s, index }: { series: WritingSeries; index: number }) {
   return (
-    <motion.li
+    <motion.section
+      aria-label={`${s.name} 대표글`}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      className="border-t-2 pt-5"
+      style={{ borderColor: 'var(--color-navy)' }}
     >
-      <a
-        href={s.href}
-        target="_blank"
-        rel="noreferrer"
-        className="group block h-full border-t-2 pt-4"
-        style={{ borderColor: 'var(--color-navy)' }}
-      >
-        <div className="flex items-baseline justify-between gap-2">
-          <p className={`${labelEn} font-mono`} style={{ color: 'var(--color-signal)' }}>
+      {/* 헤더 — 축 / 시리즈명 / 편수 + 전체 보기 */}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
+        <div className="flex items-baseline gap-x-3 flex-wrap">
+          <span className={`${labelEn} font-mono`} style={{ color: 'var(--color-signal)' }}>
             {s.axis}
-          </p>
-          <span className="font-mono text-[12px] text-text-faint">{s.count}</span>
+          </span>
+          <h3 className="font-body font-bold text-ink text-[19px] leading-tight">{s.name}</h3>
+          <span className="font-mono text-[12px] text-text-muted">{s.count}</span>
         </div>
-        <p className="font-body font-bold text-ink text-[17px] leading-[1.4] mt-2 group-hover:underline underline-offset-4">
-          {s.name}
-        </p>
-        <p className="font-body text-text-sub text-[14px] leading-[1.65] mt-2 break-keep">{s.blurb}</p>
-        <span className="mt-4 inline-flex items-center gap-1 font-body font-semibold text-[13px] text-signal">
-          velog에서 보기
+        <a
+          href={s.href}
+          target="_blank"
+          rel="noreferrer"
+          className="group inline-flex items-center gap-1 font-body font-semibold text-[13px] text-signal"
+        >
+          전체 {s.count} 보기
           <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-        </span>
-      </a>
-    </motion.li>
+        </a>
+      </div>
+      <p className="font-body text-text-sub text-[14px] leading-[1.65] mt-2.5 max-w-[70ch] break-keep">
+        {s.blurb}
+      </p>
+
+      {/* 대표글 — 하이라인 로그 행(날짜 모노 · 제목 · 한 줄 · 화살표) */}
+      <ul className="mt-5 border-t border-line">
+        {s.posts.map((p) => (
+          <li key={p.href} className="border-b border-line">
+            <a
+              href={p.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 py-4 sm:grid-cols-[92px_1fr_auto] sm:gap-x-6"
+            >
+              <time className="hidden pt-0.5 font-mono text-[12.5px] tabular-nums text-text-muted sm:block">
+                {p.date}
+              </time>
+              <div className="min-w-0">
+                <p className="font-body font-semibold text-ink text-[15.5px] leading-[1.45] break-keep group-hover:underline underline-offset-4 decoration-1">
+                  {p.title}
+                </p>
+                <p className="font-body text-text-sub text-[13.5px] leading-[1.6] mt-1 break-keep">
+                  {p.note}
+                </p>
+                <time className="mt-1.5 block font-mono text-[11.5px] text-text-muted sm:hidden">
+                  {p.date}
+                </time>
+              </div>
+              <span
+                aria-hidden
+                className="justify-self-end pt-0.5 text-text-muted transition-transform group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </motion.section>
   )
 }
 
@@ -451,7 +486,7 @@ function SideWorkItem({ work, index }: { work: SideWork; index: number }) {
               {work.title}
             </h3>
             {work.period && <p className="font-body text-text-muted text-[13px] leading-[1.55] mt-4">{work.period}</p>}
-            <p className="font-body text-text-sub text-[16px] leading-[1.75] mt-5 max-w-[58ch] break-keep">{work.oneLine}</p>
+            <p className="font-body text-text-sub text-[16px] leading-[1.75] mt-5 max-w-[58ch] break-keep"><Sentences text={work.oneLine} /></p>
 
             {work.motif && (
               <div className="border-y border-line py-4 mt-6">
@@ -528,7 +563,7 @@ function SideDetailRow({ label, body }: { label: string; body: string }) {
   return (
     <div className="border-t border-line py-4 grid gap-2 sm:grid-cols-[112px_minmax(0,1fr)]">
       <dt className={`${labelEn} font-mono`}>{label}</dt>
-      <dd className="font-body text-text-sub text-[14.5px] leading-[1.7] m-0 break-keep">{body}</dd>
+      <dd className="font-body text-text-sub text-[14.5px] leading-[1.7] m-0 break-keep"><Sentences text={body} /></dd>
     </div>
   )
 }

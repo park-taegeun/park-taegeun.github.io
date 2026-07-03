@@ -279,7 +279,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     mainWall: {
       src: '/images/evidence/eeg/ieie_poster.png',
       alt: 'IEIE 학회 포스터 — Dual-Stream Transformer for Single 14-Channel EEG Emotion Recognition and Analysis of the Label-Inference Gap',
-      caption: 'IEIE 학회 발표 포스터 (Park et al., 서경대) — 눌러서 원본 크기로 볼 수 있습니다',
+      caption: 'IEIE 학회 발표 포스터 (Park et al., 서경대). 눌러서 원본 크기로 볼 수 있습니다.',
     },
     heroStats: [
       { value: '75.1%', label: 'trial 정확도 · 14채널 EEG 단독' },
@@ -328,7 +328,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
   thingdong: {
     key: 'thingdong',
     entranceLine:
-      '놓치면 안 되는 소리를 실시간 감지해 알리는, 센서부터 ML·서버·알림까지 전 계층을 1인 설계·구현한 시스템입니다. 진행 중입니다.',
+      '놓치면 안 되는 소리를 실시간 감지해 알리는, 센서부터 ML·서버·알림까지 전 계층을 1인 설계·구현한 시스템으로, 현재 진행 중입니다.',
     entranceDetail:
       '한 단계라도 끊기면 알림이 무의미해지므로, 모델 정확도가 아니라 데이터가 흐르는 전 구간을 책임지고 설계했습니다.',
     mainWall: {

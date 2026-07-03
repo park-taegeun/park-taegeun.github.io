@@ -5,6 +5,7 @@ import { type ReactNode } from 'react'
 import { PRINCIPLES, PROFILE, TIMELINE, type Principle, type TimelineGroup, type TimelineItem } from '../../data/about'
 import { scrollToId } from '../../lib/lenis'
 import { onImgError } from '../../lib/placeholder'
+import { splitSentences } from '../../lib/text'
 import Label, { labelEnClass as labelEn } from '../Label'
 
 const aboutPad = { paddingBlock: 'clamp(72px, 8vw, 120px)' }
@@ -28,22 +29,24 @@ export default function About() {
 }
 
 function Headline() {
-  // '시스템 전체를 검증하고 책임지는' 구절을 강조(밑줄)
-  const EMPH = '시스템 전체를 검증하고 책임지는'
+  // '시스템 전체를 검증하고 책임집니다' 구절을 강조(밑줄)
+  const EMPH = '시스템 전체를 검증하고 책임집니다'
   const [before, after] = PROFILE.headline.split(EMPH)
   return (
     <h2
-      className="font-body font-bold text-ink mt-4 leading-[1.3]"
+      className="font-body font-bold text-ink mt-4 leading-[1.4]"
       style={{ fontSize: 'clamp(24px,3.2vw,40px)', letterSpacing: '-0.03em' }}
     >
       {before}
-      <span className="relative whitespace-nowrap">
+      <span
+        style={{
+          textDecorationLine: 'underline',
+          textDecorationColor: 'var(--color-signal)',
+          textDecorationThickness: '3px',
+          textUnderlineOffset: '5px',
+        }}
+      >
         {EMPH}
-        <span
-          aria-hidden
-          className="absolute left-0 right-0 -bottom-1 h-[3px] rounded-full"
-          style={{ background: 'var(--color-signal)' }}
-        />
       </span>
       {after}
     </h2>
@@ -123,8 +126,35 @@ function Principles() {
   )
 }
 
+// 원칙 본문 — 문장 경계에서 줄바꿈(다문장이면 문장마다 block), 핵심 문구는 굵게.
+function PrincipleBody({ body, highlight }: { body: string; highlight: string }) {
+  const sentences = splitSentences(body)
+  const multi = sentences.length > 1
+  return (
+    <>
+      {sentences.map((s, i) => {
+        const idx = s.indexOf(highlight)
+        const content =
+          idx === -1 ? (
+            s
+          ) : (
+            <>
+              {s.slice(0, idx)}
+              <strong className="font-semibold text-ink">{highlight}</strong>
+              {s.slice(idx + highlight.length)}
+            </>
+          )
+        return (
+          <span key={i} className={multi ? 'block' : undefined}>
+            {content}
+          </span>
+        )
+      })}
+    </>
+  )
+}
+
 function PrincipleRow({ item, n }: { item: Principle; n: number }) {
-  const [a, b] = item.body.split(item.highlight)
   return (
     <motion.li
       initial={{ opacity: 0, y: 22 }}
@@ -153,10 +183,8 @@ function PrincipleRow({ item, n }: { item: Principle; n: number }) {
           <p className="font-body font-bold text-ink text-[15px] leading-[1.35] mt-0.5">{item.title}</p>
         </div>
       </div>
-      <p className="font-body text-text-sub text-[14.5px] leading-[1.78] sm:pt-1.5">
-        {a}
-        <strong className="font-semibold text-ink">{item.highlight}</strong>
-        {b}
+      <p className="font-body text-text-sub text-[14.5px] leading-[1.78] sm:pt-1.5 break-keep">
+        <PrincipleBody body={item.body} highlight={item.highlight} />
       </p>
     </motion.li>
   )
@@ -237,7 +265,7 @@ function TimelineEntry({ item }: { item: TimelineItem }) {
             </span>
           </span>
         )}
-        <span className="font-body text-text-faint text-[12px] ml-auto whitespace-nowrap">{item.period}</span>
+        <span className="font-body text-text-muted text-[12px] ml-auto whitespace-nowrap">{item.period}</span>
       </div>
       {item.org && <p className="font-body text-text-muted text-[12px] leading-[1.5] mt-1">{item.org}</p>}
       {item.note && <p className="font-body text-text-sub text-[13px] leading-[1.6] mt-1 max-w-[64ch]">{item.note}</p>}
