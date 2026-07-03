@@ -35,7 +35,7 @@ function ContactRow({ label, sub, href, hoverClass, external }: ContactItem) {
         className="absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 bg-white/[0.06] will-change-transform"
       />
       <a href={href} {...linkProps} className="relative flex items-center justify-between py-6 lg:py-7 gap-6">
-        <div>
+        <div className="min-w-0">
           <p
             className={`font-display font-bold text-white leading-none tracking-[-0.04em] transition-colors duration-300 ${hoverClass}`}
             style={{ fontSize: 'clamp(28px, 5vw, 54px)' }}
@@ -48,7 +48,7 @@ function ContactRow({ label, sub, href, hoverClass, external }: ContactItem) {
         </div>
         <span
           aria-hidden
-          className="font-body text-white/25 text-[20px] leading-none transition-all duration-300 will-change-transform group-hover:translate-x-2 group-hover:-translate-y-2 group-hover:text-white/70"
+          className="shrink-0 font-body text-white/25 text-[20px] leading-none transition-all duration-300 will-change-transform group-hover:translate-x-2 group-hover:-translate-y-2 group-hover:text-white/70"
         >
           {external ? '↗' : '→'}
         </span>

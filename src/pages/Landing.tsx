@@ -248,10 +248,11 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
           <button
             type="button"
             onClick={() => enter(0)}
-            className="font-body font-semibold text-[14px] tracking-[0.04em] mt-10 inline-block cursor-pointer"
+            className="font-body font-semibold text-[14px] tracking-[0.04em] mt-10 inline-flex items-baseline gap-[0.3em] cursor-pointer"
             style={{ color: p.accent }}
           >
-            작업 과정 보기 →
+            <span className="min-w-0 break-keep">작업 과정 보기</span>
+            <span aria-hidden className="shrink-0">→</span>
           </button>
         </motion.div>
       </div>
@@ -341,8 +342,8 @@ function Writing() {
             rel="noreferrer"
             className="group inline-flex items-center gap-2 font-body font-semibold text-[15px] tracking-[0.02em] text-signal"
           >
-            velog {VELOG_PROFILE.handle} 전체 글 보기
-            <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span>
+            <span className="min-w-0 break-keep">velog {VELOG_PROFILE.handle} 전체 글 보기</span>
+            <span aria-hidden className="shrink-0 inline-block transition-transform group-hover:translate-x-1">→</span>
           </a>
           <p className="font-body text-text-muted text-[13px]">대표글은 각 시리즈에서 선정했고, 전체는 velog에 있습니다.</p>
         </div>
@@ -377,8 +378,8 @@ function SeriesBlock({ series: s, index }: { series: WritingSeries; index: numbe
           rel="noreferrer"
           className="group inline-flex items-center gap-1 font-body font-semibold text-[13px] text-signal"
         >
-          전체 {s.count} 보기
-          <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+          <span className="min-w-0 break-keep">전체 {s.count} 보기</span>
+          <span aria-hidden className="shrink-0 transition-transform group-hover:translate-x-1">→</span>
         </a>
       </div>
       <p className="font-body text-text-sub text-[14px] leading-[1.65] mt-2.5 max-w-[70ch] break-keep">
@@ -411,7 +412,7 @@ function SeriesBlock({ series: s, index }: { series: WritingSeries; index: numbe
               </div>
               <span
                 aria-hidden
-                className="justify-self-end pt-0.5 text-text-muted transition-transform group-hover:translate-x-1"
+                className="shrink-0 justify-self-end pt-0.5 text-text-muted transition-transform group-hover:translate-x-1"
               >
                 →
               </span>
@@ -539,9 +540,10 @@ function SideWorkItem({ work, index }: { work: SideWork; index: number }) {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-body font-semibold text-[13px] tracking-[0.04em] text-text-muted hover:text-ink transition-colors"
+                    className="inline-flex items-baseline gap-[0.3em] font-body font-semibold text-[13px] tracking-[0.04em] text-text-muted hover:text-ink transition-colors"
                   >
-                    {link.label} →
+                    <span className="min-w-0 break-keep">{link.label}</span>
+                    <span aria-hidden className="shrink-0">→</span>
                   </a>
                 ))}
               </div>

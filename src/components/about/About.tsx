@@ -276,8 +276,8 @@ function TimelineEntry({ item }: { item: TimelineItem }) {
           className="group/link font-body font-semibold text-[12px] tracking-[0.04em] mt-2 inline-flex items-center gap-1"
           style={{ color: link.color }}
         >
-          <span aria-hidden className="transition-transform group-hover/link:translate-x-0.5">→</span>
-          <span className="group-hover/link:underline underline-offset-4">
+          <span aria-hidden className="shrink-0 transition-transform group-hover/link:translate-x-0.5">→</span>
+          <span className="min-w-0 break-keep group-hover/link:underline underline-offset-4">
             {link.label}{link.suffix ?? '에서 활용'}
           </span>
         </button>
