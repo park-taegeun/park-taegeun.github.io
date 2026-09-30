@@ -1,0 +1,20 @@
+{
+  "updatedAt": "2026-09-30T02:24:05Z",
+  "series": {
+    "ai-lab": {
+      "name": "AI_LAB",
+      "count": 80,
+      "lastPost": "2026-09-18"
+    },
+    "graduation": {
+      "name": "졸업작품 기록",
+      "count": 62,
+      "lastPost": "2026-09-10"
+    },
+    "ai-ecosystem": {
+      "name": "AI 생태계 탐험 로그",
+      "count": 15,
+      "lastPost": "2026-08-02"
+    }
+  }
+}

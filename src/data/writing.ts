@@ -1,8 +1,14 @@
 // 생각의 기록 (Velog @xorms) — 실측 로그.
 // velog는 3개 시리즈로 운영: AI_LAB(음성·LLM 연구) / 졸업작품 기록 / AI 생태계 탐험 로그.
 // 전체 나열 대신 각 시리즈에서 문제→판단→검증이 드러나는 대표글만 큐레이션하고,
-// 하단 "전체 N편 보기"로 시리즈 전체 링크아웃(편수는 velog @xorms/series 기준 실측).
+// 하단 "전체 N편 보기"로 시리즈 전체 링크아웃(편수는 velog-series.json — velog-sync 워크플로가 매일 갱신).
 // 카드 제목·설명은 velog 원문을 정제한 표현이며 수치·사실은 velog 실데이터만 사용(지어내기 금지).
+
+import velogSeries from './velog-series.json'
+
+const SERIES_COUNTS: Record<string, { count?: number }> = velogSeries.series
+/** JSON 편수, 키가 없으면 fallback */
+const seriesCount = (key: string, fallback: number) => `${SERIES_COUNTS[key]?.count ?? fallback}편`
 
 export const VELOG_URL = 'https://velog.io/@xorms'
 
@@ -45,7 +51,7 @@ export const WRITING_SERIES: WritingSeries[] = [
   {
     axis: '음성·LLM 연구',
     name: 'AI_LAB',
-    count: '45편',
+    count: seriesCount('ai-lab', 80),
     blurb: '멀티모달 LLM의 음성인식 환각을 진단·재측정한 실험을 타임스탬프로 남긴 로그.',
     href: 'https://velog.io/@xorms/series/AILAB',
     posts: [
@@ -78,7 +84,7 @@ export const WRITING_SERIES: WritingSeries[] = [
   {
     axis: '졸업작품 시스템',
     name: '졸업작품 기록',
-    count: '41편',
+    count: seriesCount('graduation', 62),
     blurb: '센서부터 알림까지 전 계층을 잇는 소리 알림 시스템의 설계 판단과 폐기한 접근을 기록.',
     href: 'https://velog.io/@xorms/series/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D',
     posts: [
@@ -111,7 +117,7 @@ export const WRITING_SERIES: WritingSeries[] = [
   {
     axis: 'AI 생태계 탐험',
     name: 'AI 생태계 탐험 로그',
-    count: '14편',
+    count: seriesCount('ai-ecosystem', 15),
     blurb: 'AI 도구·모델·생태계를 직접 조합·응용하며 관찰한 것을 정리한 탐험 기록.',
     href: 'https://velog.io/@xorms/series/AI-%EC%83%9D%ED%83%9C%EA%B3%84-%ED%83%90%ED%97%98-%EB%A1%9C%EA%B7%B8',
     posts: [
