@@ -104,7 +104,7 @@ export const WRITING_SERIES: WritingSeries[] = [
         title: 'YAMNet 파인튜닝과 서빙 export 검증',
         date: '2026.07.01',
         href: 'https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-41',
-        note: '공개 데이터 예비 학습으로 정확도 88.7%까지 확인했고, 목표는 90%입니다.',
+        note: '공개 데이터 예비 학습을 검증했고, 이후 평가셋 누수 79건을 발견해 정확도 표기를 0.861로 정정했습니다.',
       },
     ],
   },

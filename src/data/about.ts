@@ -109,17 +109,17 @@ export const TIMELINE: TimelineGroup[] = [
       {
         title: 'EEG 기반 실시간 감정 인식 연구',
         org: '학부연구생',
-        award: 'IEIE 발표',
-        period: '2026',
+        award: 'IEIE 발표 · 3저자',
+        period: '2026.04~06',
         note: '라벨링 한계를 지표로 규명하고 비중첩 조건으로 재검증.',
         link: EEG_LINK,
       },
       {
         title: '청각장애인용 소리 알림 시스템',
-        org: '졸업작품 · 1인 설계·구현',
-        period: '진행 중 · 11월 전시',
+        org: '졸업작품 · 단독 설계·검증',
+        period: '진행 중 · 11월 발표',
         ongoing: true,
-        note: '센서부터 알림까지 전 계층을 1인 설계·구현.',
+        note: '센서부터 알림까지 전 계층을 혼자 설계하고, 구현은 AI 도구에 위임해 결과를 검증.',
         link: DDINGDONG_LINK,
       },
       {
