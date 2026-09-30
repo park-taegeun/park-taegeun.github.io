@@ -1,0 +1,32 @@
+name: velog series sync
+on:
+  schedule:
+    - cron: '17 21 * * *' # 매일 06:17 KST (UTC 21:17). 정각 회피용 지터.
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  actions: write # GITHUB_TOKEN push는 deploy를 트리거하지 않으므로 dispatch로 직접 호출
+concurrency:
+  group: velog-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: node scripts/fetch-velog-series.mjs
+      - name: commit if changed
+        run: |
+          if git diff --quiet -- src/data/velog-series.json; then
+            echo "no change"; exit 0
+          fi
+          git config user.name  "velog-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/data/velog-series.json
+          git commit -m "chore: sync velog series counts"
+          git push
+          gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
