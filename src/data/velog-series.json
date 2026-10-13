@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T00:36:35Z",
+  "updatedAt": "2026-10-13T02:36:17Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
@@ -8,13 +8,13 @@
     },
     "graduation": {
       "name": "졸업작품 기록",
-      "count": 90,
-      "lastPost": "2026-10-08"
+      "count": 91,
+      "lastPost": "2026-10-12"
     },
     "ai-ecosystem": {
       "name": "AI 생태계 탐험 로그",
-      "count": 17,
-      "lastPost": "2026-10-11"
+      "count": 18,
+      "lastPost": "2026-10-12"
     }
   }
 }
