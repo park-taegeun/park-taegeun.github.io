@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T23:18:24Z",
+  "updatedAt": "2026-10-20T00:24:38Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
@@ -13,8 +13,8 @@
     },
     "ai-ecosystem": {
       "name": "AI 생태계 탐험 로그",
-      "count": 22,
-      "lastPost": "2026-10-18"
+      "count": 23,
+      "lastPost": "2026-10-19"
     }
   }
 }
