@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-10-23T23:52:27Z",
+  "updatedAt": "2026-10-24T23:19:44Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
       "count": 88,
       "lastPost": "2026-10-16",
-      "latestTitle": "[ LAB ] 89. 실전 모듈이 학습 때와 똑같이 계산하는가",
+      "latestTitle": "[ LAB ]  89. 실전 모듈이 학습 때와 똑같이 계산하는가",
       "latestUrl": "https://velog.io/@xorms/LAB-89.-%EC%8B%A4%EC%A0%84-%EB%AA%A8%EB%93%88%EC%9D%B4-%ED%95%99%EC%8A%B5-%EB%95%8C%EC%99%80-%EB%98%91%EA%B0%99%EC%9D%B4-%EA%B3%84%EC%82%B0%ED%95%98%EB%8A%94%EA%B0%80"
     },
     "graduation": {
@@ -19,7 +19,7 @@
       "name": "AI 생태계 탐험 로그",
       "count": 24,
       "lastPost": "2026-10-20",
-      "latestTitle": "[[ LLM Wiki 운영편 2 — 정규식이 놓친 비밀번호, 숫자는 맞는데 남은 1편: \"부탁\"을 \"강제\"로 바꾸는 운영 ]]",
+      "latestTitle": "[ LLM Wiki 운영편 2 — 정규식이 놓친 비밀번호, 숫자는 맞는데 남은 1편: \"부탁\"을 \"강제\"로 바꾸는 운영 ]",
       "latestUrl": "https://velog.io/@xorms/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-2-%EC%A0%95%EA%B7%9C%EC%8B%9D%EC%9D%B4-%EB%86%93%EC%B9%9C-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%88%AB%EC%9E%90%EB%8A%94-%EB%A7%9E%EB%8A%94%EB%8D%B0-%EB%82%A8%EC%9D%80-1%ED%8E%B8-%EB%B6%80%ED%83%81%EC%9D%84-%EA%B0%95%EC%A0%9C%EB%A1%9C-%EB%B0%94%EA%BE%B8%EB%8A%94-%EC%9A%B4%EC%98%81"
     }
   }
