@@ -15,10 +15,12 @@ interface FlipTitleProps {
   /** 뒷면(액센트) 색 — 프로젝트 ink(네이비) */
   ink: string
   onActivate: (letterIndex: number) => void
+  /** 글자 크기(긴 이름은 작게). 기본 text-h1 */
+  fontSize?: string
 }
 
 const FlipTitle = forwardRef<FlipTitleHandle, FlipTitleProps>(function FlipTitle(
-  { name, ink, onActivate },
+  { name, ink, onActivate, fontSize },
   ref,
 ) {
   const wrap = useRef<HTMLSpanElement>(null)
@@ -54,8 +56,8 @@ const FlipTitle = forwardRef<FlipTitleHandle, FlipTitleProps>(function FlipTitle
         const card = (e.target as HTMLElement).closest<HTMLElement>('[data-letter-card]')
         onActivate(card ? Number(card.dataset.index) : 0)
       }}
-      className="block text-left font-body font-bold tracking-[-0.03em] text-h1 cursor-pointer"
-      style={{ lineHeight: 1.1 }}
+      className={`block text-left font-body font-bold tracking-[-0.03em] cursor-pointer ${fontSize ? '' : 'text-h1'}`}
+      style={{ lineHeight: 1.1, fontSize }}
     >
       {/* 글자별 카드는 유지하되 단어 단위로 묶어(whitespace-nowrap) 줄바꿈이 단어를 관통하지 않게 한다.
          data-index는 전체 글자 기준 연속값을 유지해 플립 stagger·클릭 기점이 그대로 동작한다. */}

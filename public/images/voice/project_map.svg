@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 640" width="1400" height="640" role="img" aria-label="과제 구성 중 담당 부분">
+<title>과제 구성 중 담당 부분</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
+<rect width="1400" height="640" fill="#FFFFFF"/>
+<text x="50" y="58" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="30" font-weight="700" fill="#101A2C" text-anchor="start">XR 텔레프레즌스 과제의 음성·영상 분석 구성</text>
+<text x="50" y="94" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">정부 R&amp;D 과제(한국콘텐츠진흥원) 중 대화 맥락 분석 부분을 재구성한 그림</text>
+<rect x="50" y="150" width="230" height="110" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="70" y="198" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#101A2C" text-anchor="start">음성</text>
+<text x="70" y="234" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">음 높이 · MFCC</text>
+<line x1="290" y1="205" x2="360" y2="205" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="370" y="140" width="470" height="130" rx="12" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3.5" opacity="1"/>
+<text x="395" y="180" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="27" font-weight="700" fill="#0E7C86" text-anchor="start">음성 분석</text>
+<rect x="690" y="157" width="128" height="32" rx="16" fill="#0E7C86" stroke="#0E7C86" stroke-width="2" opacity="1"/>
+<text x="754" y="180" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">담당</text>
+<text x="395" y="220" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="500" fill="#101A2C" text-anchor="start">받아쓰기 환각 진단 (2026.06 ~ 07)</text>
+<text x="395" y="252" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="500" fill="#101A2C" text-anchor="start">어조 모듈 (2026.07 ~ 진행 중)</text>
+<path d="M850,205 C930,205 930,355 990,355" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="50" y="300" width="230" height="110" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="70" y="348" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#101A2C" text-anchor="start">영상</text>
+<text x="70" y="384" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">상반신 자세</text>
+<line x1="290" y1="355" x2="360" y2="355" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="370" y="300" width="470" height="110" rx="12" fill="#FFFFFF" stroke="#9AA6B4" stroke-width="2" stroke-dasharray="7 6" opacity="1"/>
+<text x="395" y="348" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="25" font-weight="600" fill="#586173" text-anchor="start">제스처 인식</text>
+<text x="395" y="384" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#9AA6B4" text-anchor="start">다른 파트</text>
+<path d="M850,355 C930,355 930,355 990,355" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="50" y="450" width="230" height="110" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="70" y="498" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#101A2C" text-anchor="start">성문 · 입 모양</text>
+<text x="70" y="534" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">누가 언제 말했는지</text>
+<line x1="290" y1="505" x2="360" y2="505" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="370" y="450" width="470" height="110" rx="12" fill="#FFFFFF" stroke="#9AA6B4" stroke-width="2" stroke-dasharray="7 6" opacity="1"/>
+<text x="395" y="498" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="25" font-weight="600" fill="#586173" text-anchor="start">화자 분리</text>
+<text x="395" y="534" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#9AA6B4" text-anchor="start">다른 파트</text>
+<path d="M850,505 C930,505 930,355 990,355" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1000" y="290" width="170" height="130" rx="12" fill="#FFFFFF" stroke="#9AA6B4" stroke-width="2" stroke-dasharray="7 6" opacity="1"/>
+<text x="1085" y="346" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="600" fill="#586173" text-anchor="middle">모듈 통합</text>
+<text x="1085" y="380" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="400" fill="#9AA6B4" text-anchor="middle">융합 구조 · 팀</text>
+<line x1="1170" y1="355" x2="1220" y2="355" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1225" y="290" width="150" height="130" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="1300" y="346" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="middle">다자 대화</text>
+<text x="1300" y="376" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="middle">타임라인</text>
+<rect x="50" y="601" width="22" height="18" rx="4" fill="#E1F3F4" stroke="#0E7C86" stroke-width="2" opacity="1"/>
+<text x="82" y="615" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">담당 부분</text>
+<rect x="197.5" y="601" width="22" height="18" rx="4" fill="#EEF1F5" stroke="#9AA6B4" stroke-width="2" stroke-dasharray="4 3" opacity="1"/>
+<text x="229.5" y="615" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">다른 파트 · 팀</text>
+</svg>

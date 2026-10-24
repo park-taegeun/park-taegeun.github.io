@@ -1,512 +1,460 @@
-// 상세 룸 (P5) — RoomEntrance / MainWall / FloatingEvidenceFrames / InfoDock / RoomExit.
-// 증거가 주인공: 실제 화면·사진을 큰 액자로, 스크롤 리빌로 드러남(§8 — 전시관처럼 살아있게).
-// 진입: 커버 persist 아래 마운트 → 엔트런스 fade-up 0.4s (§6③). 뒤로가기 = 0.3s 크로스페이드.
+// 상세(2층) 페이지. 케이스 스터디형 공통 틀:
+// 머리(태그·이름·한 줄) → 요약 박스 → 대표 이미지 → (과제와 내 자리) → [탭] 문제 · 구조 · 결과 · 설계 결정 · 검증
+// → AI 위임 → 한계와 다음 행동 → 증거 링크. 데스크톱은 오른쪽 고정 목차, 모바일은 상단 칩 목차.
+// 진입은 시그니처 전환(커버 persist) 아래에서 마운트되고, 머리만 fade-up 한다.
 import gsap from 'gsap'
 import { AnimatePresence } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Navigate, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Label from '../components/Label'
-import AiUsageSection from '../components/room/AiUsageSection'
-import CardNewsStack from '../components/room/CardNewsStack'
-import ComparisonTable from '../components/room/ComparisonTable'
-import SlideViewer from '../components/room/SlideViewer'
+import RichText from '../components/RichText'
+import {
+  AiDelegation,
+  BlockHead,
+  Body,
+  CheckList,
+  DecisionList,
+  Limits,
+  LinksBlock,
+  ResultsTable,
+  SummaryBox,
+  ZoomFrame,
+} from '../components/case/CaseBlocks'
+import { SECTION_LABELS } from '../components/case/sections'
 import EvidenceFrame from '../components/room/EvidenceFrame'
 import Lightbox from '../components/room/Lightbox'
-import OriginStoryView from '../components/room/OriginStory'
 import Reveal from '../components/room/Reveal'
 import { PROJECTS, type ProjectKey } from '../data/projects'
-import { ROOMS, type EvidenceItem } from '../data/rooms'
+import { ROOMS, type EvidenceItem, type RoomData, type Track } from '../data/rooms'
 import { scrollToId } from '../lib/lenis'
-import { Sentences } from '../components/Sentences'
 import { EASE_DEFAULT, prefersReducedMotion } from '../lib/motion'
 import { crossfadeToRoom, exitRoom } from '../lib/signature'
 
-const roomPad = {
-  paddingInline: 'var(--room-padding-x)',
-  paddingBlock: 'var(--room-padding-y)',
-}
+const padX = { paddingInline: 'var(--room-padding-x)' }
 
-// 대표 화면이 한 화면을 통째로 점유하지 않도록 짧은 수직 패딩 (§9 토큰)
-const roomPadTight = {
-  paddingInline: 'var(--room-padding-x)',
-  paddingBlock: 'var(--room-padding-y-tight)',
-}
-
-function evidenceLayoutClass(item: EvidenceItem, evidenceCols: 2 | 3, groupSize: number) {
-  if (item.layout === 'wide') {
-    return evidenceCols === 3
-      ? 'lg:col-span-3 lg:max-w-[780px] lg:justify-self-center'
-      : 'md:col-span-2 md:max-w-[780px] md:justify-self-center'
-  }
-
-  if (item.layout === 'compact') {
-    return 'max-w-[250px] sm:max-w-[270px] lg:max-w-[255px] justify-self-center'
-  }
-
-  return groupSize === 1 ? 'md:max-w-[480px]' : ''
+function tocFor(room: RoomData, track: Track) {
+  const ids = ['summary']
+  if (room.context) ids.push('context')
+  if (track.problem) ids.push('problem')
+  if (track.structure) ids.push('structure')
+  if (track.results) ids.push('results')
+  if (track.decisions?.length) ids.push('decisions')
+  if (track.checks?.length) ids.push('checks')
+  if (room.delegation) ids.push('ai')
+  ids.push('limits', 'links')
+  return ids.map((id) => ({ id, label: SECTION_LABELS[id] }))
 }
 
 export default function ProjectRoom() {
   const { key } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+  const [params, setParams] = useSearchParams()
   const root = useRef<HTMLElement>(null)
   const [zoom, setZoom] = useState<EvidenceItem | null>(null)
+
   const index = PROJECTS.findIndex((p) => p.key === (key as ProjectKey))
   const project = index >= 0 ? PROJECTS[index] : undefined
   const room = project ? ROOMS[project.key] : undefined
   const next = project ? PROJECTS[(index + 1) % PROJECTS.length] : undefined
 
+  const tabParam = params.get('tab')
+  const activeTrack = room?.tracks.find((t) => t.id === tabParam) ?? room?.tracks[0]
+  const track = activeTrack?.track
+  const toc = useMemo(() => (room && track ? tocFor(room, track) : []), [room, track])
+  const [activeId, setActiveId] = useState('summary')
+  const hash = location.hash.slice(1)
+
+  // 머리 fade-up
   useEffect(() => {
     if (!project || prefersReducedMotion()) return
     const ctx = gsap.context(() => {
-      gsap.from('[data-room-fade]', {
-        y: 24,
-        opacity: 0,
-        duration: 0.4,
-        ease: EASE_DEFAULT,
-        stagger: 0.06,
-      })
+      gsap.from('[data-room-fade]', { y: 20, opacity: 0, duration: 0.4, ease: EASE_DEFAULT, stagger: 0.05 })
     }, root)
     return () => ctx.revert()
   }, [project])
 
-  if (!project || !room || !next) return <Navigate to="/" replace />
+  // 문서 제목(탭 제목·공유 시 브라우저 표시)
+  useEffect(() => {
+    if (!project) return
+    const prev = document.title
+    document.title = project.og.title
+    return () => {
+      document.title = prev
+    }
+  }, [project])
 
-  const goBackToProject = () => void exitRoom(navigate, project.anchorId)
-  const isCompactRoom = room.mainWallSize === 'compact'
-  const mainWallMax = isCompactRoom ? 'max-w-[520px]' : 'max-w-[820px]'
-  const evidenceCols = room.evidenceGrid ?? (isCompactRoom ? 3 : 2)
-  const evidenceGridClass =
-    evidenceCols === 3
-      ? 'grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:items-start'
-      : 'grid gap-12 md:grid-cols-2 md:items-start'
-  // evidenceGroups 없으면 flat evidence를 라벨 없는 단일 그룹으로 정규화
-  const evidenceGroups = room.evidenceGroups ?? [{ label: '', items: room.evidence }]
+  // 근거 링크로 들어온 경우(#check-0 등) 해당 블록으로 이동
+  useEffect(() => {
+    if (!hash) return
+    const t = window.setTimeout(() => scrollToId(hash), 450)
+    return () => window.clearTimeout(t)
+  }, [hash, key, tabParam])
+
+  // 현재 읽는 블록(목차 강조)
+  useEffect(() => {
+    const onScroll = () => {
+      const line = window.innerHeight * 0.3
+      let cur = toc[0]?.id ?? ''
+      for (const { id } of toc) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top < line) cur = id
+      }
+      setActiveId(cur)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [toc])
+
+  if (!project || !room || !next || !track || !activeTrack) return <Navigate to="/" replace />
+
+  const goBack = () => void exitRoom(navigate, project.anchorId)
+  const jump = (id: string) => scrollToId(id)
+  const selectTab = (id: string) => setParams({ tab: id }, { replace: true, preventScrollReset: true })
+  const hasTabs = room.tracks.length > 1
 
   return (
     <main ref={root} className="bg-base">
-      <nav className="sticky top-0 z-40 bg-base/90 backdrop-blur-sm border-b border-line">
-        <div className="mx-auto max-w-[1080px] px-5 py-3 flex flex-wrap items-center gap-x-6 gap-y-2">
-          <button
-            type="button"
-            onClick={goBackToProject}
-            className="font-body font-semibold text-[13px] text-text-muted hover:text-ink transition-colors"
-          >
-            프로젝트 목록으로
+      {/* 상단 바: 목록 · 다음 + 모바일 칩 목차 */}
+      <nav aria-label="상세 페이지 이동" className="sticky top-0 z-40 bg-base/92 backdrop-blur-sm border-b border-line">
+        <div className="mx-auto max-w-[1180px] flex items-center justify-between gap-4 py-3" style={padX}>
+          <button type="button" onClick={goBack} className="font-body font-semibold text-[13px] text-text-muted hover:text-ink transition-colors">
+            ← 목록으로
           </button>
-          <button
-            type="button"
-            onClick={() => scrollToId('info')}
-            className="font-body font-semibold text-[13px] text-text-muted hover:text-ink transition-colors"
-          >
-            정보로
-          </button>
-          {room.aiUsage && (
-            <button
-              type="button"
-              onClick={() => scrollToId('ai-usage')}
-              className="font-body font-semibold text-[13px] text-text-muted hover:text-ink transition-colors"
-            >
-              AI 사용
-            </button>
-          )}
+          <p className="hidden sm:block font-body font-semibold text-[13px] text-ink truncate">{project.name}</p>
           <button
             type="button"
             onClick={() => void crossfadeToRoom(next, navigate)}
-            className="font-body font-semibold text-[13px] transition-colors"
-            style={{ color: next.ink }}
+            className="font-body font-semibold text-[13px] text-signal hover:text-ink transition-colors truncate"
           >
-            다음 프로젝트
+            다음: {next.name} →
           </button>
         </div>
-      </nav>
-
-      {/* RoomEntrance — 옅은 톤 배경 + 콘텐츠 (헤어라인·모노 라벨로 절제) */}
-      <section
-        aria-label={`${project.name} 룸 입구`}
-        className="relative flex flex-col justify-center overflow-hidden"
-        style={{ minHeight: 'var(--room-min-height)', ...roomPad }}
-      >
-        {/* 프로젝트 톤 컬러 오버레이 (옅은 냉색 틴트) */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: project.tone }}
-          aria-hidden
-        />
-
-        {/* 콘텐츠 레이어 */}
-        <div className="relative z-10">
-          <p data-room-fade className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11.5px]">
-            {project.room} · {project.tagline}
-          </p>
-          <h1
-            data-room-fade
-            className="font-body font-bold tracking-[-0.03em] text-room-title mt-3"
-            style={{ lineHeight: 1.06, color: project.ink }}
-          >
-            {project.name}
-          </h1>
-          <p data-room-fade className="font-body text-text-sub text-[16px] leading-[1.7] mt-6 max-w-[58ch] break-keep">
-            <Sentences text={room.entranceLine} />
-          </p>
-          {room.entranceDetail && (
-            <p data-room-fade className="font-body text-text-muted text-[14px] leading-[1.75] mt-3 max-w-[54ch] break-keep">
-              <Sentences text={room.entranceDetail} />
-            </p>
-          )}
-          <p data-room-fade className="font-body font-medium text-text-muted text-[12.5px] mt-3">{project.role}</p>
-          <ul data-room-fade className="mt-6 flex flex-wrap gap-2" aria-label={`${project.name} 핵심 증거`}>
-            {project.proofChips.map((chip) => (
-              <li
-                key={chip}
-                className="font-body font-semibold text-[12px] leading-none px-2.5 py-2 border border-line bg-white/45"
-                style={{ color: project.ink, borderRadius: 999 }}
-              >
-                {chip}
+        <div className="lg:hidden border-t border-line">
+          <ul className="flex gap-1.5 overflow-x-auto py-2 no-scrollbar" style={padX} aria-label="이 페이지 목차">
+            {toc.map((t) => (
+              <li key={t.id} className="shrink-0">
+                <button
+                  type="button"
+                  onClick={() => jump(t.id)}
+                  aria-current={activeId === t.id ? 'true' : undefined}
+                  className="font-body text-[12.5px] leading-none px-3 py-2 rounded-full border transition-colors whitespace-nowrap"
+                  style={
+                    activeId === t.id
+                      ? { background: 'var(--color-navy)', borderColor: 'var(--color-navy)', color: '#fff' }
+                      : { borderColor: 'var(--color-line)', color: 'var(--color-text-sub)', background: 'var(--color-panel)' }
+                  }
+                >
+                  {t.label}
+                </button>
               </li>
             ))}
           </ul>
-
-          <div data-room-fade className="mt-14 flex items-baseline gap-8">
-            <button
-              type="button"
-              onClick={() => scrollToId('mainwall')}
-              className="font-body font-medium text-text-muted text-[13px] hover:text-ink transition-colors cursor-pointer"
-            >
-              전시 보기 ↓
-            </button>
-            <button
-              type="button"
-              onClick={goBackToProject}
-              className="font-body font-semibold uppercase tracking-[0.18em] text-[11.5px] cursor-pointer"
-              style={{ color: project.ink }}
-            >
-              ← 프로젝트 목록
-            </button>
-          </div>
         </div>
-      </section>
+      </nav>
 
-      {/* ── 콘텐츠 영역 래퍼 ── */}
-      <div className="relative">
+      {/* 머리: 태그 · 이름 · 부제 · 한 줄 */}
+      <header aria-label={`${project.name} 소개`} className="relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: project.tone }} aria-hidden />
+        <div className="relative mx-auto max-w-[1180px] pt-14 pb-12 sm:pt-20 sm:pb-16" style={padX}>
+          <ul data-room-fade className="flex flex-wrap items-center gap-2" aria-label="프로젝트 태그">
+            <li
+              className="font-body font-bold text-[12px] leading-none px-2.5 py-1.5 rounded-full"
+              style={
+                project.ownership === '주도'
+                  ? { background: 'var(--color-navy)', color: '#fff' }
+                  : { border: '1.5px solid var(--color-signal)', color: 'var(--color-signal)' }
+              }
+            >
+              {project.ownership}
+            </li>
+            {[project.kind, project.period, project.status].filter(Boolean).map((t) => (
+              <li key={t} className="font-body font-medium text-[12.5px] text-text-sub leading-none px-2.5 py-1.5 rounded-full bg-white/60 border border-line">
+                {t}
+              </li>
+            ))}
+            <li className="font-mono text-[11.5px] text-text-muted leading-none px-2 py-1.5">{room.asOf}</li>
+          </ul>
+          <h1
+            data-room-fade
+            className="font-body font-bold tracking-[-0.035em] mt-5 break-keep"
+            style={{ color: project.ink, fontSize: 'clamp(36px, 5.6vw, 76px)', lineHeight: 1.08 }}
+          >
+            {project.name}
+          </h1>
+          <p data-room-fade className="font-body font-semibold text-text-sub text-[17px] sm:text-[19px] leading-[1.5] mt-3 break-keep">
+            {project.fullName}
+          </p>
+          <p data-room-fade className="font-body text-ink text-[16px] leading-[1.8] mt-6 max-w-[64ch] break-keep">
+            <RichText text={project.oneLine} />
+          </p>
+        </div>
+      </header>
 
-      {/* MainWall — 대표 화면 액자 (짧은 패딩, 한 화면 점유 해소) */}
-      <section id="mainwall" aria-label="대표 화면" style={roomPadTight} className="relative overflow-hidden">
-        <div className={`relative mx-auto ${mainWallMax}`}>
+      <div className="mx-auto max-w-[1180px] grid gap-12 lg:grid-cols-[minmax(0,1fr)_188px] pt-10 pb-24" style={padX}>
+        <article className="min-w-0 flex flex-col gap-16 sm:gap-20">
+          <SummaryBox room={room} toc={toc} onJump={jump} />
+
           <Reveal>
-            <EvidenceFrame item={room.mainWall} large />
+            <ZoomFrame item={room.mainImage} onZoom={setZoom} />
           </Reveal>
-          {room.heroStats && (
-            <Reveal delay={0.1}>
-              <dl className="mt-8 grid gap-px overflow-hidden rounded-[10px] border border-line bg-line sm:grid-cols-3">
-                {room.heroStats.map((s) => (
-                  <div key={s.label} className="bg-panel px-5 py-5">
-                    <dt
-                      className="font-display font-bold tabular-nums tracking-[-0.03em] text-[30px] leading-none"
-                      style={{ color: project.ink }}
-                    >
-                      {s.value}
-                    </dt>
-                    <dd className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-2 m-0">{s.label}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-          )}
-        </div>
-      </section>
 
-      {(room.phaseFlow || room.casePanels) && (
-        <section aria-label="설계 구조" style={{ ...roomPad, paddingTop: 0 }}>
-          <div className="mx-auto max-w-[1080px]">
-            <Label as="h2" lang="ko">설계 구조</Label>
-
-            {room.phaseFlow ? (
-              <div className="mt-8">
-                <Reveal>
-                  <p className="font-body font-semibold uppercase tracking-[0.18em] text-[11.5px]" style={{ color: project.ink }}>
-                    {room.phaseFlow.eyebrow}
-                  </p>
-                  <h3 className="font-body font-bold text-ink text-[20px] leading-[1.4] mt-3 max-w-[40ch]">
-                    {room.phaseFlow.title}
-                  </h3>
-                  {room.phaseFlow.intro && (
-                    <p className="font-body text-text-sub text-[14.5px] leading-[1.75] mt-3 max-w-[72ch] break-keep">
-                      <Sentences text={room.phaseFlow.intro} />
-                    </p>
-                  )}
-                </Reveal>
-                {/* 4단계 흐름 다이어그램 — 줄글 대신 단계 위계로 시각화(번호·상단 액센트 룰·연결 화살표) */}
-                <ol className="mt-10 grid gap-x-7 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
-                  {room.phaseFlow.phases.map((p, i) => (
-                    <Reveal key={p.no} delay={i * 0.08}>
-                      <li className="relative border-t-2 pt-4" style={{ borderColor: project.ink }}>
-                        {i < room.phaseFlow!.phases.length - 1 && (
-                          <span aria-hidden className="hidden lg:block absolute -right-[18px] top-2.5 text-text-faint text-[15px] leading-none">
-                            →
-                          </span>
-                        )}
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-display font-bold text-[30px] leading-none tracking-[-0.04em]" style={{ color: project.ink }}>
-                            {p.no}
-                          </span>
-                          <span className="font-body font-semibold uppercase tracking-[0.14em] text-[10px] text-text-muted">Phase</span>
-                        </div>
-                        <p className="font-body font-bold text-ink text-[15px] leading-[1.4] mt-3">{p.name}</p>
-                        <p className="font-body text-text-sub text-[13px] leading-[1.6] mt-1.5">{p.desc}</p>
-                      </li>
-                    </Reveal>
+          {room.context && (
+            <section id="context" aria-label="과제 구성과 담당 범위" className="scroll-mt-28">
+              <BlockHead id="context" />
+              {room.context.periods && (
+                <ol className="mt-5 flex flex-wrap gap-2" aria-label="기간">
+                  {room.context.periods.map((p, i) => (
+                    <li key={p.label} className="flex items-center gap-2">
+                      {i > 0 && <span aria-hidden className="text-text-muted">→</span>}
+                      <span className="font-body text-[13px] leading-none px-3 py-2 rounded-full bg-panel border border-line">
+                        <strong className="font-semibold text-ink">{p.label}</strong>
+                        <span className="font-mono text-text-muted ml-2">{p.period}</span>
+                        {p.note && <span className="text-text-sub ml-2">· {p.note}</span>}
+                      </span>
+                    </li>
                   ))}
                 </ol>
+              )}
+              <Body text={room.context.body} className="mt-5" />
+              {room.context.image && (
+                <div className="mt-8">
+                  <ZoomFrame item={room.context.image} onZoom={setZoom} />
+                </div>
+              )}
+            </section>
+          )}
+
+          {hasTabs && (
+            <div id="tracks" className="scroll-mt-28 -mb-6 sm:-mb-10">
+              <p className="font-body text-text-muted text-[13px] mb-3">두 연구 주제를 탭으로 나눴습니다. 탭을 바꾸면 아래 배경부터 문제 해결까지의 내용이 바뀝니다.</p>
+              <div role="tablist" aria-label="연구 주제" className="flex flex-wrap gap-2">
+                {room.tracks.map((t) => {
+                  const on = t.id === activeTrack.id
+                  return (
+                    <button
+                      key={t.id}
+                      type="button"
+                      role="tab"
+                      id={`tab-${t.id}`}
+                      aria-selected={on}
+                      aria-controls="track-panel"
+                      onClick={() => selectTab(t.id)}
+                      className="font-body text-[14px] px-4 py-2.5 rounded-full border transition-colors"
+                      style={
+                        on
+                          ? { background: 'var(--color-navy)', borderColor: 'var(--color-navy)', color: '#fff', fontWeight: 700 }
+                          : { borderColor: 'var(--color-line-strong)', color: 'var(--color-text-sub)', background: 'var(--color-panel)', fontWeight: 500 }
+                      }
+                    >
+                      {t.label}
+                      {t.period && <span className="font-mono text-[11.5px] ml-2 opacity-80">{t.period}</span>}
+                    </button>
+                  )
+                })}
               </div>
-            ) : (
-              /* 가독성 개선 — 상단 액센트 룰 + 인덱스 번호로 위계를 또렷하게 */
-              <div className="mt-8 grid gap-x-8 gap-y-10 md:grid-cols-3">
-                {room.casePanels!.map((panel, i) => (
-                  <Reveal key={panel.title}>
-                    <article className="border-t-2 pt-5" style={{ borderColor: project.ink }}>
-                      <div className="flex items-center justify-between gap-3">
-                        <p className="font-body font-semibold uppercase tracking-[0.18em] text-[11px]" style={{ color: project.ink }}>
-                          {panel.eyebrow}
-                        </p>
-                        <span className="font-display font-bold text-[13px] tabular-nums" style={{ color: project.ink, opacity: 0.45 }}>
-                          0{i + 1}
-                        </span>
-                      </div>
-                      <h3 className="font-body font-bold text-ink text-[17px] leading-[1.42] mt-3">
-                        {panel.title}
-                      </h3>
-                      <p className="font-body text-text-sub text-[14px] leading-[1.78] mt-3 break-keep">
-                        <Sentences text={panel.body} />
-                      </p>
-                    </article>
-                  </Reveal>
+            </div>
+          )}
+
+          <div
+            id="track-panel"
+            role={hasTabs ? 'tabpanel' : undefined}
+            aria-labelledby={hasTabs ? `tab-${activeTrack.id}` : undefined}
+            className="flex flex-col gap-16 sm:gap-20"
+            key={activeTrack.id}
+          >
+            {track.problem && (
+              <section id="problem" aria-label="배경과 목표" className="scroll-mt-28">
+                <BlockHead id="problem" />
+                <div className="mt-5">
+                  <Body text={track.problem.body} />
+                  {track.problem.source && <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-4">{track.problem.source}</p>}
+                </div>
+                {track.problem.image && (
+                  <div className="mt-8 max-w-[680px]">
+                    <ZoomFrame item={track.problem.image} onZoom={setZoom} />
+                  </div>
+                )}
+              </section>
+            )}
+
+            {track.structure && (
+              <section id="structure" aria-label="구조" className="scroll-mt-28">
+                <BlockHead id="structure" />
+                <Body text={track.structure.body} className="mt-5" />
+                {track.structure.image && (
+                  <div className="mt-8">
+                    <ZoomFrame item={track.structure.image} onZoom={setZoom} />
+                  </div>
+                )}
+                {track.structure.gallery && <Gallery items={track.structure.gallery} onZoom={setZoom} />}
+              </section>
+            )}
+
+            {track.results && (
+              <section id="results" aria-label="결과" className="scroll-mt-28">
+                <BlockHead id="results" />
+                <div className="mt-5">
+                  <ResultsTable rows={track.results.rows} columns={track.results.columns} />
+                </div>
+                {track.results.note && <Body text={track.results.note} className="mt-5 !text-[14.5px]" />}
+                {track.results.repo && (
+                  <a
+                    href={track.results.repo.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-4 inline-flex items-center gap-1.5 font-body font-semibold text-[13.5px] text-signal hover:text-ink transition-colors"
+                  >
+                    {track.results.repo.label} <span aria-hidden>↗</span>
+                  </a>
+                )}
+                {track.results.image && (
+                  <div className="mt-8 max-w-[760px]">
+                    <ZoomFrame item={track.results.image} onZoom={setZoom} />
+                  </div>
+                )}
+              </section>
+            )}
+
+            {track.decisions && track.decisions.length > 0 && (
+              <section id="decisions" aria-label="설계 결정" className="scroll-mt-28">
+                <BlockHead id="decisions" />
+                <div className="mt-8">
+                  <DecisionList items={track.decisions} onZoom={setZoom} />
+                </div>
+              </section>
+            )}
+
+            {track.checks && track.checks.length > 0 && (
+              <section id="checks" aria-label="검증과 문제 해결" className="scroll-mt-28">
+                <BlockHead id="checks" />
+                <p className="font-body text-text-muted text-[13.5px] mt-3">문제 → 원인 → 해결과 결과 순서로 정리했습니다. ‘자세히’를 누르면 전체 내용이 열립니다.</p>
+                <div className="mt-5">
+                  <CheckList items={track.checks} initialOpen={hash} />
+                </div>
+              </section>
+            )}
+
+            {track.gallery && (
+              <section aria-label={track.gallery.label}>
+                <Label as="h3" lang="ko">
+                  {track.gallery.label}
+                </Label>
+                <Gallery items={track.gallery.items} onZoom={setZoom} />
+              </section>
+            )}
+          </div>
+
+          {room.delegation && (
+            <section id="ai" aria-label="AI 활용 방식" className="scroll-mt-28">
+              <BlockHead id="ai" />
+              <p className="font-body text-text-muted text-[13.5px] mt-3">AI에 맡긴 일과 직접 한 일, 그리고 결과를 어떻게 검증했는지 정리했습니다.</p>
+              <div className="mt-6">
+                <AiDelegation d={room.delegation} />
+              </div>
+            </section>
+          )}
+
+          <section id="limits" aria-label="한계와 개선 계획" className="scroll-mt-28">
+            <BlockHead id="limits" />
+            <div className="mt-6">
+              <Limits items={room.limits} />
+            </div>
+          </section>
+
+          <section id="links" aria-label="관련 링크" className="scroll-mt-28">
+            <BlockHead id="links" />
+            <div className="mt-6">
+              <LinksBlock items={room.links} citation={room.citation} />
+            </div>
+          </section>
+        </article>
+
+        {/* 데스크톱 고정 목차 */}
+        <aside className="hidden lg:block">
+          <nav aria-label="이 페이지 목차" className="sticky top-24">
+            <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">On this page</p>
+            {hasTabs && (
+              <div className="mt-3 flex flex-col gap-1" aria-label="연구 주제 바꾸기">
+                {room.tracks.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => {
+                      selectTab(t.id)
+                      jump('tracks')
+                    }}
+                    className="text-left font-body text-[12.5px] px-2.5 py-1.5 rounded-md transition-colors"
+                    style={
+                      t.id === activeTrack.id
+                        ? { background: 'var(--color-navy)', color: '#fff', fontWeight: 700 }
+                        : { color: 'var(--color-text-sub)', background: 'var(--color-soft)' }
+                    }
+                  >
+                    {t.label}
+                  </button>
                 ))}
               </div>
             )}
-          </div>
-        </section>
-      )}
-
-      {room.aiUsage && (
-        <section id="ai-usage" aria-label="AI 사용 방식" style={{ ...roomPad, paddingTop: 0 }}>
-          <AiUsageSection aiUsage={room.aiUsage} project={project} />
-        </section>
-      )}
-
-      {/* FloatingEvidenceFrames — 보조 근거 (그룹 라벨 = 내러티브 흐름, 지그재그는 2열에서만) */}
-      <section aria-label="근거 자료" style={{ ...roomPad, paddingTop: 0 }}>
-        <div className={`mx-auto ${evidenceCols === 3 ? 'max-w-[960px]' : 'max-w-[1080px]'} flex flex-col gap-20`}>
-          {evidenceGroups.map((group, gi) => (
-            <div key={group.label || `group-${gi}`}>
-              {group.label && (
-                <Reveal>
-                  <h2
-                    className="border-t border-line pt-5 font-body font-semibold tracking-[0.08em] text-[13.5px]"
-                    style={{ color: project.ink }}
-                  >
-                    {group.label}
-                  </h2>
-                  {group.desc && (
-                    <p className="font-body text-text-sub text-[14.5px] leading-[1.72] mt-3 max-w-[72ch] break-keep">
-                      <Sentences text={group.desc} />
-                    </p>
-                  )}
-                </Reveal>
-              )}
-              {group.layout === 'gallery' ? (
-                /* 갤러리 — 균일 썸네일 + 클릭 확대(그래프 벽 방지) */
-                <div className={`grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 ${group.label ? 'mt-8' : ''}`}>
-                  {group.items.map((item, i) => (
-                    <Reveal key={item.src} delay={i * 0.06}>
-                      <EvidenceFrame item={item} thumb onExpand={() => setZoom(item)} />
-                    </Reveal>
-                  ))}
-                </div>
-              ) : (
-                <div className={`${evidenceGridClass} ${group.label ? 'mt-8' : ''}`}>
-                  {group.items.map((item, i) => (
-                    <Reveal
-                      key={item.src}
-                      delay={i * 0.08}
-                      className={[
-                        // 지그재그는 margin으로 — GSAP transform(Reveal)과의 합성 충돌 방지
-                        evidenceCols === 2 && i % 2 === 1 ? 'md:mt-10' : '',
-                        evidenceLayoutClass(item, evidenceCols, group.items.length),
-                      ]
-                        .filter(Boolean)
-                        .join(' ')}
+            <ul className="mt-3 border-l border-line">
+              {toc.map((t) => {
+                const on = activeId === t.id
+                return (
+                  <li key={t.id}>
+                    <button
+                      type="button"
+                      onClick={() => jump(t.id)}
+                      aria-current={on ? 'true' : undefined}
+                      className="block w-full text-left font-body text-[13px] leading-[1.4] py-1.5 pl-3.5 -ml-px border-l-2 transition-colors"
+                      style={{
+                        borderColor: on ? 'var(--color-navy)' : 'transparent',
+                        color: on ? 'var(--color-ink)' : 'var(--color-text-sub)',
+                        fontWeight: on ? 700 : 400,
+                      }}
                     >
-                      <EvidenceFrame item={item} tiltDir={i % 2 === 0 ? 1 : -1} />
-                    </Reveal>
-                  ))}
-                </div>
-              )}
-              {group.comparisonTable && (
-                <Reveal className={group.items.length > 0 ? 'mt-12' : group.label ? 'mt-8' : ''}>
-                  <ComparisonTable table={group.comparisonTable} ink={project.ink} />
-                </Reveal>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+                      {t.label}
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        </aside>
+      </div>
 
-      {/* OriginStory — 세로 내러티브(voice에서는 작업 과정 01~05) */}
-      {room.originStory && (
-        <section aria-label="원점 스토리" style={{ ...roomPad, paddingTop: 0 }}>
-          <OriginStoryView story={room.originStory} ink={project.ink} />
-        </section>
-      )}
-
-      {/* SlideViewer — Peek Carousel: 세션 PPT 슬라이드 */}
-      {room.slideViewer && (
-        <section aria-label="세션 슬라이드" style={{ ...roomPad, paddingTop: 0 }}>
-          <div className="mx-auto max-w-[880px]">
-            <Reveal>
-              <h2
-                className="border-t border-line pt-5 font-body font-semibold tracking-[0.08em] text-[13.5px]"
-                style={{ color: project.ink }}
-              >
-                {room.slideViewer.label}
-              </h2>
-            </Reveal>
-            <Reveal className="mt-8" delay={0.1}>
-              <SlideViewer items={room.slideViewer.items} />
-            </Reveal>
-          </div>
-        </section>
-      )}
-
-      {/* CardNewsStack — 겹침 콜라주: 내용 판독보다 "직접 만들었다"는 증거 */}
-      {room.cardStack && (
-        <section aria-label="카드뉴스 모음" style={{ ...roomPad, paddingTop: 0 }}>
-          <div className="mx-auto max-w-[880px]">
-            <Reveal>
-              <h2
-                className="border-t border-line pt-5 font-body font-semibold tracking-[0.08em] text-[13.5px]"
-                style={{ color: project.ink }}
-              >
-                {room.cardStack.label}
-              </h2>
-            </Reveal>
-            <Reveal className="mt-8" delay={0.1}>
-              <CardNewsStack groups={room.cardStack.groups} caption={room.cardStack.caption} />
-            </Reveal>
-          </div>
-        </section>
-      )}
-
-      {room.writingRefs && (
-        <section aria-label="벨로그 연결" style={{ ...roomPad, paddingTop: 0 }}>
-          <div className="mx-auto max-w-[1080px]">
-            <Label as="h2" lang="ko">벨로그 연결</Label>
-            <p className="font-body text-text-sub text-[15px] leading-[1.7] mt-4 max-w-[72ch]">
-              멋사 세션에서 다룬 내용을 글로 다시 정리해, 강의 자료와 개인적인 사고 기록이 같은 방향으로 쌓이도록 했습니다.
-            </p>
-            <div className="mt-8 flex flex-col">
-              {room.writingRefs.map((ref) => (
-                <Reveal key={ref.title}>
-                  <article className="border-t border-line py-6 grid gap-3 md:grid-cols-[220px_1fr]">
-                    <div>
-                      <p className="font-body font-semibold text-[12px] tracking-[0.08em]" style={{ color: project.ink }}>
-                        {ref.source}
-                      </p>
-                      <h3 className="font-body font-bold text-ink text-[17px] leading-[1.45] mt-2">
-                        {ref.title}
-                      </h3>
-                    </div>
-                    <div>
-                      <p className="font-body text-text-sub text-[15px] leading-[1.7] break-keep"><Sentences text={ref.summary} /></p>
-                      <p className="font-body text-text-muted text-[13.5px] leading-[1.65] mt-2">
-                        {ref.application}
-                      </p>
-                    </div>
-                  </article>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* InfoDock — 문제 정의 / 핵심 판단 / 역할 / 흐름 / 산출물 / 검증 / UX Writing / 배운 점 */}
-      <section id="info" aria-label="프로젝트 정보" style={roomPad}>
-        <div className="mx-auto max-w-[1080px]">
-          <Label as="h2" lang="ko">프로젝트 정보</Label>
-          <dl className="mt-8 flex flex-col">
-            {(
-              [
-                ['문제 정의', room.infoDock.problem],
-                ['핵심 판단', room.infoDock.insight],
-                ['맡은 역할', room.infoDock.role],
-                ['설계한 흐름', room.infoDock.coreFlow],
-                ['산출물', room.infoDock.output],
-                ['검증', room.infoDock.verification],
-                ['측정·설계 관점', room.infoDock.uxWritingPoint],
-                ['이후 작업 방식', room.infoDock.learning],
-              ] as const
-            ).map(([k, v]) => (
-              <Reveal key={k}>
-                <div className="border-t border-line py-7 grid gap-3 md:grid-cols-[200px_1fr]">
-                  <dt className="font-body font-semibold tracking-[0.08em] text-[12px]" style={{ color: project.ink }}>
-                    {k}
-                  </dt>
-                  <dd className="m-0 max-w-[76ch]">
-                    {Array.isArray(v) ? (
-                      <ul className="grid gap-2.5">
-                        {v.map((item) => (
-                          <li
-                            key={item}
-                            className="font-body text-text-sub text-[15.5px] leading-[1.7] grid grid-cols-[8px_1fr] gap-3"
-                          >
-                            <span
-                              className="mt-[0.72em] h-1.5 w-1.5 rounded-full"
-                              style={{ background: project.ink }}
-                              aria-hidden
-                            />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="font-body text-text-sub text-[16px] leading-[1.75] m-0 break-keep"><Sentences text={v} /></p>
-                    )}
-                  </dd>
-                </div>
-              </Reveal>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      {/* RoomExit — 다음 룸 */}
-      <section aria-label="다음 룸" className="border-t border-line" style={{ background: next.tintSoft }}>
-        <div className="mx-auto max-w-[1080px]" style={roomPad}>
-          <Label as="h2">Next Room</Label>
+      {/* 다음 프로젝트 */}
+      <section aria-label="다음 프로젝트" className="border-t border-line" style={{ background: next.tintSoft }}>
+        <div className="mx-auto max-w-[1180px] py-16 sm:py-20" style={padX}>
+          <Label as="h2">Next</Label>
           <button
             type="button"
             onClick={() => void crossfadeToRoom(next, navigate)}
-            className="block text-left font-body font-bold tracking-[-0.03em] text-h2 mt-4 cursor-pointer transition-transform duration-300 hover:translate-x-2"
-            style={{ color: next.ink, lineHeight: 1.08 }}
-            aria-label={`다음 룸 ${next.name}으로 이동`}
+            className="block text-left font-body font-bold tracking-[-0.03em] mt-3 cursor-pointer transition-transform duration-300 hover:translate-x-2 break-keep"
+            style={{ color: next.ink, lineHeight: 1.1, fontSize: 'clamp(30px, 4.4vw, 56px)' }}
           >
             {next.name} →
           </button>
-          <button
-            type="button"
-            onClick={goBackToProject}
-            className="font-body font-medium text-text-muted text-[13px] mt-8 hover:text-ink transition-colors cursor-pointer block"
-          >
-            ← 프로젝트 목록으로 돌아가기
+          <p className="font-body text-text-sub text-[15px] mt-2">{next.fullName}</p>
+          <button type="button" onClick={goBack} className="font-body font-medium text-text-muted text-[13px] mt-8 hover:text-ink transition-colors block">
+            ← 목록으로 돌아가기
           </button>
         </div>
       </section>
-      </div>{/* ── 콘텐츠 래퍼 끝 ── */}
 
-      <AnimatePresence>
-        {zoom && <Lightbox item={zoom} onClose={() => setZoom(null)} />}
-      </AnimatePresence>
+      <AnimatePresence>{zoom && <Lightbox item={zoom} onClose={() => setZoom(null)} />}</AnimatePresence>
     </main>
+  )
+}
+
+function Gallery({ items, onZoom }: { items: EvidenceItem[]; onZoom: (i: EvidenceItem) => void }) {
+  return (
+    <div className="mt-6 grid gap-x-5 gap-y-7 sm:grid-cols-2 xl:grid-cols-3">
+      {items.map((item, i) => (
+        <Reveal key={item.src} delay={i * 0.05}>
+          <EvidenceFrame item={item} thumb onExpand={() => onZoom(item)} />
+        </Reveal>
+      ))}
+    </div>
   )
 }

@@ -20,7 +20,11 @@ interface ContactItem {
   external: boolean
 }
 
+// 이력서 PDF는 PROFILE.resumePdf를 채우면 맨 앞에 나타난다(PDF 단계).
 const CONTACTS: ContactItem[] = [
+  ...(PROFILE.resumePdf
+    ? [{ label: 'Resume', sub: '이력서 PDF', href: PROFILE.resumePdf, hoverClass: 'group-hover:text-signal-bright', external: true }]
+    : []),
   { label: 'GitHub', sub: PROFILE.githubHandle, href: GITHUB_URL, hoverClass: 'group-hover:text-github-bright', external: true },
   { label: 'Velog', sub: '@xorms', href: VELOG_URL, hoverClass: 'group-hover:text-signal-bright', external: true },
   { label: 'Email', sub: EMAIL, href: `mailto:${EMAIL}`, hoverClass: 'group-hover:text-signal-bright', external: false },
@@ -42,7 +46,7 @@ function ContactRow({ label, sub, href, hoverClass, external }: ContactItem) {
           >
             {label}
           </p>
-          <p className="font-body text-white/35 text-[13px] mt-1.5 transition-colors duration-300 group-hover:text-white/60">
+          <p className="font-body text-white/60 text-[13px] mt-1.5 transition-colors duration-300 group-hover:text-white/80">
             {sub}
           </p>
         </div>
@@ -104,30 +108,30 @@ export default function Finale() {
       <div ref={black} aria-hidden className="absolute inset-0 bg-[#0A0A0A]" />
 
       <div className="relative">
-        <section aria-label="후킹" className="mx-auto max-w-[1200px] container-pad pt-24 pb-16">
+        <section aria-label="마무리 문장" className="mx-auto max-w-[1200px] container-pad pt-24 pb-16">
           <h2
             data-finale-fade
             className="font-body font-bold text-white leading-[1.28] tracking-[-0.02em] break-keep"
             style={{ fontSize: 'clamp(24px, 3.4vw, 44px)' }}
           >
-            좋아 보이는 결과일수록, 통제된 조건에서 다시 재현합니다.
+            좋아 보이는 결과일수록 조건을 바꿔 다시 측정합니다.
           </h2>
           <p
             data-finale-fade
             className="font-body font-bold text-white/40 leading-[1.28] tracking-[-0.02em] mt-2 break-keep"
             style={{ fontSize: 'clamp(24px, 3.4vw, 44px)' }}
           >
-            틀린 결론은 스스로 철회하고, 과정까지 기록으로 남깁니다.
+            틀린 결론은 직접 철회하고, 그 과정까지 기록합니다.
           </p>
-          <p data-finale-fade className="font-body text-white/50 text-[15px] leading-[1.85] mt-7 max-w-[46ch] break-keep">
-            음성·EEG·소리 알림. 모델 하나가 아니라 데이터가 흐르는 전 구간을 설계하고 검증했습니다.<br />
-            실패와 철회까지 타임스탬프로 남겨, 다음 판단의 근거로 씁니다.
+          <p data-finale-fade className="font-body text-white/65 text-[15px] leading-[1.85] mt-7 max-w-[58ch] break-keep">
+            음성 연구, 띵동, AI-Vault 모두 AI에 맡긴 작업을 실측과 대조 실험으로 검증했습니다.
+            AI-Vault에서는 사고를 막는 차단 장치까지 만들어 운영하고 있습니다.
           </p>
         </section>
 
         <section id="contact" aria-label="연락처" className="mx-auto max-w-[1200px] container-pad pt-2 pb-0">
           <h2 className="sr-only">Contact</h2>
-          <p data-finale-fade className="font-body text-white/30 text-[11px] tracking-[0.14em] uppercase mb-5">Contact</p>
+          <p data-finale-fade className="font-body text-white/60 text-[11px] tracking-[0.14em] uppercase mb-5">Contact</p>
           <ul className="border-t border-white/15">
             {CONTACTS.map((c) => (
               <ContactRow key={c.label} {...c} />
@@ -150,7 +154,7 @@ export default function Finale() {
             </span>
           </p>
           <p data-finale-end className="font-body text-white/60 text-[14px] leading-[1.7] mt-6">
-            숫자가 스스로 말할 때까지, 측정하고 기록합니다.
+            측정 조건까지 밝힌 숫자로 말하겠습니다.
           </p>
         </section>
       </div>

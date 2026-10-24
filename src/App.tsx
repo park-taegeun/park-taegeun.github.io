@@ -1,11 +1,12 @@
 // 라우터 셸 — 랜딩 + 상세 룸. 시그니처 진입 전환(§6)은 CoverOverlay가 라우트 위에 상주.
 import { MotionConfig } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import CoverOverlay from './components/transition/CoverOverlay'
 import { scrollToTopImmediate, useLenisRoot } from './lib/lenis'
 import Landing from './pages/Landing'
-import ProjectRoom from './pages/ProjectRoom'
+// 상세 페이지는 따로 나눠 받는다(첫 화면 JS를 줄임)
+const ProjectRoom = lazy(() => import('./pages/ProjectRoom'))
 
 function ScrollRestore() {
   const { pathname } = useLocation()
@@ -37,7 +38,14 @@ export default function App() {
         <CoverOverlay />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/projects/:key" element={<ProjectRoom />} />
+          <Route
+            path="/projects/:key"
+            element={
+              <Suspense fallback={<main className="min-h-[100dvh] bg-base" />}>
+                <ProjectRoom />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

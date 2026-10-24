@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360" role="img" aria-label="정리 작업 43분의 시간 구성">
+<title>정리 작업 43분의 시간 구성</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
+<rect width="1200" height="360" fill="#FFFFFF"/>
+<text x="40" y="54" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#101A2C" text-anchor="start">졸업작품 기록 94개 정리 작업(43분)의 시간 구성</text>
+<rect x="40" y="110" width="390.69767441860466" height="80" rx="8" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3" opacity="1"/>
+<rect x="436.69767441860466" y="110" width="723.3023255813953" height="80" rx="8" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
+<text x="60" y="160" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="25" font-weight="700" fill="#0E7C86" text-anchor="start">병렬 초안 약 15분</text>
+<text x="456.69767441860466" y="160" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="25" font-weight="700" fill="#FFFFFF" text-anchor="start">메인 에이전트 하나가 병합 약 28분</text>
+<text x="40" y="228" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">서브에이전트 12개 × 3차례</text>
+<text x="436.69767441860466" y="228" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">목차 · 로그 수정과 병합은 한 에이전트만(공유 파일 충돌 방지)</text>
+<text x="40" y="300" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="600" fill="#101A2C" text-anchor="start">병목은 병합이었습니다. 병렬 수를 늘려도 줄어드는 것은 앞의 15분뿐입니다.</text>
+<text x="40" y="336" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="400" fill="#586173" text-anchor="start">1회 측정, 43분 27초</text>
+</svg>
