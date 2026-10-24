@@ -40,7 +40,7 @@ export default function About() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start">
+        <div className="mt-12 grid gap-10 lg:grid-cols-[230px_minmax(0,1fr)] lg:items-start">
           <Identity />
           <Principles />
         </div>
@@ -120,9 +120,9 @@ function Identity() {
 
 function MetaRow({ k, v }: { k: string; v: ReactNode }) {
   return (
-    <div className="border-t border-line py-2 grid grid-cols-[58px_minmax(0,1fr)] items-baseline gap-3">
+    <div className="border-t border-line py-2 grid grid-cols-[64px_minmax(0,1fr)] items-baseline gap-2">
       <dt className={labelEn}>{k}</dt>
-      <dd className="font-body text-text-sub text-[13px] m-0 truncate">{v}</dd>
+      <dd className="font-body text-text-sub text-[12.5px] m-0 break-all">{v}</dd>
     </div>
   )
 }

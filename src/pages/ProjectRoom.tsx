@@ -267,13 +267,15 @@ export default function ProjectRoom() {
             {track.problem && (
               <section id="problem" aria-label="문제와 목표" className="scroll-mt-28">
                 <BlockHead id="problem" />
-                <div className={track.problem.image ? 'mt-5 grid gap-8 xl:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] xl:items-start' : 'mt-5'}>
-                  <div>
-                    <Body text={track.problem.body} />
-                    {track.problem.source && <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-4">{track.problem.source}</p>}
-                  </div>
-                  {track.problem.image && <ZoomFrame item={track.problem.image} onZoom={setZoom} />}
+                <div className="mt-5">
+                  <Body text={track.problem.body} />
+                  {track.problem.source && <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-4">{track.problem.source}</p>}
                 </div>
+                {track.problem.image && (
+                  <div className="mt-8 max-w-[680px]">
+                    <ZoomFrame item={track.problem.image} onZoom={setZoom} />
+                  </div>
+                )}
               </section>
             )}
 

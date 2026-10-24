@@ -71,7 +71,7 @@ export function SummaryBox({
       <dl className="grid sm:grid-cols-3 gap-px bg-line">
         {s.results.map((r) => (
           <div key={r.label} className="bg-panel px-5 py-5 sm:px-6">
-            <dt className="font-mono font-semibold text-navy text-[22px] sm:text-[24px] leading-[1.15] tracking-[-0.02em] tabular-nums break-keep">
+            <dt className="font-mono font-semibold text-navy text-[20px] sm:text-[21px] leading-[1.2] tracking-[-0.03em] tabular-nums break-keep">
               {r.value}
             </dt>
             <dd className="m-0 mt-2">
@@ -303,7 +303,7 @@ export function Limits({ items }: { items: RoomData['limits'] }) {
   return (
     <ul className="grid gap-px overflow-hidden bg-line sm:grid-cols-2" style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)' }}>
       {items.map((l) => (
-        <li key={l.title} className="bg-panel px-5 py-5">
+        <li key={l.title} className="bg-panel px-5 py-5 sm:[&:last-child:nth-child(odd)]:col-span-2">
           <p className="font-body font-bold text-ink text-[14.5px]">{l.title}</p>
           <p className="font-body text-text-sub text-[14px] leading-[1.75] mt-1.5 break-keep">
             <RichText text={l.body} lines={false} />

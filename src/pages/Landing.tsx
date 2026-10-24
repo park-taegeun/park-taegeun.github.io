@@ -241,7 +241,7 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
             <OwnershipTags project={p} />
           </div>
           <div className="mt-4">
-            <FlipTitle ref={flipRef} name={p.name} ink={p.ink} onActivate={enter} />
+            <FlipTitle ref={flipRef} name={p.name} ink={p.ink} onActivate={enter} fontSize={p.name.length > 8 ? 'clamp(34px, 4.2vw, 56px)' : undefined} />
           </div>
           <p className="font-body font-semibold text-text-sub text-[16px] leading-[1.5] mt-2 break-keep">{p.fullName}</p>
           <p className="font-body text-ink text-[15.5px] leading-[1.75] mt-5 max-w-[60ch] break-keep">
@@ -554,13 +554,11 @@ function SideWorkItem({ work }: { work: SideWork }) {
             <SideDetailRow label="Learning" body={work.learning} />
           </dl>
         </div>
-        <div className="min-w-0 grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-1 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] items-start">
+        <div className="min-w-0 grid grid-cols-3 gap-3 items-start">
           {work.demoVideo && <SideDemoVideo video={work.demoVideo} />}
-          <div className="grid grid-cols-2 gap-3">
-            {work.supportingImages.map((image) => (
-              <SideImageFrame key={image.src} image={image} />
-            ))}
-          </div>
+          {work.supportingImages.map((image) => (
+            <SideImageFrame key={image.src} image={image} />
+          ))}
         </div>
       </div>
     </article>
@@ -590,7 +588,7 @@ function SideImageFrame({ image }: { image: SideWorkImage }) {
             loading="lazy"
             decoding="async"
             className="block w-full h-auto object-contain"
-            style={{ maxHeight: 400, borderRadius: 'calc(var(--frame-radius) - 4px)' }}
+            style={{ aspectRatio: '9 / 16', objectFit: 'cover', objectPosition: 'top', borderRadius: 'calc(var(--frame-radius) - 4px)' }}
           />
         </div>
       </div>
@@ -604,7 +602,7 @@ function SideDemoVideo({ video }: { video: SideWorkVideo }) {
   const [active, setActive] = useState(false)
   return (
     <figure>
-      <div className="mx-auto w-full" style={{ maxWidth: 300 }}>
+      <div className="mx-auto w-full">
         <div
           className="relative overflow-hidden bg-panel"
           style={{ aspectRatio: '9 / 16', borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)', boxShadow: 'var(--shadow-frame)' }}
@@ -635,7 +633,7 @@ function SideDemoVideo({ video }: { video: SideWorkVideo }) {
           )}
         </div>
       </div>
-      <figcaption className="font-body text-text-sub text-[12.5px] leading-[1.5] mt-2.5 px-1 text-center max-w-[300px] mx-auto break-keep">
+      <figcaption className="font-body text-text-sub text-[12.5px] leading-[1.5] mt-2.5 px-1 text-center break-keep">
         {video.caption}
         {video.href && (
           <>
