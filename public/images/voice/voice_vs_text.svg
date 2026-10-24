@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="대사와 목소리 감정이 어긋난 발화에서 최종 감정 판정">
-<title>대사와 목소리 감정이 어긋난 발화에서 최종 감정 판정</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" role="img" aria-label="대사와 목소리 감정이 어긋난 발화의 최종 감정 라벨">
+<title>대사와 목소리 감정이 어긋난 발화의 최종 감정 라벨</title>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
 <rect width="1000" height="520" fill="#FFFFFF"/>
 <text x="40" y="56" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#101A2C" text-anchor="start">대사와 목소리의 감정이 어긋난 발화 17,658개</text>
-<text x="40" y="92" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">최종 감정 판정(표정 포함)이 어느 쪽과 같았나 · 데이터셋 라벨 기준</text>
+<text x="40" y="92" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">최종 감정 라벨(표정까지 반영)이 어느 쪽과 일치했는지 · 데이터셋 라벨 기준</text>
 <text x="40" y="188" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="600" fill="#101A2C" text-anchor="start">목소리 쪽과 같음</text>
 <rect x="270" y="158" width="378.0" height="46" rx="6" fill="#0E7C86" stroke="#0E7C86" stroke-width="2" opacity="1"/>
 <text x="662.0" y="191" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="26" font-weight="700" fill="#0E7C86" text-anchor="start">67.5%</text>
@@ -16,5 +16,5 @@
 <rect x="270" y="358" width="126.56" height="46" rx="6" fill="#9AA6B4" stroke="#9AA6B4" stroke-width="2" opacity="1"/>
 <text x="410.56" y="391" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="26" font-weight="700" fill="#586173" text-anchor="start">22.6%</text>
 <text x="506.56" y="391" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">3,997발화</text>
-<text x="40" y="485" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="500" fill="#101A2C" text-anchor="start">목소리 쪽과 같은 경우가 대사 쪽보다 6.9배 많았습니다. 받아쓴 글자에는 이 정보가 남지 않습니다.</text>
+<text x="40" y="485" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="500" fill="#101A2C" text-anchor="start">목소리 쪽과 일치한 경우가 대사 쪽보다 6.9배 많았습니다. 받아쓴 텍스트에는 이 정보가 남지 않습니다.</text>
 </svg>

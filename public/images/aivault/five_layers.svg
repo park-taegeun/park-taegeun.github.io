@@ -2,8 +2,8 @@
 <title>차단 장치 5겹</title>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
 <rect width="1200" height="1110" fill="#FFFFFF"/>
-<text x="50" y="60" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="32" font-weight="700" fill="#101A2C" text-anchor="start">어기면 사고가 나는 규칙만 시스템이 막게</text>
-<text x="50" y="98" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="400" fill="#586173" text-anchor="start">규칙서(부탁)는 어겨질 수 있어, 시점이 다른 다섯 겹이 강제로 막습니다</text>
+<text x="50" y="60" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="32" font-weight="700" fill="#101A2C" text-anchor="start">어기면 사고로 이어지는 규칙은 시스템이 막습니다</text>
+<text x="50" y="98" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="400" fill="#586173" text-anchor="start">규칙서(부탁)는 어겨질 수 있으므로, 서로 다른 시점의 다섯 겹이 강제로 막습니다</text>
 <rect x="60" y="135" width="340" height="76" rx="12" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3" opacity="1"/>
 <text x="80" y="182" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="700" fill="#0E7C86" text-anchor="start">AI 에이전트 · 정리와 초안 작성</text>
 <line x1="150" y1="216" x2="150" y2="230" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
@@ -11,7 +11,7 @@
 <text x="150" y="282" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#1A2B4A" text-anchor="middle">①</text>
 <text x="210" y="262" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="600" fill="#586173" text-anchor="start">쓰는 순간</text>
 <text x="210" y="294" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="700" fill="#101A2C" text-anchor="start">쓰기 훅</text>
-<text x="480" y="268" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">원본 수정, 공개 구역의 비밀값·개인정보를 막음</text>
+<text x="480" y="268" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">원본 수정, 공개 영역의 비밀값·개인정보 기록을 막음</text>
 <text x="480" y="298" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">보호 경로를 건드리는 셸 명령은 허용 목록만 통과</text>
 <line x1="150" y1="336" x2="150" y2="350" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
 <polygon points="150,356 186,392 150,428 114,392" fill="#FFFFFF" stroke="#1A2B4A" stroke-width="3"/>

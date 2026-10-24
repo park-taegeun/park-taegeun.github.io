@@ -128,7 +128,7 @@ function Glance() {
             </h2>
           </div>
           <p className="font-body text-text-sub text-[14px] leading-[1.6] max-w-[44ch] break-keep">
-            세 작업의 역할, 대표 숫자, 맞닿은 직무입니다. 카드를 누르면 상세로 갑니다.
+            대표 프로젝트 3개의 역할, 핵심 수치, 관련 직무입니다. 카드를 누르면 상세 페이지로 이동합니다.
           </p>
         </div>
         <ul className="mt-9 grid gap-4 md:grid-cols-3">
@@ -155,7 +155,7 @@ function Glance() {
                 </span>
                 <span className="block font-body text-text-sub text-[14px] leading-[1.7] mt-4 break-keep flex-1">{p.glance.verb}</span>
                 <span className="mt-5 flex flex-wrap items-center gap-1.5">
-                  <span className="font-body text-[11.5px] text-text-muted mr-1">맞닿은 직무</span>
+                  <span className="font-body text-[11.5px] text-text-muted mr-1">관련 직무</span>
                   {p.glance.jobTags.map((t) => (
                     <span key={t} className="font-body font-semibold text-[11.5px] text-signal-deep px-2 py-1 rounded-full" style={{ background: 'var(--color-signal-soft)' }}>
                       {t}
@@ -220,7 +220,7 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
 
   const rows: [string, string][] = [
     ['대표 결과', p.result],
-    ['내 역할', p.role],
+    ['담당 역할', p.role],
     ...(p.decision ? ([['핵심 결정', p.decision]] as [string, string][]) : []),
   ]
 
@@ -250,7 +250,7 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
 
           <dl className="mt-6 border-t border-line">
             {rows.map(([k, v]) => (
-              <div key={k} className="border-b border-line py-3.5 grid gap-1.5 sm:grid-cols-[84px_minmax(0,1fr)] sm:gap-4">
+              <div key={k} className="border-b border-line py-3.5 grid gap-1.5 sm:grid-cols-[92px_minmax(0,1fr)] sm:gap-4">
                 <dt className="font-body font-semibold text-[12.5px] text-navy pt-[3px]">{k}</dt>
                 <dd className="m-0 font-body text-text-sub text-[14.5px] leading-[1.72] break-keep">
                   <RichText text={v} lines={false} />
@@ -268,7 +268,7 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
           </ul>
 
           <button type="button" onClick={() => enter(0)} className="font-body font-semibold text-[14.5px] tracking-[0.02em] mt-8 inline-flex items-baseline gap-[0.3em] text-signal hover:text-ink transition-colors">
-            상세 보기: 결과 표 · 설계 결정 · 검증 · AI 위임 <span aria-hidden>→</span>
+            자세히 보기: 결과, 설계 결정, 문제 해결, AI 활용 <span aria-hidden>→</span>
           </button>
         </motion.div>
 
@@ -311,16 +311,16 @@ function SelectedBlock({ project: p, index }: { project: Project; index: number 
 function Writing() {
   const navigate = useNavigate()
   return (
-    <section id="writing" aria-label="실측 로그" className="relative overflow-hidden border-t border-line">
+    <section id="writing" aria-label="개발 기록" className="relative overflow-hidden border-t border-line">
       <div className="mx-auto max-w-[1200px] container-pad" style={sectionPad}>
         <div className="grid gap-10 lg:grid-cols-[1fr_320px] lg:items-start">
           <div>
             <Label as="p">Log</Label>
             <h2 className="font-body font-bold text-ink mt-3 leading-[1.35] break-keep tracking-[-0.03em]" style={{ fontSize: 'clamp(22px,3vw,34px)' }}>
-              결과가 아니라 과정을 남긴 기록
+              연구와 개발 과정 기록
             </h2>
             <p className="font-body text-text-sub text-[15.5px] leading-[1.75] mt-5 max-w-[66ch] break-keep">
-              실험과 설계 판단을 그날그날 velog에 남겼습니다. 성공한 결과만이 아니라 틀린 판단과 철회한 결론도 함께 씁니다. 상세 페이지의 결정과 검증 블록에 붙은 「당시 기록」이 이 글들입니다.
+              실험과 설계 판단을 그때그때 velog에 기록했습니다. 상세 페이지의 ‘당시 기록’ 링크가 이 글들로 연결됩니다.
             </p>
           </div>
           <aside className="border-t border-line pt-5">
@@ -438,7 +438,7 @@ function SideWorks() {
           그 외 작업
         </h2>
         <p className="font-body text-text-sub text-[15px] leading-[1.75] mt-4 max-w-[66ch] break-keep">
-          대표 작업을 받치는 개발 도구, 학회 논문으로 낸 공동 연구, 팀 해커톤입니다.
+          대표 프로젝트 외에 만든 개발 도구, 학회에 발표한 공동 연구, 팀 해커톤 프로젝트입니다.
         </p>
 
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
@@ -462,7 +462,7 @@ function SideWorks() {
                 fullName="전통시장 식재료 큐레이션 서비스 · 해커톤"
                 metric="거리 → 이동 시간"
                 cond="지도 표시 방식 제안, 기획 담당이 반영"
-                body="지도·검색·포인트 전환·마이페이지 화면을 구현했고, 직선거리를 걷기·차량 이동 시간으로 바꿔 보여 주는 방법을 제안했습니다."
+                body="지도, 검색, 포인트 전환, 마이페이지 화면을 구현했고, 직선거리를 도보·차량 이동 시간으로 바꿔 보여 주자고 제안했습니다."
                 cta="아래에서 보기"
                 onOpen={() => scrollToId('side-pickl')}
               />

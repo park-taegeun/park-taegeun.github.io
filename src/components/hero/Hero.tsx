@@ -14,7 +14,7 @@ import HeroVisual from './HeroVisual'
 const PROOFS: { key: ProjectKey; label: string; metric: string; cond: string }[] = [
   { key: 'ddingdong', label: '띵동', metric: 'macro F1 0.82', cond: '4종 소리 분류, 평가 703클립, 개발 중 값' },
   { key: 'voice', label: '음성 연구', metric: 'CER 0.31 → 0.21', cond: '길이를 맞춘 168발화, 학습 1회' },
-  { key: 'aivault', label: 'AI-Vault', metric: '위험 시도 5/5 차단', cond: '본인 승인 시연 1회' },
+  { key: 'aivault', label: 'AI-Vault', metric: '위험 시도 5/5 차단', cond: '시연 1회, 우회 시도 0' },
 ]
 
 export default function Hero() {

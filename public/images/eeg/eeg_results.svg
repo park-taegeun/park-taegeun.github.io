@@ -20,7 +20,7 @@
 <circle cx="707.0000000000001" cy="184" r="14" fill="#9AA6B4" stroke="none" stroke-width="0"/>
 <text x="731.0000000000001" y="192" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="25" font-weight="700" fill="#586173" text-anchor="start">68.2%</text>
 <text x="50" y="282" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="700" fill="#101A2C" text-anchor="start">뇌파 + 같은 정규화 LightGBM</text>
-<text x="50" y="312" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">정규화 효과를 맞춘 기준</text>
+<text x="50" y="312" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">정규화 방식을 맞춘 기준</text>
 <line x1="420" y1="274" x2="885.4999999999999" y2="274" stroke="#1A2B4A" stroke-width="4"/>
 <circle cx="885.4999999999999" cy="274" r="14" fill="#1A2B4A" stroke="none" stroke-width="0"/>
 <text x="909.4999999999999" y="282" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="25" font-weight="700" fill="#1A2B4A" text-anchor="start">73.3%</text>
@@ -32,5 +32,5 @@
 <line x1="947.4999999999998" y1="380" x2="947.4999999999998" y2="380" stroke="#586173" stroke-width="2.5"/>
 <text x="796.25" y="410" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="600" fill="#586173" text-anchor="middle">+5.1%p 정규화</text>
 <text x="917.0000000000001" y="410" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="700" fill="#0E7C86" text-anchor="middle">+1.8%p 모델</text>
-<text x="50" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">축은 60%부터 시작합니다. 같은 정규화 기준과의 차이(+1.8%p)가 모델 구조의 몫입니다.</text>
+<text x="50" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">축은 60%부터 시작합니다. 같은 정규화 기준과의 차이(+1.8%p)가 모델 구조만의 효과입니다.</text>
 </svg>

@@ -108,24 +108,24 @@ export default function Finale() {
       <div ref={black} aria-hidden className="absolute inset-0 bg-[#0A0A0A]" />
 
       <div className="relative">
-        <section aria-label="후킹" className="mx-auto max-w-[1200px] container-pad pt-24 pb-16">
+        <section aria-label="마무리 문장" className="mx-auto max-w-[1200px] container-pad pt-24 pb-16">
           <h2
             data-finale-fade
             className="font-body font-bold text-white leading-[1.28] tracking-[-0.02em] break-keep"
             style={{ fontSize: 'clamp(24px, 3.4vw, 44px)' }}
           >
-            좋아 보이는 결과일수록, 조건을 바꿔 다시 잽니다.
+            좋아 보이는 결과일수록 조건을 바꿔 다시 측정합니다.
           </h2>
           <p
             data-finale-fade
             className="font-body font-bold text-white/40 leading-[1.28] tracking-[-0.02em] mt-2 break-keep"
             style={{ fontSize: 'clamp(24px, 3.4vw, 44px)' }}
           >
-            틀린 결론은 스스로 철회하고, 과정까지 기록으로 남깁니다.
+            틀린 결론은 직접 철회하고, 그 과정까지 기록합니다.
           </p>
-          <p data-finale-fade className="font-body text-white/65 text-[15px] leading-[1.85] mt-7 max-w-[52ch] break-keep">
-            음성 연구, 띵동, AI-Vault. AI에 맡긴 일도 결과로 확인하고, 사고가 나지 않게 막는 장치까지 운영합니다.<br />
-            실패와 철회까지 날짜와 함께 남겨, 다음 판단의 근거로 씁니다.
+          <p data-finale-fade className="font-body text-white/65 text-[15px] leading-[1.85] mt-7 max-w-[58ch] break-keep">
+            음성 연구, 띵동, AI-Vault 모두 AI에 맡긴 작업을 실측과 대조 실험으로 검증했습니다.
+            AI-Vault에서는 사고를 막는 차단 장치까지 만들어 운영하고 있습니다.
           </p>
         </section>
 
@@ -154,7 +154,7 @@ export default function Finale() {
             </span>
           </p>
           <p data-finale-end className="font-body text-white/60 text-[14px] leading-[1.7] mt-6">
-            숫자가 스스로 말할 때까지, 측정하고 기록합니다.
+            측정 조건까지 밝힌 숫자로 말하겠습니다.
           </p>
         </section>
       </div>

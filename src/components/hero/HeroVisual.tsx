@@ -184,7 +184,7 @@ export default function HeroVisual() {
         </div>
       </div>
       <figcaption className="font-body text-text-sub text-[12.5px] leading-[1.6] mt-3 px-1 break-keep">
-        음성 연구: 출력 길이가 오디오 길이를 따라가는 정도(짧은 발화 262개, 점선은 정답 전사문 0.737). 회색 0.128은 길이를 맞추자 오히려 나빠져 철회한 방식입니다.
+        음성 연구에서 출력 길이가 실제 오디오 길이를 얼마나 따라가는지 나타낸 그래프입니다(짧은 발화 262개, 점선은 정답 전사문 0.737). 회색(0.128)은 어텐션을 학습한 방식으로, 이 값은 올랐지만 발화 길이를 맞춘 오류율 비교에서 원래 모델보다 나빠져 철회했습니다.
       </figcaption>
     </figure>
   )

@@ -63,7 +63,7 @@ export function SummaryBox({
       style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)', boxShadow: 'var(--shadow-soft)' }}
     >
       <div className="px-5 py-5 sm:px-7 sm:py-6 border-b border-line">
-        <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">내 역할</p>
+        <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">담당 역할</p>
         <p className="font-body text-ink text-[15.5px] leading-[1.75] mt-2 max-w-[78ch] break-keep">
           <RichText text={s.role} />
         </p>
@@ -83,7 +83,7 @@ export function SummaryBox({
       </dl>
       <div className="px-5 py-4 sm:px-7 border-t border-line grid gap-4 md:grid-cols-[1fr_auto] md:items-start">
         <div>
-          <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">기술</p>
+          <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">기술 스택</p>
           <ul className="mt-2.5 flex flex-wrap gap-1.5" aria-label="사용 기술">
             {s.tech.map((t) => (
               <li key={t} className="font-mono text-[11.5px] leading-none px-2 py-1.5 border border-line text-text-sub bg-base" style={{ borderRadius: 6 }}>
@@ -114,7 +114,7 @@ export function SummaryBox({
 /* ── 결과 표: 네이티브 표, 조건 열 필수 ── */
 export function ResultsTable({
   rows,
-  columns = ['항목', '값', '조건'],
+  columns = ['항목', '결과', '측정 조건'],
 }: {
   rows: ResultRow[]
   columns?: [string, string, string]
@@ -249,10 +249,10 @@ function CheckItem({ check, index, defaultOpen }: { check: Check; index: number;
 /* ── AI 위임 네 칸 + 한 줄 사례 (+ 검증 방법 표) ── */
 export function AiDelegation({ d }: { d: NonNullable<RoomData['delegation']> }) {
   const cells: [string, string][] = [
-    ['맡긴 것', d.delegated],
-    ['직접 한 것', d.did],
+    ['AI에 맡긴 일', d.delegated],
+    ['직접 한 일', d.did],
     ['검증 방법', d.verify],
-    ['찾아서 바꾼 것', d.fixed],
+    ['발견하고 고친 점', d.fixed],
   ]
   return (
     <div>
@@ -261,8 +261,7 @@ export function AiDelegation({ d }: { d: NonNullable<RoomData['delegation']> }) 
           <div key={k} className={i === 0 ? 'bg-soft px-5 py-5 sm:px-6' : 'bg-panel px-5 py-5 sm:px-6'}>
             <p className="font-body font-semibold text-[12.5px] tracking-[0.06em]" style={{ color: i === 0 ? 'var(--color-text-muted)' : 'var(--color-navy)' }}>
               {k}
-              {i === 0 && <span className="ml-1.5 font-mono text-[11px] text-text-muted">(AI)</span>}
-            </p>
+                          </p>
             <p className="font-body text-text-sub text-[14.5px] leading-[1.75] mt-2 break-keep">
               <RichText text={v} lines={false} />
             </p>
@@ -277,7 +276,7 @@ export function AiDelegation({ d }: { d: NonNullable<RoomData['delegation']> }) 
       </div>
       {d.methods && (
         <div className="mt-8">
-          <p className="font-body font-semibold text-[13px] text-ink">검증 방법을 어디에 썼는지</p>
+          <p className="font-body font-semibold text-[13px] text-ink">이 연구에서 쓴 검증 방법</p>
           <div className="mt-3 overflow-x-auto">
             <table className="w-full min-w-[520px] border-collapse text-left">
               <tbody>

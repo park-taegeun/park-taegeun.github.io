@@ -3,7 +3,7 @@
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
 <rect width="1200" height="720" fill="#FFFFFF"/>
 <text x="50" y="64" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="34" font-weight="700" fill="#101A2C" text-anchor="start">결과를 보기 전에 채택 규칙을 고정하고 평가</text>
-<text x="50" y="104" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="400" fill="#586173" text-anchor="start">시험지 30문항 + 숨겨 둔 시험지 15문항 · 실행 1회</text>
+<text x="50" y="104" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="400" fill="#586173" text-anchor="start">평가 문항 30개 + held-out 15개 · 실행 1회</text>
 <line x1="50" y1="156" x2="1150" y2="156" stroke="#1A2B4A" stroke-width="3"/>
 <text x="50" y="142" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#586173" text-anchor="start">실험</text>
 <text x="440" y="142" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#586173" text-anchor="start">결과</text>
@@ -27,16 +27,16 @@
 <rect x="1010" y="373" width="120" height="42" rx="21" fill="#FFFFFF" stroke="#9AA6B4" stroke-width="2" opacity="1"/>
 <text x="1070" y="402" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#9AA6B4" text-anchor="middle">미채택</text>
 <text x="50" y="489" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#101A2C" text-anchor="start">질의 재작성</text>
-<text x="440" y="489" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="start">원래 시험지 적중 6 → 8</text>
-<text x="440" y="521" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">숨겨 둔 시험지 적중 1 → 5, 정답 9 → 8</text>
+<text x="440" y="489" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="start">기존 문항 적중 6 → 8</text>
+<text x="440" y="521" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">held-out 검색 적중 1 → 5(12문항), 정답 9 → 8</text>
 <rect x="1010" y="465" width="120" height="42" rx="21" fill="#FFFFFF" stroke="#9AA6B4" stroke-width="2" opacity="1"/>
 <text x="1070" y="494" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#9AA6B4" text-anchor="middle">미채택</text>
 <rect x="40" y="547" width="1120" height="92" rx="0" fill="#F6F7F9" stroke="none" stroke-width="0" opacity="1"/>
 <text x="50" y="581" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#101A2C" text-anchor="start">로컬 모델</text>
 <text x="50" y="613" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">llama3.1 · EXAONE</text>
 <text x="440" y="581" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="start">정답 9 · 6 · 7</text>
-<text x="440" y="613" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">응답 약 1초 vs 약 6.3초</text>
+<text x="440" y="613" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">응답 약 1초(gpt) vs 약 6.3초(로컬)</text>
 <rect x="1010" y="557" width="120" height="42" rx="21" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
 <text x="1070" y="586" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#586173" text-anchor="middle">참고</text>
-<text x="50" y="680" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="600" fill="#101A2C" text-anchor="start">기준선 오답 · 부분 정답 21건 중 19건이 검색 실패 → 답변 모델보다 검색을 먼저 고칠 것</text>
+<text x="50" y="680" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="600" fill="#101A2C" text-anchor="start">기준선 오답 · 부분 정답 21건 중 19건이 검색 실패 → 답변 모델보다 검색 개선이 먼저</text>
 </svg>

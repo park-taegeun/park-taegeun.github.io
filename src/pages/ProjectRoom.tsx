@@ -201,7 +201,7 @@ export default function ProjectRoom() {
           </Reveal>
 
           {room.context && (
-            <section id="context" aria-label="과제와 내 자리" className="scroll-mt-28">
+            <section id="context" aria-label="과제 구성과 담당 범위" className="scroll-mt-28">
               <BlockHead id="context" />
               {room.context.periods && (
                 <ol className="mt-5 flex flex-wrap gap-2" aria-label="기간">
@@ -228,8 +228,8 @@ export default function ProjectRoom() {
 
           {hasTabs && (
             <div id="tracks" className="scroll-mt-28 -mb-6 sm:-mb-10">
-              <p className="font-body text-text-muted text-[13px] mb-3">두 연구 트랙을 탭으로 나눴습니다. 아래 문제부터 검증까지가 탭에 따라 바뀝니다.</p>
-              <div role="tablist" aria-label="연구 트랙" className="flex flex-wrap gap-2">
+              <p className="font-body text-text-muted text-[13px] mb-3">두 연구 주제를 탭으로 나눴습니다. 탭을 바꾸면 아래 배경부터 문제 해결까지의 내용이 바뀝니다.</p>
+              <div role="tablist" aria-label="연구 주제" className="flex flex-wrap gap-2">
                 {room.tracks.map((t) => {
                   const on = t.id === activeTrack.id
                   return (
@@ -265,7 +265,7 @@ export default function ProjectRoom() {
             key={activeTrack.id}
           >
             {track.problem && (
-              <section id="problem" aria-label="문제와 목표" className="scroll-mt-28">
+              <section id="problem" aria-label="배경과 목표" className="scroll-mt-28">
                 <BlockHead id="problem" />
                 <div className="mt-5">
                   <Body text={track.problem.body} />
@@ -327,9 +327,9 @@ export default function ProjectRoom() {
             )}
 
             {track.checks && track.checks.length > 0 && (
-              <section id="checks" aria-label="검증과 찾아서 바꾼 것" className="scroll-mt-28">
+              <section id="checks" aria-label="검증과 문제 해결" className="scroll-mt-28">
                 <BlockHead id="checks" />
-                <p className="font-body text-text-muted text-[13.5px] mt-3">찾은 것 → 원인 → 바꾼 것과 결과 순서입니다. 「자세히」로 펼칩니다.</p>
+                <p className="font-body text-text-muted text-[13.5px] mt-3">문제 → 원인 → 해결과 결과 순서로 정리했습니다. ‘자세히’를 누르면 전체 내용이 열립니다.</p>
                 <div className="mt-5">
                   <CheckList items={track.checks} initialOpen={hash} />
                 </div>
@@ -347,23 +347,23 @@ export default function ProjectRoom() {
           </div>
 
           {room.delegation && (
-            <section id="ai" aria-label="AI 위임" className="scroll-mt-28">
+            <section id="ai" aria-label="AI 활용 방식" className="scroll-mt-28">
               <BlockHead id="ai" />
-              <p className="font-body text-text-muted text-[13.5px] mt-3">무엇을 AI에 맡겼고, 무엇을 직접 했고, 어떻게 확인했는지입니다.</p>
+              <p className="font-body text-text-muted text-[13.5px] mt-3">AI에 맡긴 일과 직접 한 일, 그리고 결과를 어떻게 검증했는지 정리했습니다.</p>
               <div className="mt-6">
                 <AiDelegation d={room.delegation} />
               </div>
             </section>
           )}
 
-          <section id="limits" aria-label="한계와 다음 행동" className="scroll-mt-28">
+          <section id="limits" aria-label="한계와 개선 계획" className="scroll-mt-28">
             <BlockHead id="limits" />
             <div className="mt-6">
               <Limits items={room.limits} />
             </div>
           </section>
 
-          <section id="links" aria-label="증거 링크" className="scroll-mt-28">
+          <section id="links" aria-label="관련 링크" className="scroll-mt-28">
             <BlockHead id="links" />
             <div className="mt-6">
               <LinksBlock items={room.links} citation={room.citation} />
@@ -376,7 +376,7 @@ export default function ProjectRoom() {
           <nav aria-label="이 페이지 목차" className="sticky top-24">
             <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">On this page</p>
             {hasTabs && (
-              <div className="mt-3 flex flex-col gap-1" aria-label="연구 트랙 바꾸기">
+              <div className="mt-3 flex flex-col gap-1" aria-label="연구 주제 바꾸기">
                 {room.tracks.map((t) => (
                   <button
                     key={t.id}

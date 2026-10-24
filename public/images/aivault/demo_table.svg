@@ -43,5 +43,5 @@
 <rect x="1010" y="594" width="120" height="44" rx="22" fill="#0E7C86" stroke="#0E7C86" stroke-width="2" opacity="1"/>
 <text x="1070" y="624" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">차단</text>
 <line x1="50" y1="690" x2="1150" y2="690" stroke="#DCE1E9" stroke-width="2"/>
-<text x="50" y="728" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="start">본인 승인 시연 1회 · 5개 모두 차단 · 우회 시도 0</text>
+<text x="50" y="728" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="start">시연 1회 · 5개 모두 차단 · 우회 시도 0</text>
 </svg>
