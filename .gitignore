@@ -19,3 +19,6 @@ pnpm-debug.log*
 # raw source assets (kept locally, excluded from build/deploy)
 _raw_assets/
 _review_shots/
+
+# TypeScript build cache
+*.tsbuildinfo
