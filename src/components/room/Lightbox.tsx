@@ -35,7 +35,7 @@ export default function Lightbox({ item, onClose }: { item: EvidenceItem; onClos
     <motion.div
       role="dialog"
       aria-modal="true"
-      aria-label="슬라이드 확대 보기"
+      aria-label="그림 확대 보기"
       className="fixed inset-0 z-[60] flex flex-col items-center justify-center p-5 md:p-10"
       style={{ background: 'rgba(15,23,42,0.82)' }}
       onClick={onClose}
@@ -59,7 +59,7 @@ export default function Lightbox({ item, onClose }: { item: EvidenceItem; onClos
         src={item.src}
         alt={item.alt}
         decoding="async"
-        className="max-w-[min(1100px,94vw)] max-h-[82vh] w-auto h-auto object-contain rounded-[8px]"
+        className="max-w-[min(1100px,94vw)] max-h-[82vh] w-auto h-auto object-contain rounded-[8px] bg-white"
         style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.5)' }}
         onClick={(e) => e.stopPropagation()}
       />

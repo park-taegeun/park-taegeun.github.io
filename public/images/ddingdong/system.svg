@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 820" width="1500" height="820" role="img" aria-label="띵동 시스템 구성도">
+<title>띵동 시스템 구성도</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
+<rect width="1500" height="820" fill="#FFFFFF"/>
+<text x="40" y="56" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="30" font-weight="700" fill="#101A2C" text-anchor="start">현관 기기에서 카카오톡까지</text>
+<rect x="40" y="110" width="330" height="420" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="60" y="152" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#101A2C" text-anchor="start">현관 기기</text>
+<text x="60" y="182" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="18" font-weight="400" fill="#586173" text-anchor="start">XIAO ESP32-S3 Sense</text>
+<rect x="60" y="215" width="290" height="80" rx="12" fill="#FFFFFF" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="80" y="249" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="start">마이크</text>
+<text x="80" y="277" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="16" font-weight="400" fill="#586173" text-anchor="start">INMP441</text>
+<rect x="60" y="315" width="290" height="80" rx="12" fill="#FFFFFF" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="80" y="349" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="start">거리 센서</text>
+<text x="80" y="377" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="16" font-weight="400" fill="#586173" text-anchor="start">ToF 8×8 · VL53L5CX</text>
+<rect x="60" y="415" width="290" height="80" rx="12" fill="#FFFFFF" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="80" y="449" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="start">카메라</text>
+<text x="80" y="477" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="16" font-weight="400" fill="#586173" text-anchor="start">OV3660</text>
+<rect x="560" y="110" width="640" height="560" rx="12" fill="#FFFFFF" stroke="#1A2B4A" stroke-width="2.5" opacity="1"/>
+<text x="580" y="152" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="700" fill="#1A2B4A" text-anchor="start">서버</text>
+<text x="650" y="152" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="400" fill="#586173" text-anchor="start">Flask · SQLite · 노트북 로컬 + Cloudflare 터널</text>
+<line x1="375" y1="255" x2="600" y2="255" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="383" y="238" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="600" fill="#101A2C" text-anchor="start">1차: 2초 녹음 + 거리 값</text>
+<rect x="600" y="200" width="240" height="110" rx="12" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3" opacity="1"/>
+<text x="720" y="245" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="700" fill="#0E7C86" text-anchor="middle">소리 분류</text>
+<text x="720" y="275" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="400" fill="#586173" text-anchor="middle">YAMNet + 분류기 · 4종</text>
+<line x1="845" y1="255" x2="885" y2="255" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<polygon points="930,213 972,255 930,297 888,255" fill="#FFFFFF" stroke="#1A2B4A" stroke-width="2.5"/>
+<text x="930" y="262" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#1A2B4A" text-anchor="middle">판정</text>
+<text x="985" y="222" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="start">기타 소리 차단</text>
+<text x="985" y="246" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="start">신뢰도 0.70 미만 차단</text>
+<text x="985" y="270" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="start">화재: 거리 확인 생략</text>
+<text x="985" y="294" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="start">초인종 · 노크: 사람 있을 때만</text>
+<line x1="930" y1="300" x2="930" y2="360" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="600" y="365" width="500" height="70" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="620" y="408" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="start">보낼 소리 → 텍스트 알림 발송 · 기기에 2차 요청</text>
+<path d="M600,400 C500,400 470,480 375,480" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<path d="M375,505 C470,505 500,520 600,520" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="383" y="560" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="600" fill="#101A2C" text-anchor="start">2차: 사진 1장 + 5초 녹음</text>
+<rect x="600" y="480" width="240" height="90" rx="12" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3" opacity="1"/>
+<text x="720" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="700" fill="#0E7C86" text-anchor="middle">음성 받아쓰기</text>
+<text x="720" y="548" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="middle">CLOVA Speech</text>
+<line x1="845" y1="525" x2="885" y2="525" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="890" y="480" width="210" height="90" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="995" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="middle">사진 · 자막 발송</text>
+<rect x="600" y="595" width="500" height="55" rx="12" fill="#FFFFFF" stroke="#DCE1E9" stroke-width="2" stroke-dasharray="6 5" opacity="1"/>
+<text x="620" y="630" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="500" fill="#586173" text-anchor="start">모든 판정을 기록(보내지 않은 이유 포함)</text>
+<line x1="1105" y1="400" x2="1255" y2="340" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<line x1="1105" y1="525" x2="1255" y2="420" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1260" y="280" width="210" height="170" rx="12" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
+<circle cx="1310" cy="331.0" r="9.0" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<path d="M1295.0,359.0 Q1310,337.0 1325.0,359.0 Z" fill="#FFFFFF"/>
+<text x="1345" y="330" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="start">카카오톡</text>
+<text x="1345" y="360" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#C9D3E2" text-anchor="start">사용자</text>
+<text x="1280" y="410" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="500" fill="#C9D3E2" text-anchor="start">텍스트 → 사진 · 자막</text>
+<line x1="1105" y1="622" x2="1255" y2="622" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1260" y="575" width="210" height="95" rx="12" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
+<text x="1365" y="615" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="middle">대시보드</text>
+<text x="1365" y="645" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#C9D3E2" text-anchor="middle">React · 3초 갱신</text>
+<text x="40" y="730" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="500" fill="#101A2C" text-anchor="start">거리 센서는 초음파 대신 소리를 내지 않는 ToF를 골랐습니다(같은 기기의 마이크 녹음에 섞이지 않게).</text>
+<rect x="40" y="776" width="22" height="18" rx="4" fill="#E1F3F4" stroke="#0E7C86" stroke-width="2" opacity="1"/>
+<text x="72" y="790" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">모델이 하는 단계</text>
+<rect x="255.9" y="776" width="22" height="18" rx="4" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
+<text x="287.9" y="790" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">사람이 보는 곳</text>
+<polygon points="465.7,774 476.7,785 465.7,796 454.7,785" fill="#FFFFFF" stroke="#1A2B4A" stroke-width="2"/>
+<text x="486.7" y="790" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">보낼지 가르는 판정</text>
+<line x1="687.7" y1="785" x2="713.7" y2="785" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="719.7" y="790" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">데이터 흐름</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-label="길이를 맞춘 오류율과 오디오 길이-출력 길이 상관">
+<title>길이를 맞춘 오류율과 오디오 길이-출력 길이 상관</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
+<rect width="1200" height="760" fill="#FFFFFF"/>
+<text x="60" y="70" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="32" font-weight="700" fill="#101A2C" text-anchor="start">길이를 맞춘 받아쓰기 오류율</text>
+<text x="60" y="108" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="400" fill="#586173" text-anchor="start">CER · 낮을수록 좋음</text>
+<rect x="80" y="383.0" width="110" height="217.0" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
+<text x="135" y="369.0" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#1A2B4A" text-anchor="middle">0.31</text>
+<text x="135" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="middle">원래 모델</text>
+<rect x="245" y="453.0" width="110" height="147.0" rx="6" fill="#0E7C86" stroke="#0E7C86" stroke-width="2" opacity="1"/>
+<text x="300" y="439.0" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#0E7C86" text-anchor="middle">0.21</text>
+<text x="300" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="middle">연결부 학습</text>
+<rect x="410" y="236.0" width="110" height="364.0" rx="6" fill="url(#hatch)" stroke="#9AA6B4" stroke-width="2" opacity="1"/>
+<text x="465" y="222.0" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="34" font-weight="700" fill="#9AA6B4" text-anchor="middle">0.52</text>
+<text x="465" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="400" fill="#586173" text-anchor="middle">어텐션 학습</text>
+<text x="465" y="668" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#9AA6B4" text-anchor="middle">철회한 방식</text>
+<line x1="60" y1="600" x2="560" y2="600" stroke="#DCE1E9" stroke-width="2"/>
+<text x="640" y="70" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="32" font-weight="700" fill="#101A2C" text-anchor="start">오디오 길이를 따라가는 정도</text>
+<text x="640" y="108" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="400" fill="#586173" text-anchor="start">오디오 길이와 출력 길이의 상관 · 높을수록 좋음</text>
+<rect x="660" y="588.24" width="110" height="11.760000000000002" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
+<text x="715" y="574.24" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="32" font-weight="700" fill="#1A2B4A" text-anchor="middle">0.021</text>
+<text x="715" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="middle">원래 모델</text>
+<rect x="825" y="177.2" width="110" height="422.8" rx="6" fill="#0E7C86" stroke="#0E7C86" stroke-width="2" opacity="1"/>
+<text x="880" y="163.2" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="32" font-weight="700" fill="#0E7C86" text-anchor="middle">0.755</text>
+<text x="880" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="middle">연결부 학습</text>
+<rect x="990" y="528.3199999999999" width="110" height="71.68" rx="6" fill="url(#hatch)" stroke="#9AA6B4" stroke-width="2" opacity="1"/>
+<text x="1045" y="514.3199999999999" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="32" font-weight="700" fill="#9AA6B4" text-anchor="middle">0.128</text>
+<text x="1045" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="400" fill="#586173" text-anchor="middle">어텐션 학습</text>
+<text x="1045" y="668" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#9AA6B4" text-anchor="middle">철회한 방식</text>
+<line x1="640" y1="187.28000000000003" x2="1160" y2="187.28000000000003" stroke="#0E7C86" stroke-width="2.5" stroke-dasharray="8 7"/>
+<text x="1160" y="175.28000000000003" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="600" fill="#0E7C86" text-anchor="end">정답 전사문 0.737</text>
+<line x1="640" y1="600" x2="1160" y2="600" stroke="#DCE1E9" stroke-width="2"/>
+<line x1="600" y1="140" x2="600" y2="690" stroke="#DCE1E9" stroke-width="2"/>
+<text x="60" y="735" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">학습에 쓰지 않은 회의 세션 기준 · 오류율: 길이를 맞춘 168발화(철회 방식은 같은 기준 167발화) · 상관: 짧은 발화 262개 · 학습 1회</text>
+</svg>

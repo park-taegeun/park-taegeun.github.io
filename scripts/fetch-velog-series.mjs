@@ -53,6 +53,35 @@ for (const name of byName.keys()) {
 }
 if (matched === 0) keep('no series matched')
 
+// 최근 글 제목·주소(사이트 LOG 섹션의 「최근 글」). 별도 쿼리로 받아, 실패해도 편수 갱신은 그대로 둔다.
+const LATEST_QUERY = `query SeriesLatest($username: String) {
+  seriesList(username: $username) { name series_posts { post { title url_slug released_at } } }
+}`
+try {
+  const res = await fetch('https://v2.velog.io/graphql', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (portfolio-sync)' },
+    body: JSON.stringify({ operationName: 'SeriesLatest', variables: { username: 'xorms' }, query: LATEST_QUERY }),
+    signal: AbortSignal.timeout(20000),
+  })
+  const latestList = res.status === 200 ? (await res.json())?.data?.seriesList : null
+  if (Array.isArray(latestList)) {
+    const latestByName = new Map(latestList.map((s) => [s.name?.trim(), s]))
+    for (const entry of Object.values(data.series)) {
+      const posts = (latestByName.get(entry.name)?.series_posts ?? [])
+        .map((p) => p.post)
+        .filter((p) => p?.released_at && p?.title && p?.url_slug)
+        .sort((a, b) => a.released_at.localeCompare(b.released_at))
+      const last = posts.at(-1)
+      if (!last) continue
+      entry.latestTitle = last.title
+      entry.latestUrl = `https://velog.io/@xorms/${encodeURIComponent(last.url_slug)}`
+    }
+  } else console.log('latest posts: skipped (no data)')
+} catch (e) {
+  console.log(`latest posts: skipped (${e.message})`)
+}
+
 data.updatedAt = new Date().toISOString().replace(/\.\d+Z$/, 'Z')
 writeFileSync(FILE, JSON.stringify(data, null, 2) + '\n')
 console.log(

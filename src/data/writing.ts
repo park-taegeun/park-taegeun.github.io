@@ -15,7 +15,7 @@ export const VELOG_URL = 'https://velog.io/@xorms'
 export const VELOG_PROFILE = {
   displayName: '박태근',
   handle: '@xorms',
-  bio: '음성·LLM 실험 로그와 졸업작품 시스템 기록, AI 생태계 탐험을 타임스탬프로 남깁니다.',
+  bio: '음성·LLM 실험, 졸업작품의 설계 판단, AI 도구 실험을 날짜와 함께 남깁니다.',
   tags: ['AI', 'LLM', '음성', '검증', '기록'],
 }
 
@@ -52,7 +52,7 @@ export const WRITING_SERIES: WritingSeries[] = [
     axis: '음성·LLM 연구',
     name: 'AI_LAB',
     count: seriesCount('ai-lab', 80),
-    blurb: '멀티모달 LLM의 음성인식 환각을 진단·재측정한 실험을 타임스탬프로 남긴 로그.',
+    blurb: '멀티모달 LLM 음성 연구의 실험 일지. 환각 진단부터 어조 모듈 검증까지, 철회한 결론도 그날 남겼습니다.',
     href: 'https://velog.io/@xorms/series/AILAB',
     posts: [
       {
@@ -71,7 +71,7 @@ export const WRITING_SERIES: WritingSeries[] = [
         title: '오디오·텍스트 결합 통로 파인튜닝 검증',
         date: '2026.06.29',
         href: 'https://velog.io/@xorms/LAB-39',
-        note: '오디오와 텍스트를 잇는 통로(embed_audio)만 따로 학습해 검증했습니다.',
+        note: '오디오가 언어 모델로 들어가는 연결부만 따로 학습해 검증했습니다.',
       },
       {
         title: '발음 오인식 외부 ASR 진단',
@@ -85,7 +85,7 @@ export const WRITING_SERIES: WritingSeries[] = [
     axis: '졸업작품 시스템',
     name: '졸업작품 기록',
     count: seriesCount('graduation', 62),
-    blurb: '센서부터 알림까지 전 계층을 잇는 소리 알림 시스템의 설계 판단과 폐기한 접근을 기록.',
+    blurb: '현관 소리 알림 시스템(띵동)의 설계 판단과 폐기한 접근을 기록한 개발 일지.',
     href: 'https://velog.io/@xorms/series/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D',
     posts: [
       {
@@ -93,12 +93,6 @@ export const WRITING_SERIES: WritingSeries[] = [
         date: '2026.04.23',
         href: 'https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-11-5s9lgfpm',
         note: '여러 후보 끝에 SP/DTW와 코사인 거리로 유사도 판정을 확정했습니다.',
-      },
-      {
-        title: '발주 전 검증을 시스템 4개 영역에 적용',
-        date: '2026.04.30',
-        href: 'https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-20',
-        note: '부품 발주 전 검증을 4개 영역에 적용해 설계 3가지를 바꿨습니다.',
       },
       {
         title: '802.1X 지원 폐기 결정',
@@ -110,7 +104,7 @@ export const WRITING_SERIES: WritingSeries[] = [
         title: 'YAMNet 파인튜닝과 서빙 export 검증',
         date: '2026.07.01',
         href: 'https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-41',
-        note: '공개 데이터 예비 학습을 검증했고, 이후 평가셋 누수 79건을 발견해 정확도 표기를 0.861로 정정했습니다.',
+        note: '공개 데이터로 소리 분류기를 처음 학습하고, 서버에서 쓸 형태로 내보낸 결과를 검증했습니다.',
       },
     ],
   },
@@ -118,27 +112,94 @@ export const WRITING_SERIES: WritingSeries[] = [
     axis: 'AI 생태계 탐험',
     name: 'AI 생태계 탐험 로그',
     count: seriesCount('ai-ecosystem', 15),
-    blurb: 'AI 도구·모델·생태계를 직접 조합·응용하며 관찰한 것을 정리한 탐험 기록.',
+    blurb: 'AI 도구를 직접 붙여 보고 관찰한 기록. AI-Vault 구축편과 운영편이 이 시리즈에 있습니다.',
     href: 'https://velog.io/@xorms/series/AI-%EC%83%9D%ED%83%9C%EA%B3%84-%ED%83%90%ED%97%98-%EB%A1%9C%EA%B7%B8',
     posts: [
       {
-        title: 'Context7 + GitHub MCP 콤보',
-        date: '2026.03.27',
-        href: 'https://velog.io/@xorms/Context7-GitHub-MCP-%EC%BD%A4%EB%B3%B4',
-        note: '문서 참조(Context7)와 GitHub 워크플로를 하나의 흐름으로 묶었습니다.',
+        title: '카파시의 LLM Wiki를 Claude Code로 만들기(구축편)',
+        date: '2026.10.18',
+        href: 'https://velog.io/@xorms/%EC%B9%B4%ED%8C%8C%EC%8B%9C%EC%9D%98-LLM-Wiki%EB%A5%BC-Claude-Code%EB%A1%9C-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0',
+        note: 'AI-Vault 구축편. 원본·위키·규칙서 세 층 구조와 공개·비공개 저장소 분리를 만든 과정입니다.',
       },
       {
-        title: 'Memory + Playwright + Notion + GitHub 4 MCP 콤보',
-        date: '2026.04.01',
-        href: 'https://velog.io/@xorms/Memory-Playwright-Notion-GitHub-4-MCP-%EC%BD%A4%EB%B3%B4',
-        note: 'velog 변화 감지부터 백업·기록까지 네 개 도구로 자동화했습니다.',
+        title: 'LLM Wiki 운영편: 자동화를 멈춘 이유',
+        date: '2026.10.19',
+        href: 'https://velog.io/@xorms/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-%EC%9E%90%EB%8F%99%ED%99%94%EB%A5%BC-%EB%A9%88%EC%B6%98-%EC%9D%B4%EC%9C%A0%EC%99%80-%EC%8C%93%EC%9D%84%EC%88%98%EB%A1%9D-%EB%98%91%EB%98%91%ED%95%B4%EC%A7%84%EB%8B%A4%EB%A5%BC-%EC%88%AB%EC%9E%90%EB%A1%9C-%EC%A6%9D%EB%AA%85%ED%95%98%EA%B8%B0',
+        note: '완전 자동화 계획을 철회한 이유와, 위키가 나아졌는지를 고정 질문으로 잰 과정입니다.',
+      },
+      {
+        title: 'LLM Wiki 운영편 2: 「부탁」을 「강제」로 바꾸는 운영',
+        date: '2026.10.20',
+        href: 'https://velog.io/@xorms/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-2-%EC%A0%95%EA%B7%9C%EC%8B%9D%EC%9D%B4-%EB%86%93%EC%B9%9C-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%88%AB%EC%9E%90%EB%8A%94-%EB%A7%9E%EB%8A%94%EB%8D%B0-%EB%82%A8%EC%9D%80-1%ED%8E%B8-%EB%B6%80%ED%83%81%EC%9D%84-%EA%B0%95%EC%A0%9C%EB%A1%9C-%EB%B0%94%EA%BE%B8%EB%8A%94-%EC%9A%B4%EC%98%81',
+        note: '검사 규칙이 놓친 비밀번호와 처리 안 된 1건을 찾고, 규칙을 차단 장치로 옮긴 기록입니다.',
       },
       {
         title: 'Claude Code Nested Agent',
         date: '2026.04.01',
         href: 'https://velog.io/@xorms/Claude-Code-Nested-Agent',
-        note: '메인 에이전트가 서브에이전트를 병렬로 지휘하는 구조를 구현했습니다.',
+        note: '메인 에이전트가 서브에이전트를 병렬로 지휘하는 구조를 처음 실험했습니다.',
       },
+    ],
+  },
+]
+
+/** 시리즈별 최근 글(velog-sync가 매일 갱신). 없으면 표시하지 않는다. */
+type SeriesMeta = { count?: number; lastPost?: string; latestTitle?: string; latestUrl?: string }
+const SERIES_META: Record<string, SeriesMeta> = velogSeries.series
+const SERIES_KEY: Record<string, string> = { AI_LAB: 'ai-lab', '졸업작품 기록': 'graduation', 'AI 생태계 탐험 로그': 'ai-ecosystem' }
+
+/** velog 제목의 머리표([ LAB ] 89. / [[ … ]] / [ … ])를 떼고, 긴 줄표는 쌍점으로 바꾼다(사이트 문장 규칙). */
+export function cleanVelogTitle(raw: string): string {
+  let t = raw.trim()
+  const wrapped = t.match(/^\[\[\s*(.*?)\s*\]\]$/)
+  const lab = t.match(/^\[\s*LAB\s*\]\s*\d+\.\s*(.*)$/)
+  const single = t.match(/^\[\s*(.*?)\s*\]$/)
+  if (wrapped) t = wrapped[1]
+  else if (lab) t = lab[1]
+  else if (single) t = single[1]
+  return t.replace(/\s*[\u2014\u2013\u2015\u2012]\s*/g, ': ')
+}
+
+export function latestPost(seriesName: string): { title: string; href: string; date: string } | null {
+  const m = SERIES_META[SERIES_KEY[seriesName]]
+  if (!m?.latestTitle || !m.latestUrl || !m.lastPost) return null
+  return { title: cleanVelogTitle(m.latestTitle), href: m.latestUrl, date: m.lastPost.replace(/-/g, '.') }
+}
+
+/** 프로젝트별 당시 기록 — 상세 페이지의 결정·검증 블록과 같은 글을 가리킨다. */
+export interface ProjectRecord {
+  project: 'ddingdong' | 'voice' | 'aivault'
+  label: string
+  posts: { date: string; what: string; href: string }[]
+}
+
+const V = 'https://velog.io/@xorms'
+export const PROJECT_RECORDS: ProjectRecord[] = [
+  {
+    project: 'voice',
+    label: '멀티모달 LLM 음성 연구',
+    posts: [
+      { date: '2026.06.23', what: '길이를 맞추자 나빠진 학습 방식을 철회한 날', href: `${V}/LAB-37.-%ED%8C%8C%EC%9D%B8%ED%8A%9C%EB%8B%9D-%EA%B2%B0%EB%A1%A0` },
+      { date: '2026.06.29', what: '연결부만 학습한 모델의 평가와 검증', href: `${V}/LAB-39` },
+      { date: '2026.10.06', what: '학습 1회 결과를 시드 3회로 다시 잰 기록', href: `${V}/LAB-80.-%ED%95%99%EC%8A%B5%EC%9D%84-%EB%8B%A4%EC%8B%9C-%ED%95%98%EB%A9%B4-%EA%B0%99%EC%9D%80-%EC%88%AB%EC%9E%90%EA%B0%80-%EB%82%98%EC%98%A4%EB%8A%94%EA%B0%80` },
+    ],
+  },
+  {
+    project: 'ddingdong',
+    label: '띵동',
+    posts: [
+      { date: '2026.04.23', what: '소리 유사도 판정 방식을 고른 기록', href: `${V}/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-11-5s9lgfpm` },
+      { date: '2026.05.08', what: '기능 하나를 통째로 덜어 낸 결정', href: `${V}/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-25` },
+      { date: '2026.07.01', what: '소리 분류기 첫 학습과 서빙 검증', href: `${V}/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-41` },
+    ],
+  },
+  {
+    project: 'aivault',
+    label: 'AI-Vault',
+    posts: [
+      { date: '2026.10.18', what: '구축편: 세 층 구조와 저장소 분리', href: `${V}/%EC%B9%B4%ED%8C%8C%EC%8B%9C%EC%9D%98-LLM-Wiki%EB%A5%BC-Claude-Code%EB%A1%9C-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0` },
+      { date: '2026.10.19', what: '운영편: 자동화를 멈춘 이유', href: `${V}/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-%EC%9E%90%EB%8F%99%ED%99%94%EB%A5%BC-%EB%A9%88%EC%B6%98-%EC%9D%B4%EC%9C%A0%EC%99%80-%EC%8C%93%EC%9D%84%EC%88%98%EB%A1%9D-%EB%98%91%EB%98%91%ED%95%B4%EC%A7%84%EB%8B%A4%EB%A5%BC-%EC%88%AB%EC%9E%90%EB%A1%9C-%EC%A6%9D%EB%AA%85%ED%95%98%EA%B8%B0` },
+      { date: '2026.10.20', what: '운영편 2: 놓친 비밀번호와 처리 안 된 1건', href: `${V}/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-2-%EC%A0%95%EA%B7%9C%EC%8B%9D%EC%9D%B4-%EB%86%93%EC%B9%9C-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%88%AB%EC%9E%90%EB%8A%94-%EB%A7%9E%EB%8A%94%EB%8D%B0-%EB%82%A8%EC%9D%80-1%ED%8E%B8-%EB%B6%80%ED%83%81%EC%9D%84-%EA%B0%95%EC%A0%9C%EB%A1%9C-%EB%B0%94%EA%BE%B8%EB%8A%94-%EC%9A%B4%EC%98%81` },
     ],
   },
 ]

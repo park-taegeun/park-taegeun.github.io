@@ -1,7 +1,7 @@
-// Hero 비주얼 — 재측정 모티프: 오디오 길이(x) vs 출력 길이(y) 상관 산점도.
-// 상태가 base(r=0.024) → attention LoRA(0.128) → 융합 통로 LoRA(0.755)로 전환되며
-// 흩어진 점이 대각선을 따라 정렬되고 회귀선 기울기가 살아난다. 색은 회색(개입 전) → 틸(검증됨).
-// reduced-motion이면 최종 정렬 상태(r=0.755)를 정적으로 표시.
+// Hero 비주얼. 재측정 모티프: 오디오 길이(x) 대 출력 길이(y) 상관 산점도(짧은 발화 262개의 개념도).
+// 원래 모델(r=0.021) → 철회한 어텐션 학습(0.128, 회색 「철회한 방식」) → 연결부 학습(0.755)으로 전환된다.
+// 0.128 → 0.755는 서로 다른 모델이라 한 줄의 개선처럼 잇지 않고, 철회 표시를 붙인다.
+// reduced-motion이면 최종 상태(r=0.755)를 정적으로 표시.
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
@@ -37,9 +37,9 @@ const PTS: { x: number; yb: number; yf: number }[] = [
 
 // 단계별 회귀선(y = m·x + b)과 상관계수
 const STAGES = [
-  { key: 'base', label: 'base', r: 0.024, m: 0.03, b: 0.5, mix: 0 },
-  { key: 'attn', label: 'attention LoRA', r: 0.128, m: 0.35, b: 0.32, mix: 0.35 },
-  { key: 'fusion', label: '융합 통로 LoRA', r: 0.755, m: 0.78, b: 0.06, mix: 1 },
+  { key: 'base', label: '원래 모델', r: 0.021, m: 0.03, b: 0.5, mix: 0 },
+  { key: 'attn', label: '어텐션 학습 · 철회한 방식', r: 0.128, m: 0.35, b: 0.32, mix: 0.35 },
+  { key: 'fusion', label: '연결부 학습', r: 0.755, m: 0.78, b: 0.06, mix: 1 },
 ] as const
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t
@@ -47,7 +47,7 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 export default function HeroVisual() {
   const reduced = useReducedMotion()
   const [stage, setStage] = useState(reduced ? 2 : 0)
-  const r = useMotionValue(reduced ? 0.755 : 0.024)
+  const r = useMotionValue(reduced ? 0.755 : 0.021)
   const rText = useTransform(r, (v) => v.toFixed(3))
 
   useEffect(() => {
@@ -92,8 +92,6 @@ export default function HeroVisual() {
   return (
     <figure
       className="w-full"
-      role="img"
-      aria-label="오디오 길이 대비 출력 길이 상관 산점도. 융합 통로 재학습으로 상관계수가 0.024에서 0.755로 회복된다."
     >
       <div
         className="bg-panel"
@@ -103,7 +101,7 @@ export default function HeroVisual() {
           boxShadow: 'var(--shadow-frame)',
         }}
       >
-        <svg viewBox={`0 0 ${W} ${H}`} className="block w-full h-auto" role="presentation">
+        <svg viewBox={`0 0 ${W} ${H}`} className="block w-full h-auto" role="img" aria-label="오디오 길이와 출력 길이의 상관 개념도. 원래 모델 0.021, 철회한 어텐션 학습 0.128, 연결부 학습 0.755, 정답 전사문 0.737.">
           {/* 격자 */}
           {[0, 0.25, 0.5, 0.75, 1].map((g) => (
             <g key={g}>
@@ -115,7 +113,7 @@ export default function HeroVisual() {
           <line x1={px(0)} y1={py(0)} x2={px(1)} y2={py(0)} stroke="var(--color-line-strong)" strokeWidth={1.4} />
           <line x1={px(0)} y1={py(0)} x2={px(0)} y2={py(1)} stroke="var(--color-line-strong)" strokeWidth={1.4} />
 
-          {/* 정답(ref) 대각선 — r=0.739, 항상 옅은 점선 */}
+          {/* 정답 전사문 기준선(r=0.737), 항상 옅은 점선 */}
           <line
             x1={px(0)}
             y1={py(0.05)}
@@ -156,7 +154,7 @@ export default function HeroVisual() {
 
           {/* 축 라벨 (mono) */}
           <text x={px(0.5)} y={H - 10} textAnchor="middle" fontSize={11} fill="var(--color-text-muted)" fontFamily="var(--font-mono)">
-            audio length
+            오디오 길이
           </text>
           <text
             x={14}
@@ -167,7 +165,7 @@ export default function HeroVisual() {
             fontFamily="var(--font-mono)"
             transform={`rotate(-90 14 ${py(0.5)})`}
           >
-            output length
+            출력 길이
           </text>
         </svg>
 
@@ -180,11 +178,14 @@ export default function HeroVisual() {
             {st.label}
           </span>
           <span className="font-mono text-[12px] text-text-muted">
-            r: <span className="text-text-faint">0.024</span> →{' '}
+            r: <span className="text-text-muted">0.021</span> →{' '}
             <motion.span style={{ color: isSignal ? SIGNAL : 'var(--color-text-sub)' }}>{rText}</motion.span>
           </span>
         </div>
       </div>
+      <figcaption className="font-body text-text-sub text-[12.5px] leading-[1.6] mt-3 px-1 break-keep">
+        음성 연구: 출력 길이가 오디오 길이를 따라가는 정도(짧은 발화 262개, 점선은 정답 전사문 0.737). 회색 0.128은 길이를 맞추자 오히려 나빠져 철회한 방식입니다.
+      </figcaption>
     </figure>
   )
 }

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 470" width="1400" height="470" role="img" aria-label="오디오 경로와 학습 위치">
+<title>오디오 경로와 학습 위치</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker><marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C86"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#F1F3F6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#C3CAD6" stroke-width="3"/></pattern></defs>
+<rect width="1400" height="470" fill="#FFFFFF"/>
+<text x="40" y="54" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="30" font-weight="700" fill="#101A2C" text-anchor="start">음성이 언어 모델로 들어가는 길</text>
+<rect x="40" y="150" width="170" height="110" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="125" y="213" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="26" font-weight="600" fill="#101A2C" text-anchor="middle">음성</text>
+<line x1="215" y1="205" x2="255" y2="205" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="260" y="150" width="230" height="110" rx="12" fill="#EEF1F5" stroke="#9AA6B4" stroke-width="2" stroke-dasharray="7 6" opacity="1"/>
+<text x="375" y="200" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="25" font-weight="600" fill="#586173" text-anchor="middle">오디오 인코더</text>
+<text x="375" y="234" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#9AA6B4" text-anchor="middle">고정</text>
+<line x1="495" y1="205" x2="535" y2="205" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="540" y="125" width="290" height="160" rx="12" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3.5" opacity="1"/>
+<text x="685" y="178" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#0E7C86" text-anchor="middle">연결부</text>
+<text x="685" y="212" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="middle">오디오 표현 → 언어 모델 입력 크기</text>
+<text x="685" y="252" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="700" fill="#0E7C86" text-anchor="middle">최종 학습 위치 · 32,768개</text>
+<line x1="835" y1="205" x2="875" y2="205" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="880" y="110" width="300" height="190" rx="12" fill="#FFFFFF" stroke="#1A2B4A" stroke-width="2.5" opacity="1"/>
+<text x="1030" y="152" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="25" font-weight="700" fill="#1A2B4A" text-anchor="middle">언어 모델 (Gemma 4)</text>
+<rect x="905" y="180" width="250" height="96" rx="8" fill="url(#hatch)" stroke="#9AA6B4" stroke-width="2" opacity="1"/>
+<text x="1030" y="218" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#586173" text-anchor="middle">어텐션 층 · 처음 학습</text>
+<text x="1030" y="252" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#9AA6B4" text-anchor="middle">454만 개 · 철회한 방식</text>
+<line x1="1185" y1="205" x2="1225" y2="205" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<rect x="1230" y="150" width="140" height="110" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
+<text x="1300" y="213" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="600" fill="#101A2C" text-anchor="middle">받아쓰기</text>
+<text x="40" y="360" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#101A2C" text-anchor="start">학습한 파라미터: 454만 개 → 32,768개(전체 79억 개의 0.0004%)</text>
+<text x="40" y="398" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="400" fill="#586173" text-anchor="start">평가: 학습에 쓰지 않은 회의 세션 2개(828발화)를 통째로 떼어 냄</text>
+<rect x="40" y="434" width="22" height="18" rx="4" fill="#E1F3F4" stroke="#0E7C86" stroke-width="2" opacity="1"/>
+<text x="72" y="448" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">학습한 곳</text>
+<rect x="187.5" y="434" width="22" height="18" rx="4" fill="#EEF1F5" stroke="#9AA6B4" stroke-width="2" stroke-dasharray="4 3" opacity="1"/>
+<text x="219.5" y="448" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">고정한 곳</text>
+<line x1="335.0" y1="443" x2="361.0" y2="443" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
+<text x="367.0" y="448" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">데이터 흐름</text>
+</svg>

@@ -54,10 +54,12 @@ export async function enterRoom(opts: {
 export async function crossfadeToRoom(
   project: Project,
   navigate: (to: string) => void,
+  /** 상세 안 특정 블록으로(예: ?tab=tone#check-0) */
+  suffix = '',
 ): Promise<void> {
   if (entering) return
   entering = true
-  const to = `/projects/${project.key}`
+  const to = `/projects/${project.key}${suffix}`
   try {
     const api = getCoverApi()
     if (!api) {

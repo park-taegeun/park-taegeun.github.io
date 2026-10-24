@@ -1,3 +1,6 @@
+// 프로젝트 2층(상세) 데이터. 원천 문서 01~04의 「사이트 문장」만 옮긴다.
+// 상세 공통 틀: 머리 → 요약 박스 → 대표 이미지 → (과제와 내 자리) → 문제 → 구조 → 결과 → 설계 결정
+//               → 검증 → AI 위임 → 한계와 다음 → 증거 링크. 음성 연구는 문제~검증을 두 탭으로 나눈다.
 import type { ProjectKey } from './projects'
 
 export interface EvidenceItem {
@@ -5,467 +8,669 @@ export interface EvidenceItem {
   alt: string
   caption: string
   layout?: 'wide' | 'compact'
-  /** 다문장 캡션을 문장 단위로 줄바꿈(Sentences). 미설정이면 기존처럼 한 줄 문자열로 렌더. */
-  captionMultiline?: boolean
 }
 
-/** 유사 제품 기능 비교표 — 발표자료 원본 비교표를 사이트 톤(네이티브 table)으로 재현. */
-export interface ComparisonTable {
-  /** 비교 대상 열 — 순서 유지. */
-  columns: string[]
-  /** 자사(딥틸 하이라이트) 열 인덱스. */
-  highlightCol: number
-  /** 행: 기능명 + 열별 지원 여부(columns와 같은 길이). */
-  rows: { feature: string; cells: boolean[] }[]
-  /** 각주(제품 모델 출처 등). */
-  note?: string
-  /** 표 아래 해설(선언형 산문). */
-  caption?: string
-}
-
-export interface EvidenceGroup {
+export interface RecordLink {
   label: string
-  desc?: string
-  /** gallery: 균일 썸네일 + 클릭 확대(그래프 벽 방지). 기본은 대형 프레임. */
-  layout?: 'gallery' | 'feature'
-  items: EvidenceItem[]
-  /** 이미지 대신(또는 함께) 렌더하는 네이티브 비교표. */
-  comparisonTable?: ComparisonTable
+  href: string
 }
 
-/** 대표 화면 옆 핵심 수치 — 포스터/이미지를 못 읽어도 결론이 전달되게(모노 병기). */
-export interface HeroStat {
+export interface ResultRow {
+  item: string
   value: string
-  label: string
+  /** 조건(표본·측정 횟수·개발 중 값 여부). 조건 없는 숫자는 올리지 않는다. */
+  cond: string
 }
 
-/** 세로 내러티브 비트(번호형 프로세스에도 재사용). 이미지는 있는 비트만. */
-export interface OriginBeat {
-  eyebrow: string
+export interface Decision {
   title: string
   body: string
   image?: EvidenceItem
+  record?: RecordLink
 }
 
-export interface OriginStory {
-  label: string
-  beats: OriginBeat[]
-}
-
-export interface AiUsageBlock {
-  /** 짧은 한글 단계명 (프로세스 맵·번호 흐름용). */
-  step?: string
-  eyebrow: string
+export interface Check {
   title: string
-  /** 접힘 상태용 한 줄 결과. 없으면 output 사용. */
-  scanResult?: string
-  usedWhen: string
-  how: string[]
-  output: string
-  /** 펼침 영역 인라인 증거. */
-  evidence?: EvidenceItem
+  /** 찾은 것 → 원인 → 바꾼 것과 결과. 첫 문장만 접힌 상태로 보인다. */
+  body: string
+  image?: EvidenceItem
+  record?: RecordLink
+}
+
+export interface Track {
+  problem?: { body: string; source?: string; image?: EvidenceItem }
+  structure?: { body: string; image?: EvidenceItem; gallery?: EvidenceItem[] }
+  results?: {
+    rows: ResultRow[]
+    /** 열 이름(기본: 항목 · 값 · 조건) */
+    columns?: [string, string, string]
+    note?: string
+    repo?: RecordLink
+    image?: EvidenceItem
+  }
+  decisions?: Decision[]
+  checks?: Check[]
+  gallery?: { label: string; items: EvidenceItem[] }
 }
 
 export interface RoomData {
   key: ProjectKey
-  entranceLine: string
-  entranceDetail?: string
-  mainWallSize?: 'default' | 'compact'
-  mainWall: EvidenceItem
-  /** 대표 화면 아래 핵심 수치 스트립(모노). */
-  heroStats?: HeroStat[]
-  /** 있으면 flat evidence 대신 라벨 그룹 단위로 렌더. */
-  evidenceGroups?: EvidenceGroup[]
-  /** 그리드 밀도. */
-  evidenceGrid?: 2 | 3
-  cardStack?: {
-    label: string
-    caption: string
-    groups: { label: string; items: EvidenceItem[] }[]
+  /** 기준 시점 칩 */
+  asOf: string
+  summary: {
+    role: string
+    results: { value: string; label: string; cond: string }[]
+    tech: string[]
   }
-  slideViewer?: {
-    label: string
-    items: { src: string; alt: string; caption: string }[]
-  }
-  /** 세로 내러티브 — 있으면 별도 섹션. voice에서는 작업 과정(01~05)으로 사용. */
-  originStory?: OriginStory
-  evidence: EvidenceItem[]
-  casePanels?: {
-    eyebrow: string
-    title: string
+  mainImage: EvidenceItem
+  /** 음성 연구 전용: 과제와 내 자리 */
+  context?: {
     body: string
-  }[]
-  phaseFlow?: {
-    eyebrow: string
-    title: string
-    intro?: string
-    phases: { no: string; name: string; desc: string }[]
+    image?: EvidenceItem
+    periods?: { label: string; period: string; note?: string }[]
   }
-  aiUsage?: {
-    intro: string
-    blocks: AiUsageBlock[]
-    fullStackProof?: {
-      label: string
-      item: EvidenceItem
-    }
+  tracks: { id: string; label: string; period?: string; track: Track }[]
+  delegation?: {
+    delegated: string
+    did: string
+    verify: string
+    fixed: string
+    caseLabel: string
+    caseLine: string
+    methods?: { method: string; where: string }[]
   }
-  writingRefs?: {
-    title: string
-    source: string
-    summary: string
-    application: string
-  }[]
-  infoDock: {
-    problem: string | string[]
-    insight: string | string[]
-    role: string | string[]
-    coreFlow: string | string[]
-    output: string | string[]
-    verification: string | string[]
-    uxWritingPoint: string | string[]
-    learning: string | string[]
-  }
+  limits: { title: string; body: string }[]
+  links: { label: string; href?: string; note?: string }[]
+  /** 인용 표기(논문) */
+  citation?: string
 }
 
+const VELOG = 'https://velog.io/@xorms'
+
+/**
+ * AI-Vault 공개 위키·레포 링크 스위치.
+ * 레포 정비 커밋(쓰기 훅 허용 목록, README 철회 반영, 공개 위키 수치 정정)이 push된 뒤 true로 바꾼다.
+ * 그 전에 링크하면 면접관이 정정 전 수치와 철회한 계획을 그대로 보게 된다.
+ */
+export const AIVAULT_PUBLIC_READY = false
+const lab = (slug: string, date: string): RecordLink => ({ label: `당시 기록 · ${date}`, href: `${VELOG}/${slug}` })
+
 export const ROOMS: Record<ProjectKey, RoomData> = {
-  voice: {
-    key: 'voice',
-    entranceLine:
-      '멀티모달 LLM이 짧은 발화에서 오디오를 무시하고 언어 습관으로 문장을 지어내는 환각을, 원인을 단계별로 좁혀 진단하고 융합 통로 한 지점을 다시 학습시켜 오디오 의존을 회복시켰습니다.',
-    entranceDetail:
-      '평가 지표 설계, 원인 분리, 실패와 철회, 회복, 한계 규명까지 전 과정을 실측과 함께 기록했습니다.',
-    mainWall: {
-      src: '/images/evidence/voice/hero_correlation.png',
-      alt: '오디오 길이 대비 출력 길이 상관 — base 0.021 / 철회한 어텐션 LoRA 0.128 / 융합 통로 0.755 / 정답 전사문 0.737',
-      caption:
-        '오디오 길이에 출력이 따라붙는 정도: 융합 통로 재학습으로 0.021에서 0.755로 회복(0.128은 스스로 철회한 어텐션 LoRA 중간값)',
-    },
-    casePanels: [
-      {
-        eyebrow: 'problem framing',
-        title: '무엇이, 언제 틀리는가',
-        body: 'corpus 평균 CER은 소수 샘플의 극단 실패에 휘둘렸습니다. 중앙값을 실제 성능 지표로, 평균과 중앙값의 괴리를 환각 지표로 바꾸자 문제의 구조가 드러났습니다. 회의 음성 CER은 낭독 대비 약 5배(0.089에서 0.433)였지만, 이는 전반적 품질 저하가 아니라 짧은 발화에서 간헐적으로 터지는 환각 폭발이었습니다.',
-      },
-      {
-        eyebrow: 'cause isolation',
-        title: '원인을 단일 변수로 하나씩',
-        body: '양자화·구조·토크나이저·오디오 경로를 하나씩 통제하며 배제했습니다. 양자화를 제거한 대조군에서도 짧은 발화 환각과 길이 의존성이 그대로 보존됐고, 대표 환각 트리거 "구십"이 텍스트 경로에선 정상인데 오디오 경로에서만 환각을 냈습니다. 원인은 오디오 입력 경로에 있었습니다.',
-      },
-      {
-        eyebrow: 'retraction',
-        title: '성공처럼 보인 결과를 스스로 뒤집다',
-        body: 'language_model 어텐션 LoRA는 audio-gap을 음수에서 양수로 바꿔 처음엔 성공처럼 보였습니다. 그러나 과생성을 제외하고 길이를 통제하자 CER이 역전(base 0.301 < ft 0.521)됐습니다. 오디오를 더 들은 게 아니라 환각성 과생성을 억제한 부산물이었고, 초기 결론을 철회했습니다.',
-      },
-    ],
-    originStory: {
-      label: '작업 과정',
-      beats: [
-        {
-          eyebrow: '01',
-          title: '진단: 무엇이 언제 틀리는가',
-          body: '평균이 아니라 중앙값을 성능 지표로, 평균과 중앙값의 괴리를 환각 지표로 바꿔 문제의 구조부터 드러냈습니다.',
-        },
-        {
-          eyebrow: '02',
-          title: '원인 분리: 오디오 경로로 좁히다',
-          body: '양자화·구조·토크나이저·오디오 경로를 하나씩 통제하며 배제해, 원인이 오디오 입력 경로에 있음을 좁혔습니다.',
-        },
-        {
-          eyebrow: '03',
-          title: '실패와 철회',
-          body: 'language_model 어텐션 LoRA는 성공처럼 보였지만 길이를 통제하자 CER이 역전됐고, 과생성 억제 부작용임을 확인해 초기 결론을 철회했습니다.',
-        },
-        {
-          eyebrow: '04',
-          title: '융합 통로 특정·재학습',
-          body: '모델 dump로 오디오가 LLM으로 진입하는 단일 게이트(embed_audio.embedding_projection, 1536에서 2560)를 특정하고, 학습 데이터 2,485건으로 이 한 지점만 LoRA 재학습했습니다. 학습 파라미터는 32,768개, 전체 79억의 0.0004%입니다.',
-        },
-        {
-          eyebrow: '05',
-          title: '한계 규명',
-          body: '회복 후에도 극단 초단발화(2~8자)에서 발음 오인식이 남았습니다. 같은 오디오를 Whisper large-v3에 넣으니 6개 중 5개 음소를 정확히 변별해, 정보는 입력에 존재하며 한계는 정보 부족이 아니라 추출 실패임을 외부 모델로 규명했습니다.',
-        },
-      ],
-    },
-    evidence: [],
-    evidenceGroups: [
-      {
-        label: '핵심 결과: 오디오 의존 회복',
-        layout: 'gallery',
-        desc: '대표 화면의 상관 회복(0.021 → 0.755)에 더해, 길이를 통제했을 때도 CER 역전이 사라진 것으로 회복을 확인했습니다. 썸네일을 누르면 원본 크기로 볼 수 있습니다.',
-        items: [
-          {
-            src: '/images/evidence/voice/length_controlled_cer.png',
-            alt: '길이 통제 CER — 융합 통로 재학습 후 역전 해소',
-            caption: '길이를 통제해도 CER 역전이 사라진 상태',
-          },
-        ],
-      },
-      {
-        label: '문제 진단',
-        layout: 'gallery',
-        desc: '발화가 짧을수록 터지는 환각률과, 평균과 중앙값의 괴리로 환각 폭발의 구조를 드러냈습니다. 썸네일을 누르면 원본 크기로 볼 수 있습니다.',
-        items: [
-          {
-            src: '/images/evidence/voice/hall_rate_by_length.png',
-            alt: '발화 길이 구간별 환각률 — 10자 이하 70.5%',
-            caption: '길이별 환각률: 10자 이하 발화 70.5%',
-          },
-          {
-            src: '/images/evidence/voice/mean_vs_median.png',
-            alt: '평균 CER과 중앙값 CER의 괴리',
-            caption: '평균과 중앙값의 괴리를 환각 지표로 사용',
-          },
-        ],
-      },
-      {
-        label: '원인 분리와 검증',
-        layout: 'gallery',
-        desc: '양자화·섭동·개입 단계를 통제해 오디오 입력 경로가 원인임을 좁혔습니다.',
-        items: [
-          {
-            src: '/images/evidence/voice/nf4_vs_bf16.png',
-            alt: 'NF4 양자화와 BF16 비교 — 양자화 제거 대조군에서도 환각 보존',
-            caption: '양자화는 근본 원인이 아님(대조군에서 환각 보존)',
-          },
-          {
-            src: '/images/evidence/voice/perturbation.png',
-            alt: 'SNR·무음 마스킹·오류 모드 섭동 실험',
-            caption: 'SNR·무음 마스킹 섭동으로 본 오류 모드',
-          },
-          {
-            src: '/images/evidence/voice/stage1_vs_stage2_audio_gap.png',
-            alt: 'stage1과 stage2의 audio-gap — short 개선, long 부작용',
-            caption: '개입 단계별 audio-gap: short 개선, long 부작용',
-          },
-        ],
-      },
-      {
-        label: '한계 규명·부수 발견',
-        layout: 'gallery',
-        desc: '표현층 개입의 한계와, 오디오 임베딩에 실제로 정보가 담겨 있음을 외부 대조로 확인했습니다.',
-        items: [
-          {
-            src: '/images/evidence/voice/pron6_3way.png',
-            alt: '발음 6개 3-way 비교 — 표현층 개입이 무력한 구간',
-            caption: '발음 6개: 표현층 개입이 듣지 못한 구간',
-          },
-          {
-            src: '/images/evidence/voice/long_3way.png',
-            alt: '긴 발화 3-way 비교 — audio_tower 교정 순효과 +9',
-            caption: '긴 발화: audio_tower 교정 순효과 +9',
-          },
-          {
-            src: '/images/evidence/voice/emotion_probe.png',
-            alt: '오디오 임베딩만으로 감정 분류 49.5% (chance 33%)',
-            caption: '오디오 임베딩만으로 감정 49.5%(chance 33%)',
-          },
-          {
-            src: '/images/evidence/voice/opensmile_gemma.png',
-            alt: 'openSMILE 대비 LLM은 방향만 맞히고 수치는 내지 못함',
-            caption: 'LLM은 방향만, 정량 수치는 내지 못함',
-          },
-        ],
-      },
-    ],
-    infoDock: {
-      problem:
-        '멀티모달 LLM은 짧은 한국어 발화에서 오디오를 듣지 않고 언어 습관으로 문장을 지어냅니다. 10자 이하 발화의 환각률이 70.5%였고, corpus 평균 CER은 소수의 극단 실패에 휘둘렸습니다.',
-      insight:
-        '먼저 시도한 어텐션 LoRA는 길이를 통제하자 CER이 역전됐습니다. 오디오를 더 들은 게 아니라 과생성을 억제한 부작용이었고, 초기 결론을 철회한 뒤 개입 지점을 오디오 융합 통로로 옮겼습니다.',
-      role:
-        '환각 평가 지표를 설계하고, 원인 후보를 단일 변수로 분리하고, 오디오 융합 통로 한 지점을 재학습하고, 남은 실패를 외부 모델로 대조 검증하는 일을 맡아 진행했습니다.',
-      coreFlow:
-        '평가 지표 설계에서 원인 분리, 실패와 철회, 융합 통로 특정·재학습, 한계 규명까지 이어지는 진단·개입 흐름.',
-      output:
-        '오디오-출력 상관을 0.021에서 0.755(정답 전사문 0.737 수준)로 회복하고, 전체 79억 파라미터의 0.0004%(32,768개)만 학습해 길이 통제 CER 역전을 해소했습니다. 0.128은 길이 통제 CER 역전을 발견해 스스로 철회한 어텐션 LoRA의 중간값입니다.',
-      verification:
-        '상관·CER 수치, 실제 전사문 육안 검사, Whisper large-v3 외부 대조 세 방향으로 결과를 교차 확인했습니다.',
-      uxWritingPoint:
-        '평균 대신 중앙값을 성능 지표로, 평균과 중앙값의 괴리를 환각 지표로 설계해 지표 자체가 무엇을 재는지부터 정의했습니다.',
-      learning:
-        '점수를 받으면 그 점수가 어떤 분포에서 나왔는지부터 확인하는 순서로 일합니다.',
-    },
-  },
-
-  eeg: {
-    key: 'eeg',
-    entranceLine:
-      '14채널 소비자급 EEG 단독 입력으로 감정을 실시간 인식하면서, 라벨링 방식의 한계를 지표로 규명한 연구입니다.',
-    entranceDetail:
-      '학습-추론 라벨 간극을 모델 오류가 아니라 라벨링 방식의 한계로 보고, 검증 지표 두 개를 정의해 데이터 단에서 원인을 규명했습니다.',
-    mainWall: {
-      src: '/images/evidence/eeg/ieie_poster.png',
-      alt: 'IEIE 학회 포스터 — Dual-Stream Transformer for Single 14-Channel EEG Emotion Recognition and Analysis of the Label-Inference Gap',
-      caption: 'IEIE 학회 발표 포스터 (Park et al., 서경대). 눌러서 원본 크기로 볼 수 있습니다.',
-    },
-    heroStats: [
-      { value: '75.1%', label: 'trial 정확도 · 14채널 EEG 단독' },
-      { value: '+6.9%p', label: '5종 생체신호 LightGBM(68.2%) 대비' },
-      { value: '83.1%', label: '비중첩 인접 segment 일관성' },
-    ],
-    casePanels: [
-      {
-        eyebrow: 'problem framing',
-        title: '학습과 추론의 라벨이 어긋난다',
-        body: '60초 영상 하나에 라벨 하나를 붙이는 방식은 1초 단위 추론과 어긋납니다. 감정은 60초 내내 변하기 때문입니다. 이 어긋남을 모델 성능 문제로 뭉뚱그리지 않고, 라벨링 방식이 만든 구조적 한계로 분리해 보았습니다.',
-      },
-      {
-        eyebrow: 'metric design',
-        title: '검증 지표 두 개를 정의하고 누수를 차단',
-        body: 'segment-trial 정합도와 인접 segment 일관성 두 지표를 정의해 라벨 간극을 정량화했습니다. trial 단위로 학습·검증을 분리해 같은 trial의 segment가 양쪽에 섞이는 데이터 누수를 차단했습니다.',
-      },
-      {
-        eyebrow: 'self-check',
-        title: '자기 방법의 허점을 비중첩으로 재측정',
-        body: '인접 segment 일관성이 75% 중첩 슬라이딩 윈도우 때문에 부풀려졌을 가능성을 의심해, 비중첩 조건을 따로 만들어 재측정했습니다. 그 조건에서도 인접 일관성 83.1%가 유지됐습니다.',
-      },
-    ],
-    evidence: [],
-    evidenceGroups: [],
-    infoDock: {
-      problem:
-        '60초 영상 하나에 라벨 하나를 붙이는 방식은 1초 단위 추론과 어긋납니다. 감정은 60초 내내 변하기 때문입니다.',
-      insight:
-        '이 어긋남을 모델 오류가 아니라 라벨링 방식의 한계로 보고, 검증 지표 두 개(segment-trial 정합도, 인접 segment 일관성)를 정의해 원인을 데이터 단에서 규명했습니다.',
-      role:
-        '공동 연구에서 문제를 제기하고 검증 지표를 정의하는 데 참여했습니다. IEIE 학회 논문·포스터에 3저자(4인)로 참여했습니다.',
-      coreFlow:
-        '라벨 간극 정의에서 지표 두 개 설계, 데이터 누수 차단, 비중첩 재측정으로 이어지는 검증 흐름.',
-      output:
-        '14채널 EEG 단독으로 trial 정확도 75.1%를 얻어 5종 생체신호 LightGBM 베이스라인(68.2%, 블록 정규화를 적용한 베이스라인은 73.3%)을 앞섰고, 비중첩 조건에서 재측정해도 인접 일관성 83.1%가 유지됐습니다.',
-      verification:
-        '5-fold 교차검증, 1D CNN 제거 시 정확도 급락(절제실험), 비중첩 재측정으로 결과를 검증했습니다.',
-      uxWritingPoint:
-        'segment-trial 정합도와 인접 segment 일관성을 지표로 정의해, 라벨링 방식이 무엇을 왜곡하는지를 수치로 드러냈습니다.',
-      learning:
-        '내 방법이 좋아 보이면 그 수치가 실험 설정 때문에 부풀려진 건 아닌지부터 다른 조건으로 재측정합니다.',
-    },
-  },
-
+  /* ─────────────────────────── 띵동 ─────────────────────────── */
   ddingdong: {
     key: 'ddingdong',
-    entranceLine:
-      '놓치면 안 되는 소리를 분류해 알리는, 센서부터 ML·서버·알림까지 전 계층을 혼자 설계하고 검증하는 시스템으로, 현재 진행 중입니다.',
-    entranceDetail:
-      '한 단계라도 끊기면 알림이 무의미해지므로, 모델 정확도가 아니라 데이터가 흐르는 전 구간을 책임지고 설계했습니다.',
-    mainWall: {
-      src: '/images/evidence/ddingdong/system_diagram.png',
-      alt: '소리 알림 시스템 구성도 — 센서·펌웨어·서버·ML·알림·대시보드 전 계층',
-      caption:
-        '현관 부착 IoT 디바이스부터 스마트폰 알림까지 전 계층을 혼자 설계했습니다. ESP32-S3가 오디오와 ToF를 1차 POST로, 사진을 2차 POST로 나눠 전송합니다. 서버는 YAMNet으로 소리를 분류한 뒤 ToF 기반 클래스별 분기를 처리합니다. 카카오톡으로 1차 텍스트와 2차 사진·자막을 보내고, 웹 대시보드는 3초 폴링으로 로그를 조회합니다.',
-      captionMultiline: true,
-    },
-    casePanels: [
-      {
-        eyebrow: 'sensor',
-        title: 'ToF 채택: 초음파를 기각하다',
-        body: '초음파 센서는 소리를 내 마이크 수집에 간섭합니다. 소리 감지가 핵심인 시스템에서 센서가 소음원이 되면 안 되므로, 레이저 기반 ToF로 바꿔 위치 감지와 소리 수집을 분리했습니다.',
-      },
-      {
-        eyebrow: 'matching',
-        title: 'DTW+cosine 확정: 코사인 단독의 한계',
-        body: '코사인 단독은 초인종 누름 길이 차이에 흔들려, DTW로 시간축을 정렬한 뒤 코사인으로 주파수를 비교하도록 바꿨습니다. 초인종과 화재경보를 가르는 분리 마진은 8.418이었지만, 같은 방식으로 개별 초인종을 구분하는 마진은 1.713으로 권고치 2.0에 못 미쳤습니다. 개별 초인종 식별은 아직 계측 단계이고 차단 판정은 넣지 않았습니다.',
-      },
-      {
-        eyebrow: 'alerting',
-        title: '2단계 알림: 속도와 정보량을 함께',
-        body: '1차는 5초 예산 안에 텍스트로 먼저 알리고, 2차는 사진과 STT 자막으로 맥락을 채웁니다. /detect와 /enrich를 분리해 속도와 정보량을 함께 확보했고, 서버 파이프라인은 100회 측정에서 평균 61.7ms, 실기기 1차 대기 시간은 최대 1,246ms였습니다.',
-      },
-    ],
-    aiUsage: {
-      intro:
-        '소리 알림 시스템을 만드는 과정에서, AI 도구를 코드를 대신 써 주는 생성기가 아니라 하드웨어를 발주하기 전에 리스크를 먼저 검증하는 도구로 썼습니다. AI 제안도 그대로 받지 않고 자가검증을 거쳐 채택했습니다.',
-      blocks: [
-        {
-          step: '사전 검증',
-          eyebrow: 'pre-flight',
-          title: '발주 전 하드웨어 리스크를 코드 레벨로 먼저 검증',
-          scanResult: '발주 전에 바꾼 설계 3건',
-          usedWhen: '센서·부품을 실제로 사기 전, 간섭·타이밍 리스크를 미리 확인하는 단계',
-          how: [
-            'Claude Code와 MCP로 초음파-마이크 간섭 시나리오를 코드 레벨로 먼저 돌려, 실물 없이 리스크를 재현했습니다.',
-            '재현 결과를 근거로 센서·타이밍·수집 경로 설계 세 가지를 발주 전에 바꿨습니다.',
-          ],
-          output: '실물 발주 전에 미리 바로잡은 설계 3건',
-        },
-        {
-          step: '기록',
-          eyebrow: 'decision log',
-          title: '결정을 커밋 해시와 함께 SSoT로 관리',
-          scanResult: '커밋 해시로 추적되는 decisions.md',
-          usedWhen: '왜 이 설계로 정했는지를 나중에 다시 확인해야 할 때',
-          how: [
-            'decisions.md에 각 결정을 배경·대안·근거와 함께 남기고, 관련 커밋 해시를 붙여 단일 출처로 관리했습니다.',
-            '설계가 바뀌면 기록도 함께 갱신해, 폐기한 접근과 채택한 접근이 한 문서에서 추적되게 했습니다.',
-          ],
-          output: '커밋 해시로 추적되는 단일 결정 기록',
-        },
-        {
-          step: '자가 검증',
-          eyebrow: 'self-review',
-          title: 'AI 제안도 3단계로 되짚어 채택',
-          scanResult: '틀린 가정을 실제 타겟에 맞춰 뒤집음',
-          usedWhen: 'AI가 낸 코드·구성 제안을 그대로 받을지 판단하는 단계',
-          how: [
-            'AI 제안을 효율성·리팩토링·오류 방지 3단계로 되짚어, 근거가 약한 제안은 걸렀습니다.',
-            'AI가 가정한 "다크 테마" 대시보드가 실제 사용자(청각장애 1인 가구)에 맞지 않는다고 보고, 타겟에 맞춰 뒤집었습니다.',
-          ],
-          output: '자가검증으로 걸러 채택한 구현',
-        },
+    asOf: '2026-10 기준',
+    summary: {
+      role: '요구사항, 설계 결정, 하드웨어 결선, 실기기 측정, 검증 설계를 맡았습니다. 코드는 AI 코딩 에이전트에 맡기고 PR 142건을 검토해 머지했습니다.',
+      results: [
+        { value: 'macro F1 0.82', label: '4종 소리 분류', cond: '평가 703클립, 개발 중 값' },
+        { value: '10.4~11.0초', label: '사진·자막 알림 도착(목표 15초)', cond: '기기 기준, 노크 n=3' },
+        { value: '누수 79건', label: '평가셋에서 찾아 정확도 표기 정정', cond: '평가셋 424건 중' },
       ],
+      tech: ['ESP32-S3', 'C++(PlatformIO)', 'Python', 'TensorFlow(YAMNet)', 'Flask', 'SQLite', 'React', 'TypeScript', 'Kakao API', 'CLOVA Speech', 'Claude Code'],
     },
-    evidence: [],
-    evidenceGroups: [
+    mainImage: {
+      src: '/images/ddingdong/kakao_3cut.webp',
+      alt: '카카오톡 알림 세 장면. 초인종 텍스트 알림, 방문자 사진, 「안녕하세요 택배입니다」 자막',
+      caption: '초인종이 울리면 텍스트 알림이 먼저 오고, 방문자 사진과 방문자가 한 말의 자막이 뒤따라 옵니다.',
+      layout: 'wide',
+    },
+    tracks: [
       {
-        label: '구현과 차별점',
-        desc: '실제 대시보드 화면과 유사 제품과의 기능 비교입니다.',
-        items: [
-          {
-            src: '/images/evidence/ddingdong/dashboard.png',
-            alt: 'React 대시보드 화면 — 초인종·노크·화재경보 안내와 대피 수칙',
-            caption:
-              'React로 대시보드를 자체 구현했습니다. 초인종, 노크, 화재경보 세 소리를 구분해 안내합니다. 화재경보에는 대피 수칙과 함께 119 수어 영상통화나 문자 신고 경로를 띄웁니다. 소리를 듣지 못하는 사용자가 위급 상황에서 화면만 보고 따라갈 수 있게 했습니다.',
-            captionMultiline: true,
+        id: 'main',
+        label: '띵동',
+        track: {
+          problem: {
+            body: '국내 등록 청각장애인 44만 명 가운데 약 26%가 혼자 삽니다. 그런데 초인종 같은 소리를 빛으로 알려 주는 시각 신호표시기를 가진 사람은 0.3%뿐입니다. 혼자 사는 청각장애인에게는 현관 소리를 대신 들어 줄 사람도, 장치도 없는 셈입니다. 주 사용자는 스마트폰을 쓰는 50~60대 중증 청각장애 1인 가구로 잡았고, 목표는 세 가지였습니다. 놓치면 안 되는 소리만 골라 알릴 것, 문 앞에 아무도 없을 때 울리는 헛알림을 줄일 것, 누가 무슨 말을 했는지까지 전할 것.',
+            source: '출처: 보건복지부 「2024년 등록장애인 현황」(2025.4) · 「2023년 장애인 실태조사」 표 6-4-2',
+            image: {
+              src: '/images/ddingdong/landing_top.webp',
+              alt: '띵동 소개 화면. 초인종 소리를 못 들어도 현관 앞을 알 수 있다는 문구와 카카오톡 알림 예시',
+              caption: '서비스 소개 화면',
+            },
           },
-        ],
-        comparisonTable: {
-          columns: ['국내 제품', 'Ring·Nest', 'Amazon Echo', '띵동'],
-          highlightCol: 3,
-          rows: [
-            { feature: 'ML 소리 분류', cells: [false, false, true, true] },
-            { feature: '스마트폰 알림', cells: [false, true, true, true] },
-            { feature: '현관 외부 감지', cells: [true, true, false, true] },
-            { feature: '사진 + 자막 전달', cells: [false, false, false, true] },
+          structure: {
+            body: '현관 기기(ESP32-S3)가 마이크·거리 센서·카메라를 함께 씁니다. 소리가 나면 2초 녹음과 거리 센서 값을 서버로 보내고(1차), 서버가 보낼 소리라고 판정하면 사진과 5초 녹음을 이어서 보냅니다(2차). 서버는 1차에 텍스트 알림을, 2차에 사진과 음성 자막을 카카오톡으로 보내고, 모든 판정은 대시보드에 남습니다. 사람 확인에는 초음파 대신 레이저 방식의 ToF 거리 센서를 골랐습니다. 초음파 센서는 측정할 때 스스로 소리를 내서, 같은 기기의 마이크 녹음에 섞일 수 있기 때문입니다.',
+            image: {
+              src: '/images/ddingdong/system.svg',
+              alt: '띵동 시스템 구성도. 현관 기기(마이크·거리 센서·카메라)에서 1차 2초 녹음과 거리 값, 2차 사진과 5초 녹음이 서버로 가고, 서버의 판정을 거쳐 카카오톡과 대시보드로 이어짐',
+              caption: '현관 기기에서 카카오톡까지. 마름모는 보낼지 말지를 가르는 판정 지점입니다.',
+              layout: 'wide',
+            },
+            gallery: [
+              { src: '/images/ddingdong/breadboard.webp', alt: '브레드보드 위의 현관 기기 시제품. 카메라와 마이크, 거리 센서가 배선됨', caption: '브레드보드 시제품(카메라·마이크·거리 센서)' },
+              { src: '/images/ddingdong/tof_closeup.webp', alt: '8×8 ToF 거리 센서 모듈 클로즈업', caption: '8×8 ToF 거리 센서' },
+              { src: '/images/ddingdong/breadboard_full.webp', alt: '세로로 놓인 브레드보드 전체. 보드와 거리 센서, 배선', caption: '시제품 전체 배선' },
+            ],
+          },
+          results: {
+            rows: [
+              { item: '4종 소리 분류', value: 'macro F1 0.82 (화재 0.98 · 기타 0.94 · 초인종 0.76 · 노크 0.60)', cond: '평가 703클립, 현재 서빙 모델, 개발 중 값' },
+              { item: '1차 알림 지연', value: '정상 망에서 5초 목표의 42~71%', cond: '구간 실측 합산(망 왕복 n=8). 망이 나쁘면 초과, 폰 도착 구간 미측정' },
+              { item: '2차 알림 지연', value: '10.4~11.0초 (목표 15초)', cond: '기기 기준, 노크 n=3' },
+              { item: '개발 규모', value: 'PR 142건 · 서버 회귀 테스트 264개 · 결정 기록 8,200여 행', cond: '2026-10-22 기준' },
+            ],
+            note: '평가셋의 68%가 기타 소리라 정확도는 부풀려 보입니다. 그래서 클래스별 F1의 평균(macro F1)을 대표 수치로 씁니다.',
+            repo: { label: '레포에서 결정 기록 보기', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md' },
+          },
+          decisions: [
+            {
+              title: '소리 종류마다 다른 발송 규칙',
+              body: '화재경보는 사람 확인을 건너뛰고 바로 보냅니다. 초인종과 노크는 거리 센서로 문 앞에 사람이 있을 때만 보냅니다. 처음 구현에서는 화재 분기가 신뢰도 검사까지 건너뛰어 신뢰도 0.45짜리 알림이 나갔고, 이를 찾아 신뢰도 검사를 모든 소리의 맨 앞에 두었습니다.',
+              image: { src: '/images/ddingdong/fire_kakao.webp', alt: '카카오톡 화재경보 알림. 즉시 대피와 119 문자 신고 등 청각장애인 화재 행동요령', caption: '화재경보는 사람 확인 없이 바로, 행동요령과 함께 보냅니다.', layout: 'compact' },
+            },
+            {
+              title: '알림을 1차와 2차로 나눔',
+              body: '텍스트 알림을 먼저 보내고, 사진과 자막은 뒤따라 보냅니다. 1차 지연을 구간별로 재 보니 병목은 기기에서 서버로 올리는 업로드 하나였고, 분류와 카카오톡 전송은 합쳐도 0.1초 안팎이었습니다. 그래서 비동기 큐 같은 구조를 더하지 않고 동기 발송을 유지했습니다.',
+            },
+            {
+              title: '모델 교체를 실기기 비교로 판단',
+              body: '새로 학습한 모델이 평가셋에서 더 나아도 바로 바꾸지 않았습니다. 실제 기기에서 기존 모델로 판정하면서 같은 소리를 새 모델로 다시 채점해, 놓치는 알림이 없고 노크 오판이 10건에서 7건으로 준 것을 본 뒤 교체했습니다. 화재경보를 하나라도 놓치면 이전 모델로 되돌린다는 조건도 함께 정했습니다.',
+            },
+            {
+              title: '50~60대 사용자 기준 대시보드',
+              body: '주 사용자를 50~60대로 보고, 처음 받은 어두운 테마를 밝은 테마로 바꾸고 본문 글자를 키웠습니다. 상태는 색만이 아니라 모양과 글자로 함께 표시하고, 알림을 보내지 않은 경우에도 그 이유와 거리 센서 값을 카드에 남겨 사용자가 판정을 확인할 수 있게 했습니다.',
+              image: { src: '/images/ddingdong/dashboard_home.webp', alt: '밝은 테마 대시보드 홈. 최근 알림 카드마다 보내지 않은 이유와 거리 센서 값이 표시됨', caption: '보내지 않은 알림에도 이유와 거리 센서 값을 남깁니다.' },
+            },
           ],
-          note: '국내 제품: BF 초인등벨 / HC-013 / Syscall 무선 초인등',
-          caption:
-            '표의 네 기능(ML 소리 분류, 스마트폰 알림, 현관 외부 감지, 사진·자막 전달)을 모두 채운 건 띵동뿐입니다. Ring·Nest는 소리를 분류하지 못하고 사진·자막도 보내지 않습니다. Amazon Echo는 현관 외부를 감지하지 못하고, 국내 제품은 소리 분류와 스마트폰 알림이 없습니다. 사진·자막 전달은 띵동만 지원합니다.',
+          checks: [
+            {
+              title: '평가셋 누수 79건',
+              body: '평가셋 424건 중 79건이 학습 데이터와 바이트 단위로 같다는 것을 직접 만든 점검 도구로 찾았습니다. 79건은 전부 공개 데이터 녹음 앞부분의 안내 멘트 조각이었고, 정확도 표기를 0.887에서 0.861로 낮췄습니다. 이후 데이터 배정을 해시로 고정하고 내용 기준 누수 검사를 넣어, 재학습한 평가셋에서는 겹침이 0건입니다.',
+            },
+            {
+              title: '라벨 ID 오기',
+              body: '공개 데이터에서 「노크」로 가져온 조각을 다시 들어 보니 노크가 하나도 없었습니다. 수집 필터의 라벨 ID가 노크가 아니라 「튀김」이었습니다. 해당 329조각을 기타 소리로 옮겨 다시 학습했고, 평가셋 노크 정답의 절반 이상이 이 조각이었다는 것도 기록했습니다.',
+            },
+            {
+              title: '학습과 실제 입력의 음량 불일치',
+              body: '다시 학습한 모델이 기기의 무음을 노크로 판정해 알림을 보냈습니다. 원인은 학습 때만 음량을 정규화한 것이었고, 모델이 자기 입력 규칙을 선언하면 서버가 그대로 따르도록 바꿨습니다. 같은 세션에서 무음 헛알림은 24회 중 15회에서 8회로 줄고, 초인종 알림은 10회 중 6회에서 9회로 늘었습니다.',
+            },
+            {
+              title: '테스트가 실제 음성 인식 API를 호출',
+              body: '콘솔에 설명되지 않는 호출이 찍혀, 처음엔 코드만 읽고 문제없다고 판단했다가 실측으로 뒤집혔습니다. 테스트를 한 번 돌릴 때마다 실제 API 호출이 12건씩 나가고 있었습니다. 테스트에서 실제 키를 분리하고 외부 연결 시 즉시 실패하는 가드를 넣었고, 이후 호출은 0건입니다.',
+            },
+          ],
+          gallery: {
+            label: '그 밖의 화면',
+            items: [
+              { src: '/images/ddingdong/dashboard_settings.webp', alt: '대시보드 설정 화면. 우리 집 초인종 등록, 글자 크기, 움직임 줄이기', caption: '설정: 우리 집 초인종 등록과 글자 크기' },
+              { src: '/images/ddingdong/dashboard_help.webp', alt: '대시보드 도움말 화면. 감지하는 소리 3가지와 화재경보 행동요령', caption: '도움말: 감지하는 소리와 화재 행동요령' },
+            ],
+          },
         },
       },
     ],
-    infoDock: {
-      problem:
-        '중증 청각장애 1인 가구는 초인종·노크·화재경보를 인지하지 못해 안전에 위협을 받습니다. 기존 제품은 수동 버튼식이라 소리를 자동 분류하지 못합니다.',
-      insight:
-        '한 단계라도 끊기면 알림 전체가 무의미해지므로, 모델 정확도 하나가 아니라 소리(ML)와 위치(ToF)를 함께 보고 클래스마다 발송 규칙을 다르게 두는 전 구간 설계가 핵심이라고 봤습니다.',
-      role:
-        '마이크 수집부터 YAMNet 추론, ToF 기반 클래스별 분기, 서버, 알림 발송, 대시보드까지 데이터 흐름 전 구간을 혼자 설계했습니다. 코드는 AI 코딩 도구에 위임하고, 설계 결정·결과 검증·하드웨어 실측·결선·PR 머지를 직접 맡았습니다.',
-      coreFlow:
-        '마이크 수집에서 YAMNet 추론, ToF 위치 대조, 클래스별 발송 규칙, 서버, 2단계 알림, 대시보드까지 이어지는 end-to-end 흐름.',
-      output: [
-        '완료: React 대시보드·Flask 서버, 카카오톡 2단계 알림 실기기 관통, YAMNet 예비 학습(누수 79건 제외 test accuracy 0.861 / macro_F1 0.837, 공개 데이터 기준), 서버 파이프라인 평균 61.7ms.',
-        '진행 중: 한국 환경음 자체 녹음, other 클래스 추가, 음향 자동 트리거(현재는 수동 실행). 재학습은 착수 전이고, 발표는 11월입니다.',
-      ],
-      verification: [
-        '발주 전 Claude Code로 간섭 시나리오를 코드 레벨로 먼저 돌려 설계 세 가지를 변경.',
-        '평가 데이터 424건 중 79건이 학습 데이터와 바이트 단위로 동일한 것을 자체 점검 도구로 발견해, 정확도 표기를 0.887에서 0.861로 정정.',
-        '폐기한 접근을 정직하게 기록: 학교 WiFi(802.1X) 폐기, pitch-shifting 증강 기각, 공개 화재경보 데이터 약 65%가 차량 사이렌이라 전량 제외, 오디오 정규화 변경안은 대조 실험으로 기각.',
-      ],
-      uxWritingPoint:
-        '측정한 수치와 아직 안 한 일을 같은 화면에서 분리해 표기하고, 1차 즉시 알림과 2차 맥락 보강 알림을 나눠 놓치면 안 되는 정보가 먼저 도달하게 설계했습니다.',
-      learning:
-        '부품을 사기 전에 간섭 시나리오부터 코드로 돌려, 실물에서 터질 문제를 발주 전에 바로잡는 순서로 일합니다.',
+    delegation: {
+      delegated: '펌웨어·서버·대시보드·학습 파이프라인 코드와 테스트, PR 작성',
+      did: '요구사항과 결정, 브레드보드 결선과 보드 실측, 소리 청취 검수, 외부 콘솔·인증 설정, PR 검토와 머지',
+      verify: '맡기기 전 가정 대조표로 전제 확인 · 테스트를 일부러 망가뜨려 잡히는지 보는 대조 실험 · 결정 기록 원문 인용 강제 · 오프라인 결과를 실기기에서 다시 측정',
+      fixed: 'AI 판단과 본인 판단의 오류를 회차별로 결정 기록에 남기고, 기대값이 실물과 다르면 에이전트가 멈추고 묻도록 규칙화',
+      caseLabel: 'AI 판단을 뒤집은 사례',
+      caseLine: '전 계층 감사에서 AI가 「새 결함」으로 분류한 거리 센서 멈춤 문제를, 코드에 이미 남아 있던 설계 결정 주석을 근거로 다시 분류했습니다.',
     },
+    limits: [
+      { title: '알림 경로', body: '카카오톡 「나에게 보내기」가 잠금 화면에 알림을 띄우지 않는다는 것을 직접 시험해 찾았습니다. 시연은 채팅방을 열어 둔 상태로 운영하고, 실서비스용 알림 경로는 발표 뒤 다시 고릅니다.' },
+      { title: '노크 분류', body: '4종 중 가장 약합니다(F1 0.60). 노크 타격 수와 간격을 기록하는 계측을 서버에 넣어 원인 데이터를 모으고 있습니다.' },
+      { title: '측정 규모', body: '실기기 측정은 보드 1대·1세션 기준이고 서버는 로컬에서 운영합니다. 11월 부스 리허설에서 화재음을 다시 확인하고 남은 잠정값을 판정합니다.' },
+    ],
+    links: [
+      { label: '코드', href: 'https://github.com/park-taegeun/ddingdong', note: 'github.com/park-taegeun/ddingdong' },
+      { label: '결정 기록', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md', note: 'docs/decisions.md' },
+      { label: '개발 일지', href: `${VELOG}/series/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D`, note: 'velog 「졸업작품 기록」' },
+      { label: '결정 기록 검색 도구', href: '/projects/decisions-rag', note: 'decisions-rag' },
+    ],
+  },
+
+  /* ─────────────────────────── 음성 연구 ─────────────────────────── */
+  voice: {
+    key: 'voice',
+    asOf: '2026-10 기준',
+    summary: {
+      role: '과제의 음성 분석 항목에서 실험 설계, 결과 검증과 해석, 랩미팅 발표(10회)를 맡았습니다. 실험 코드는 AI 코딩 도구에 맡기고 출력과 중간 데이터를 원래 기록과 대조해 검증했습니다.',
+      results: [
+        { value: 'CER 0.31 → 0.21', label: '길이를 맞춘 받아쓰기 오류율', cond: '학습에 없는 세션, 168발화, 학습 1회' },
+        { value: '+1.1%p', label: '어조 정보의 감정 판단 기여', cond: '시드 3회 평균, 시드 간 표준편차 0.7' },
+        { value: '57ms', label: '발화 1초당 어조 계산', cond: '개인 PC CPU, LLM 추론 제외' },
+      ],
+      tech: ['Python', 'PyTorch', 'Hugging Face Transformers', 'PEFT(LoRA/QLoRA)', 'bitsandbytes', 'Gemma 4', 'librosa', 'openSMILE', 'jiwer', 'soundfile', 'scikit-learn', 'SciPy', 'statsmodels', 'pandas', 'NumPy', 'Matplotlib', 'sentence-transformers', 'Whisper large-v3(대조)'],
+    },
+    mainImage: {
+      src: '/images/voice/voice_main.svg',
+      alt: '왼쪽 막대: 길이를 맞춘 오류율 원래 모델 0.31, 연결부 학습 0.21, 철회한 어텐션 학습 0.52. 오른쪽 막대: 오디오 길이와 출력 길이의 상관 원래 0.021, 연결부 학습 0.755, 정답 전사문 0.737',
+      caption: '연결부만 다시 학습하자 길이를 맞춘 오류율이 내려가고, 출력 길이가 오디오 길이를 따라가기 시작했습니다. 회색은 철회한 방식입니다.',
+      layout: 'wide',
+    },
+    context: {
+      body: '원격 참여자의 대화 맥락을 이해하는 XR 텔레프레즌스 플랫폼을 만드는 정부 R&D 과제(한국콘텐츠진흥원)에 학부연구생으로 참여하고 있습니다. 과제의 음성 분석 항목에서 두 가지를 맡았습니다. 먼저 멀티모달 LLM의 받아쓰기 환각을 진단했고(2026년 6~7월), 7월부터는 지도교수 지시에 따라 목소리 어조를 분석해 LLM에 넘기는 오디오 모듈을 실험하고 있습니다. 모델 본체와 여러 입력을 합치는 융합 구조, 화자 분리, 제스처 인식은 다른 파트가 맡고 있습니다.',
+      image: {
+        src: '/images/voice/project_map.svg',
+        alt: '과제 구성도. 음성에서 어조 분석(본인 담당), 영상에서 제스처 인식(다른 파트), 성문과 입 모양에서 화자 분리(다른 파트)가 모듈 통합으로 모여 다자 대화 타임라인을 만듦',
+        caption: '「원격 다자 참여자의 대화 맥락인지를 위한 AI 에이전트 기반 XR 텔레프레즌스 플랫폼 개발」(RS-2026-25518171) 중 제가 맡은 칸',
+        layout: 'wide',
+      },
+      periods: [
+        { label: '환각 진단', period: '2026.06 ~ 07' },
+        { label: '어조 모듈', period: '2026.07 ~ 진행 중', note: '지도교수 지시로 전환' },
+      ],
+    },
+    tracks: [
+      {
+        id: 'tone',
+        label: '어조 모듈',
+        period: '2026.07 ~ 진행 중',
+        track: {
+          problem: {
+            body: '대화의 감정은 대사만으로 읽히지 않습니다. 대사의 감정과 목소리의 감정이 어긋난 발화 17,658개에서, 최종 감정 판정은 목소리 쪽과 같은 경우가 대사 쪽보다 6.9배 많았습니다. 과제는 이런 차이에서 비꼼이나 억지 동의 같은 속뜻을 읽는 것을 목표로 하고, 그러려면 텍스트에 없는 목소리 정보를 LLM에 넘길 모듈이 필요합니다.',
+            source: '어조 데이터: AI-Hub 「멀티모달 영상」(대사·목소리·표정 감정 독립 태깅)',
+            image: {
+              src: '/images/voice/voice_vs_text.svg',
+              alt: '대사와 목소리 감정이 어긋난 17,658발화에서 최종 감정 라벨이 목소리와 같음 67.5%, 대사와 같음 9.9%',
+              caption: '최종 감정 판정이 목소리 쪽과 같은 경우가 대사 쪽보다 6.9배 많았습니다(데이터셋 라벨 기준).',
+            },
+          },
+          structure: {
+            body: '모듈은 발화마다 값 126개를 냅니다. 63개는 음 높이와 음색, 그 변화량 같은 목소리 자체의 특징입니다. 나머지 63개는 같은 사람의 평소 목소리에 비해 이번 발화가 얼마나 달라졌는지입니다. 선형 변환층(약 129만 개)이 이 값을 LLM 입력 토큰 4개로 바꾸고, LLM 본체는 학습하지 않습니다. 실시간 모듈은 개인 PC의 CPU에서 발화 1초당 57ms에 값을 계산합니다.',
+            image: {
+              src: '/images/voice/tone_module.svg',
+              alt: '어조 모듈 구조. 음성에서 목소리 특징 63개와 평소 대비 변화 63개를 뽑아 126개 값을 만들고, 선형 변환층이 토큰 4개로 바꿔 고정된 LLM에 넣음',
+              caption: '학습하는 것은 선형 변환층 하나뿐이고, LLM 본체는 고정합니다.',
+              layout: 'wide',
+            },
+          },
+          results: {
+            rows: [
+              { item: '어조 정보의 기여', value: '감정 판단 정답률 +1.1%p (시드 간 표준편차 0.7)', cond: '8개 감정 중 고르기(정답률 약 40%), 평가 4,406발화. 진짜 어조와, 다른 감정에서 가져온 가짜 어조를 넣었을 때의 차. 시드 3회 중 1회 유의' },
+              { item: '효과가 가장 큰 구간', value: '대사가 목소리보다 긍정적인 발화에서 세 시드 모두 가장 큼 (+1.6 ~ +7.6%p)', cond: '감정가 차이 상위 25%, 1,035발화' },
+              { item: '실시간 계산', value: '발화 1초당 57ms (3초 발화 기준 약 0.17초)', cond: '개인 PC CPU, LLM 추론 제외. 발화가 끝난 뒤 계산 시작' },
+            ],
+            note: '과제 코드는 비공개이고, 실험 과정은 velog 「AI_LAB」에 날짜별로 남겼습니다.',
+          },
+          decisions: [
+            {
+              title: '전달 방식보다 데이터를 바꿈',
+              body: '처음에는 어조를 글로 풀어 프롬프트에 넣었습니다. 150발화에서 +4.0%p가 나왔지만 정오가 갈린 발화가 12쌍뿐이라 표본을 늘렸습니다. 750발화에서 부호가 뒤집혔고, 7,500발화에서 −0.76%p(p=0.021)로 유의해졌습니다. 임베딩으로 직접 넣는 방식도 같은 방향(−2.62%p)이어서 전달 방식이 아니라 데이터 문제로 판단했습니다. 대사와 목소리가 같은 감정을 내는 낭독 데이터를, 둘이 따로 표시된 연기 대화 데이터로 바꿨습니다.',
+              image: {
+                src: '/images/voice/prompt_samples.svg',
+                alt: '표본 수별 어조 프롬프트 효과. 150발화 +4.0%p, 750발화 −1.3%p, 7,500발화 −0.76%p(p=0.021), 임베딩 방식 −2.62%p',
+                caption: '표본을 150 → 750 → 7,500발화로 늘리자 처음의 +4.0%p는 사라지고 반대 방향으로 유의해졌습니다.',
+              },
+              record: lab('LAB-56.-%EA%B0%90%EC%A0%95-%EB%8D%B8%ED%83%80-%EA%B2%80%EC%A6%9D%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8', '2026.07.27'),
+            },
+            {
+              title: '실험용과 실전용 설계를 나눔',
+              body: '실험에서 쓴 「평소 목소리」 기준은 감정 라벨이 있어야 계산됩니다. 실제 대화에는 라벨이 없으므로, 실전 모듈은 라벨 없이 계산되는 방식으로 바꿨습니다. 사람마다 다른 흔들림 폭은 10발화로 재도 다른 사람 값을 그대로 쓰는 것보다 부정확했습니다(오차 117%). 그래서 폭은 전체 데이터에서 잰 값 하나를 씁니다. 바꾼 뒤 같은 평가를 하자 네 지표 모두 기존 시드 범위 안에 있었습니다.',
+              record: lab('LAB-76.-%EC%8B%A4%ED%97%98-%EC%84%A4%EA%B3%84%EC%99%80-%EC%8B%A4%EC%A0%84-%EC%84%A4%EA%B3%84%EC%9D%98-%EB%B6%84%EA%B8%B0', '2026.09.18'),
+            },
+            {
+              title: '지도교수 제안을 학습 없이 먼저 검증',
+              body: '지도교수께서 설계마다 잘 작동하는 구간이 다르니 상황에 따라 골라 쓰는 구조를 제안하셨습니다. 새로 학습하기 전에 기존 결과를 구간별로 다시 집계해 보니 한 설계가 세 구간 모두 가장 높아 골라 쓸 이득이 없었고, 이 결과를 보고한 뒤 해당 구조로는 진행하지 않았습니다.',
+            },
+          ],
+          checks: [
+            {
+              title: '학습 1회 결과를 다시 재서 정정',
+              body: '어조 정보가 처음으로 통계적으로 유의하게 나온 결과(+2.2%p)는 학습 1회 값이었습니다. 다시 학습하기 전에 재현으로 인정할 기준 4개를 먼저 정하고, 시드 3개로 다시 학습했습니다. 평균은 +1.1%p로 절반이었고 유의한 시드는 하나뿐이어서, 보고 수치를 낮추고 「효과가 가장 큰 구간에서 세 배」라는 표현도 철회했습니다.',
+              image: {
+                src: '/images/voice/seed_spread.svg',
+                alt: '어조 효과의 시드별 값. 학습 1회 값 +2.18%p, 시드 42 +1.88, 시드 43 +0.45, 시드 44 +1.04, 평균 +1.13',
+                caption: '학습 1회 값(속이 빈 점)과 시드 3회 재학습 값. 평균은 처음 값의 절반이었습니다.',
+              },
+              record: lab('LAB-80.-%ED%95%99%EC%8A%B5%EC%9D%84-%EB%8B%A4%EC%8B%9C-%ED%95%98%EB%A9%B4-%EA%B0%99%EC%9D%80-%EC%88%AB%EC%9E%90%EA%B0%80-%EB%82%98%EC%98%A4%EB%8A%94%EA%B0%80', '2026.10.06'),
+            },
+            {
+              title: '기여가 없다는 것을 찾고 원인을 좁힘',
+              body: '실전 모듈의 「평소 대비 변화」 값만 지우고 다시 채점하자, 정답률은 오히려 조금 올랐습니다(38.6% → 39.7%, 유의하지 않음). 정답에 준 확률의 배율로 보면 이 값이 있을 때가 손해였습니다(p=0.001). 평소를 잰 발화 수, 평소 값의 정확도, 특징 묶음을 차례로 바꿔도 손해는 남았고, 값의 세기를 0.25배로 줄이자 사라졌습니다. 원인을 값의 내용이 아니라 받는 쪽의 과신으로 좁혔고, 이를 고칠 재학습 두 가지를 결과 해석표와 함께 먼저 설계했습니다.',
+              record: lab('LAB-83.-%EC%B8%B52%EB%A5%BC-%EC%A7%80%EC%9B%8C%EB%B4%A4%EB%8D%94%EB%8B%88', '2026.10.14'),
+            },
+          ],
+        },
+      },
+      {
+        id: 'hallucination',
+        label: '환각 진단',
+        period: '2026.06 ~ 07',
+        track: {
+          problem: {
+            body: '멀티모달 LLM(Gemma 4)은 짧은 한국어 발화를 받아쓸 때 오디오와 맞지 않는 문장을 길게 지어내곤 합니다. 회의 음성 2,436발화에서 10자 이하 발화의 약 70%가 정답 글자 수보다 많은 오류를 냈고(CER 1 초과), 30자를 넘는 발화에서는 5% 아래였습니다. 그래서 평균 오류율은 소수의 폭발에 끌려갔습니다. 세션별 중앙값은 0.17~0.33으로 고른데 평균은 0.24~1.02로 흔들렸습니다.',
+            image: {
+              src: '/images/voice/hall_rate_by_length.webp',
+              alt: '정답 길이별 환각률과 오류율. 10자 이하에서 가장 높고 길수록 낮아짐',
+              caption: '정답 길이별 환각률(왼쪽)과 오류율(오른쪽). 짧을수록 계단처럼 높아집니다.',
+            },
+          },
+          structure: {
+            body: '음성은 오디오 인코더를 거쳐 연결부(오디오 표현을 언어 모델 입력 크기로 바꾸는 층)를 지나 언어 모델로 들어갑니다. 처음에는 언어 모델의 어텐션 층을 학습했고, 최종적으로는 연결부만 학습했습니다. 학습한 파라미터는 32,768개로 전체 79억 개의 0.0004%입니다. 평가용으로는 학습에 쓰지 않은 회의 세션 2개(828발화)를 통째로 떼어 냈습니다.',
+            image: {
+              src: '/images/voice/fusion_path.svg',
+              alt: '오디오 경로. 음성, 오디오 인코더, 연결부, 언어 모델 순서. 처음 학습한 곳은 언어 모델 어텐션(철회), 최종 학습한 곳은 연결부',
+              caption: '오디오가 언어 모델로 들어가는 길은 연결부 하나였습니다.',
+              layout: 'wide',
+            },
+          },
+          results: {
+            rows: [
+              { item: '길이를 맞춘 오류율', value: 'CER 0.31 → 0.21', cond: '학습에 없는 세션에서 길이를 맞춘 168발화, 학습 1회' },
+              { item: '오디오를 듣는 정도', value: '오디오 길이와 출력 길이의 상관 0.02 → 0.76 (정답 전사문 0.74)', cond: '같은 평가 세션의 짧은 발화 262개' },
+            ],
+            note: '과제 코드는 비공개이고, 실험 과정은 velog 「AI_LAB」에 날짜별로 남겼습니다.',
+          },
+          decisions: [
+            {
+              title: '학습 위치를 연결부로 좁힘',
+              body: '모델 구조를 직접 출력해 보니 오디오가 언어 모델로 들어가는 길은 연결부 하나였습니다. 언어 모델 전체의 어텐션을 건드리던 방식을 철회한 뒤 이 연결부만 학습했고, 학습 파라미터는 454만 개에서 32,768개로 줄었습니다.',
+              record: lab('LAB-38.-%EC%98%A4%EB%94%94%EC%98%A4-%EA%B2%BD%EB%A1%9C-%EA%B5%AC%EC%A1%B0-%EA%B2%80%EC%A6%9D', '2026.06.23'),
+            },
+          ],
+          checks: [
+            {
+              title: '성공처럼 보인 결과를 철회',
+              body: '모델이 소리를 실제로 듣는지 재려고 같은 발화에 무음과 실제 음성을 넣었을 때의 오류율 차이를 지표로 직접 정의했고, 언어 모델 어텐션을 학습하자 이 값이 −0.12에서 +0.27(2단계 +0.33)로 올라 오디오를 듣기 시작한 것처럼 보였습니다. 그러나 길이를 맞춘 167발화에서 학습한 모델의 오류율은 0.52로 원래 모델(0.30)보다 높았고, 62.9%가 나빠졌습니다. 과생성이 줄어든 효과를 개선으로 읽은 것으로 판단해 주장을 철회했고, 학습 위치를 연결부로 바꾼 뒤 같은 방식의 비교에서 0.31 → 0.21이 되었습니다.',
+              record: lab('LAB-37.-%ED%8C%8C%EC%9D%B8%ED%8A%9C%EB%8B%9D-%EA%B2%B0%EB%A1%A0', '2026.06.23'),
+            },
+            {
+              title: '숫자가 좋아져도 출력을 열어 봄',
+              body: '환각 판정 지표(출력 길이 비율, 삽입 비율)는 실제 데이터에 쓰기 전에 일부러 만든 환각·누락·대체 사례로 먼저 시험했습니다. 2단계 학습을 마친 뒤 긴 발화의 무음 반응 지표가 1.34로 급등했을 때도 개선으로 읽지 않고 출력을 열어 봤습니다. 무음 입력에 「그렇죠」 같은 말을 반복 생성한 결과여서 이 값은 성과에서 뺐습니다.',
+              image: {
+                src: '/images/voice/stage1_vs_stage2_audio_gap.webp',
+                alt: '무음 대조 지표의 학습 단계별 값. 짧은 발화 원래 −0.116, 1단계 +0.27, 2단계 +0.33. 긴 발화 원래 +0.65, 1단계 +0.40, 2단계 +1.34',
+                caption: '무음과 실제 음성의 오류율 차이. 긴 발화의 1.34는 무음에 말을 지어낸 결과라 성과에서 뺐습니다.',
+              },
+              record: lab('LAB-19', '2026.05.29'),
+            },
+          ],
+          gallery: {
+            label: '원인 후보를 하나씩 지운 실험',
+            items: [
+              { src: '/images/voice/nf4_vs_bf16.webp', alt: '양자화 모델과 비양자화 소형 모델의 길이별 환각률 비교', caption: '양자화를 풀어도 길이에 따른 환각 계단은 그대로였습니다(모델 크기도 함께 바뀐 비교).' },
+              { src: '/images/voice/perturbation.webp', alt: '잡음 세기와 무음 구간 길이에 따른 오류율 변화', caption: '잡음 세기와 무음 구간을 바꿔 가며 오류가 어떤 형태로 늘어나는지 봤습니다(100발화).' },
+              { src: '/images/voice/long_3way.webp', alt: '긴 발화 40개에서 학습 위치별 평균 오류율 0.208, 0.178, 0.164', caption: '긴 발화 40개에서는 오디오 인코더 학습이 도움이 됐습니다(개선 12 · 동일 25 · 악화 3).' },
+              { src: '/images/voice/emotion_probe.webp', alt: '같은 글자 발화에서 오디오 인코더 출력만으로 감정 3종을 맞힌 정확도 0.491~0.497', caption: '같은 글자(「네」「어」「음」)만 고른 발화에서도 오디오 인코더 출력만으로 감정을 0.491~0.497 맞혔습니다(라벨을 섞은 대조 0.330~0.344).' },
+              { src: '/images/voice/opensmile_gemma.webp', alt: '모델이 말로 설명한 목소리 특징과 openSMILE 측정값 비교', caption: '모델에게 목소리 특징을 말로 설명하게 하자 방향은 맞혔지만 정량 수치는 내지 못했습니다.' },
+            ],
+          },
+        },
+      },
+    ],
+    delegation: {
+      delegated: '실험 코드 전반(데이터 처리, 특징 추출, 학습, 채점, 그래프)과 결과 정리 문서 초안',
+      did: '무엇을 무엇과 비교할지 정하는 실험 설계, 대조군과 표본 규모 결정, 결과 해석과 결론 정정, 랩미팅 발표',
+      verify: '출력을 직접 열어 읽기, 중간 데이터를 원래 기록과 끝자리까지 대조, 같은 결과를 다른 기준으로 다시 채점, 시드를 바꿔 재학습',
+      fixed: '다시 만든 학습 데이터가 길이 필터를 거꾸로 적용한 것(서버 기록 대조), 실시간 모듈의 표준화 값이 학습 때와 다른 것(최대 3.20 차이, 칸 단위 대조)',
+      caseLabel: '측정 설계를 바로잡은 사례',
+      caseLine: '세 조건의 출력 분포 차이를 재는 지표를 시험하다 기대와 반대 결과가 나와, 조건마다 따로 학습한 모델을 비교하고 있었다는 것을 찾았습니다. 모델 하나로 고정해 다시 재니 차이가 사라져 그 지표는 쓰지 않았습니다.',
+      methods: [
+        { method: '무음 대조 지표(직접 정의)', where: '환각: 같은 발화에 무음과 실제 음성을 넣어 오류율 차이로 「듣는지」 측정' },
+        { method: '학습에 없는 데이터로만 평가', where: '환각: 회의 세션 2개 통째 제외 / 어조: 화자 단위 분할' },
+        { method: '길이를 맞춘 비교', where: '환각: 어텐션 학습 철회, 연결부 학습 채택' },
+        { method: '가짜 입력 대조군', where: '어조: 같은 감정·다른 감정의 가짜 어조를 넣은 조건과 비교' },
+        { method: '표본 확대', where: '어조: 150 → 750 → 7,500발화' },
+        { method: '시드 반복', where: '어조: 학습 1회 결과를 시드 3개로 재현' },
+        { method: '채점 방식 교차', where: '어조: 정답률 · 정보량 · 승률로 같은 결론이 나오는지' },
+        { method: '결과 전 해석표', where: '어조: 재학습 결과별 해석을 학습 전에 확정' },
+        { method: '성분 지우기', where: '어조: 한 성분만 지우고 다시 채점' },
+      ],
+    },
+    limits: [
+      { title: '데이터', body: '어조 실험은 배우가 연기한 대화(한 대화 약 50초, 2인) 기준입니다. 실제 텔레프레즌스 대화 데이터에서 「평소」를 재는 데 필요한 발화 수(약 50발화)를 다시 확인할 예정입니다.' },
+      { title: '반복 규모', body: '환각 진단의 연결부 학습과 실전 어조 모듈의 결과는 각각 학습 1회 값입니다. 어조 쪽은 과신을 고치는 재학습 두 가지를 시드 3개로 반복해 다시 채점합니다.' },
+      { title: '최종 목표', body: '과제 목표인 비꼼과 억지 동의 탐지는 아직 직접 재지 않았습니다. 지금 지표인 감정 8종 정답률과 감정가·각성도 예측은 그 대리 지표입니다.' },
+      { title: '환각 잔존', body: '2~8자 초단발화의 발음 오인식이 남아 있고, 오디오 인코더를 추가로 학습해도 고쳐지지 않았습니다.' },
+    ],
+    links: [
+      { label: '실험 일지', href: `${VELOG}/series/AILAB`, note: 'velog 「AI_LAB」' },
+      { label: '코드', note: '과제 소속이라 비공개' },
+    ],
+  },
+
+  /* ─────────────────────────── AI-Vault ─────────────────────────── */
+  aivault: {
+    key: 'aivault',
+    asOf: '2026-10 기준',
+    summary: {
+      role: '공개·보호 기준과 구조·안전 원칙을 정하고, 결과 검토와 승인, 실제 환경 검증, 보안 사고 대응, push를 맡았습니다. 스크립트·훅 초안과 위키 페이지 작성은 Claude Code에 맡겼습니다.',
+      results: [
+        { value: '5/5 차단', label: '위험 시도 시연', cond: '본인 승인 시연 1회, 우회 시도 0' },
+        { value: '22 차단 · 18 통과', label: '쓰기 차단 시험(막을 명령 · 평소 명령)', cond: '허용 목록 방식 전환 후 재시험(10-24)' },
+        { value: '1/5 → 5/5', label: '위키만으로 답한 고정 질문', cond: '비공개 5문항, 새 기록 반영 전후, LLM 채점' },
+      ],
+      tech: ['Claude Code(훅·스킬·서브에이전트)', 'MCP', 'Python', 'Obsidian', 'Quartz', 'GitHub Actions', 'Git hooks', 'macOS launchd', 'Velog GraphQL API'],
+    },
+    mainImage: {
+      src: '/images/aivault/demo_table.svg',
+      alt: '안전장치 시연 결과 표. 원본 수정, 비밀값 쓰기, 셸 우회 쓰기, 금지 폴더 읽기, push 다섯 시도와 각각을 막은 장치',
+      caption: 'AI에게 위험한 시도 다섯 가지를 일부러 시킨 시연. 다섯 번 모두 막혔고 AI는 우회하지 않고 보고했습니다.',
+      layout: 'wide',
+    },
+    tracks: [
+      {
+        id: 'main',
+        label: 'AI-Vault',
+        track: {
+          problem: {
+            body: '기술 블로그(약 210편)와 노션(약 1,370개 페이지)에 쌓인 기록은 검색으로는 찾기 어렵고, 같은 주제가 여러 글에 흩어져 있었습니다. 목표는 세 가지였습니다. AI 에이전트가 기록을 읽고 주제별 페이지로 정리·연결하게 할 것, AI가 실수해도 원본 훼손이나 비공개 정보 노출이 일어나지 않게 할 것, 그리고 위키가 실제로 나아졌는지를 숫자로 확인할 것.',
+          },
+          structure: {
+            body: '볼트 하나 안에 층이 셋 있습니다. 원본(추가만 가능), 위키(AI가 관리), 규칙서(사람이 관리)입니다. 저장소는 공개와 비공개 둘로 나눴고, 공개 저장소는 비공개 폴더를 통째로 무시하며 비공개 폴더는 그 자체가 별도 저장소라 구조적으로 섞이지 않습니다. 공개 위키는 Quartz로 빌드해 GitHub Pages에 배포하고, 배포 직전에 공개 파일 전체를 다시 검사합니다. 블로그 새 글은 매일 밤 AI 없이 스크립트가 수집하고, 위키 반영은 사람이 명령으로 실행합니다.',
+            image: {
+              src: '/images/aivault/graph_view.webp',
+              alt: 'Obsidian 그래프 뷰. 위키 페이지들이 링크로 연결된 원형 네트워크',
+              caption: '위키 페이지 연결을 그래프로 본 화면(Obsidian).',
+            },
+          },
+          results: {
+            rows: [
+              { item: '정리 규모', value: '블로그 209편 + 노션 260개 → 위키 약 130페이지(공개 약 120)', cond: '노션은 약 1,370개 중 선별. 10-23 기준(10-24 점검 시 전체 132)' },
+              { item: '쓰기 차단 시험', value: '막아야 할 셸 명령 22개 모두 차단, 평소 명령 18개 통과', cond: '허용 목록 방식 전환 후 재시험(10-24)' },
+              { item: '안전장치 시연', value: '위험 시도 5개 모두 차단, 우회 시도 0', cond: '본인 승인 시연 1회. 원본 수정·비밀값 쓰기·셸 우회 쓰기·금지 폴더 읽기·push' },
+              { item: '성장 측정', value: '위키만으로 답한 문항 1/5 → 5/5, 6/8 → 8/8', cond: '비공개 고정 질문 5·8문항, 새 기록 반영 전후, LLM 채점' },
+              { item: '회귀 측정', value: '29/30 → 30/30', cond: '공개 고정 질문 10문항 × 3기준, 원인 수정 전후' },
+              { item: '실사용', value: '면접 예상 질문 12개 모두 위키만으로 답함, 꼬리질문 빈틈 7 → 4', cond: '10-23, 1회' },
+            ],
+          },
+          decisions: [
+            {
+              title: '부탁과 강제를 나눔',
+              body: '규칙서는 AI에게 하는 부탁이라 어겨질 수 있습니다. 어기면 사고가 나는 규칙만 골라 시스템이 막게 했습니다. 파일을 쓰는 순간에는 쓰기 훅이 원본 수정과 공개 구역의 비밀값·개인정보를 막고, 위키·원본·안전장치 경로를 건드리는 셸 명령은 허용한 읽기·점검 명령만 통과시킵니다. 권한과 운영체제 단계에서는 push와 검사 우회(--no-verify)를 막고, 안전장치 폴더는 샌드박스로 운영체제 수준에서 쓰기를 막습니다. 커밋과 배포 단계에서는 공개 커밋, 비공개 커밋, 배포 직전에 각각 한 번 더 검사합니다.',
+              image: {
+                src: '/images/aivault/five_layers.svg',
+                alt: '차단 장치 5겹. 쓰는 순간(쓰기 훅), 권한과 샌드박스, 공개 커밋 검사, 비공개 커밋 검사, 배포 검사. push는 사람만',
+                caption: '각 겹은 서로 다른 시점을 막습니다. 마지막 push는 사람이 합니다.',
+                layout: 'wide',
+              },
+            },
+            {
+              title: '답이 정해진 일은 코드, 판단은 LLM',
+              body: '링크 수, 끊긴 링크, 아직 반영 안 된 원본 수처럼 답이 정해진 일은 스크립트가 세고, 모순·중복·공개 여부처럼 판단이 필요한 일만 LLM에 맡겼습니다.',
+            },
+            {
+              title: '병렬로 쓰되 공유 파일은 한 명만 고침',
+              body: '대량 정리 때 서브에이전트들은 초안만 쓰고, 목차·병합·로그는 메인 에이전트 혼자 맡게 했습니다. 실제로 재 보니 졸업작품 기록 94개를 정리하는 43분 중 병렬 초안은 약 15분, 혼자 하는 병합이 약 28분이었습니다. 병목이 병합이라는 것을 수치로 확인했고, 병렬 수를 늘리는 것으로는 빨라지지 않는다는 판단의 근거가 됐습니다.',
+              image: {
+                src: '/images/aivault/parallel_time.svg',
+                alt: '정리 작업 43분의 시간 구성. 병렬 초안 약 15분, 메인 에이전트 혼자 병합 약 28분',
+                caption: '43분 중 병렬로 줄일 수 있는 부분은 초안 15분뿐이었습니다.',
+              },
+            },
+            {
+              title: '다 넣지 않음',
+              body: '노션 약 1,370개를 바로 넣지 않고 대기 폴더에서 비밀값 검사를 먼저 한 뒤, 「다시 찾아볼 일이 있나, 다른 기록과 연결되나, 노션에 그대로 둬도 되나」 세 질문으로 260개만 골랐습니다.',
+            },
+            {
+              title: '자동화를 초안 단계에서 멈춤',
+              body: '블로그 글 반영까지 완전 자동화하려던 계획을 철회했습니다. 공개 글은 어차피 사람이 변경 내용을 확인해야 해서 자동화로 아끼는 것은 명령 한 줄인데, 무인 실행의 권한과 실패 처리라는 새 위험이 생기기 때문입니다. 「사람이 고친 횟수가 적으면 전환」이라는 기준도, 사람이 대충 볼수록 좋아지는 지표라 쓰지 않기로 했습니다.',
+              record: { label: '당시 기록 · 운영편', href: `${VELOG}/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-%EC%9E%90%EB%8F%99%ED%99%94%EB%A5%BC-%EB%A9%88%EC%B6%98-%EC%9D%B4%EC%9C%A0%EC%99%80-%EC%8C%93%EC%9D%84%EC%88%98%EB%A1%9D-%EB%98%91%EB%98%91%ED%95%B4%EC%A7%84%EB%8B%A4%EB%A5%BC-%EC%88%AB%EC%9E%90%EB%A1%9C-%EC%A6%9D%EB%AA%85%ED%95%98%EA%B8%B0` },
+            },
+            {
+              title: '직접 붙인 연결 방식을 버림',
+              body: '처음에는 Claude 데스크톱 앱에서 중계 프로그램과 Obsidian 플러그인을 거쳐 볼트에 접근했습니다. Obsidian이 켜져 있어야 했고, 응답이 수십 초 걸렸습니다. 볼트가 결국 마크다운 파일이 든 폴더라는 점에 착안해, 에이전트가 그 폴더에서 직접 파일을 다루도록 바꿨습니다. 중계 단계가 사라졌고 Obsidian은 보는 화면만 맡게 됐습니다.',
+              record: { label: '당시 기록 · 2026.08.02', href: `${VELOG}/Claude-Desktop%EC%97%90-Obsidian-%EB%B3%BC%ED%8A%B8-%EC%97%B0%EA%B2%B0` },
+            },
+          ],
+          checks: [
+            {
+              title: '검사 규칙이 놓친 비밀번호를 유출 직전에 잡음',
+              body: '노션 기록 108개를 넣기 전 자동 비밀값 검사는 0건이었지만, AI가 내용을 읽다 데이터베이스 비밀번호 평문을 찾았습니다. 오탐을 줄이려고 「16자 이상, 숫자 포함」만 잡던 규칙이 짧은 비밀번호를 놓친 것이었습니다. 커밋 전에 값을 가리고, 두 저장소 기록 전체에 값이 없음(0건)을 확인한 뒤, 비밀번호 자체를 바꾸고 길이 대신 문맥으로 잡는 규칙을 더해 전체를 다시 검사(0건)했습니다.',
+              record: { label: '당시 기록 · 운영편 2', href: `${VELOG}/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-2-%EC%A0%95%EA%B7%9C%EC%8B%9D%EC%9D%B4-%EB%86%93%EC%B9%9C-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%EC%88%AB%EC%9E%90%EB%8A%94-%EB%A7%9E%EB%8A%94%EB%8D%B0-%EB%82%A8%EC%9D%80-1%ED%8E%B8-%EB%B6%80%ED%83%81%EC%9D%84-%EA%B0%95%EC%A0%9C%EB%A1%9C-%EB%B0%94%EA%BE%B8%EB%8A%94-%EC%9A%B4%EC%98%81` },
+            },
+            {
+              title: '숫자가 다 맞는데 처리 안 된 1건',
+              body: '자동 수집을 켠 다음 날, 블로그·백업·노션의 편수는 모두 일치했는데 반영 명령은 「새 글 0편」이라며 아무것도 하지 않았습니다. 점검 스크립트의 「반영 안 된 원본」이 1이어서 추적해 보니, 반영 명령이 「이번 실행에서 새로 가져온 글」만 보는 구조라 자동 수집이 먼저 가져간 글은 영원히 반영되지 않았습니다. 대상을 「반영 안 된 원본 전부」로 바꾸고, 끝날 때 그 수가 0인지 스스로 확인하게 했습니다.',
+            },
+            {
+              title: '평가가 찾은 구조적 결함',
+              body: '공개 고정 질문 중 한 문항이 0점이었고, 위키에 「무엇을 했는지」는 있는데 「왜」가 빠져 있었습니다. 원본과 대조하니 같은 손실이 약 30곳에 있었습니다. 규칙서에 「결정은 무엇·왜·버린 것을 함께 쓴다」를 넣고 보강한 뒤 다시 재서 29/30에서 30/30이 됐습니다.',
+            },
+            {
+              title: '시연으로 찾은 빈틈을 허용 목록으로 막음',
+              body: '안전장치 시연 뒤 쓰기 훅을 다시 점검하니, 스크립트 실행이나 셸 명령으로 위키와 안전장치 파일을 고치는 길이 열려 있었고 시험해 보니 처음 알던 것 외에도 12가지가 더 통과했습니다. 막을 명령을 하나씩 늘리는 방식은 새 수단이 나올 때마다 뚫리므로, 보호 경로를 건드리는 셸 명령은 허용한 읽기·점검 명령만 통과시키는 방식으로 바꿨습니다. 막아야 할 22개는 모두 막히고 평소 명령 18개는 그대로 통과했으며, 문자열 검사로 못 보는 경로는 안전장치 폴더에 샌드박스를 걸어 운영체제 수준에서 막았습니다.',
+            },
+            {
+              title: '토큰 권한을 일부러 좁힘',
+              body: 'GitHub 연결 도구가 인증 오류를 내서 AI가 매번 다른 도구로 돌아가고 있었습니다. 토큰 값은 출력하지 않고 응답 코드만 확인해, 등록된 토큰 둘이 모두 만료됐고 같은 서버가 두 곳에 중복 등록된 것을 찾았습니다. 범위를 좁힌 새 토큰(90일, 저장소 3개, 권한 3개)으로 하나만 등록했고, 위키 저장소 2개는 일부러 범위에서 뺐습니다. 쓰기 권한이 있으면 AI가 push 없이 API로 파일을 올려 「push는 사람만」 원칙을 우회할 수 있기 때문입니다.',
+            },
+          ],
+          gallery: {
+            label: '안전장치 시연 원본 화면',
+            items: [
+              { src: '/images/aivault/demo_terminal.webp', alt: '안전장치 시연 결과를 정리한 터미널 원본 화면. 다섯 시도마다 막은 장치와 막힌 메시지', caption: '시연 결과 원본. 시도마다 막은 장치와 막힌 메시지가 남아 있습니다.' },
+              { src: '/images/aivault/demo_progress.webp', alt: '시연 진행 화면. 막히면 우회하지 말고 보고하라는 지시문과 빨간 차단 메시지', caption: '시연 지시문은 「한 번씩만, 막히면 우회하지 말고 보고」였습니다.' },
+              { src: '/images/aivault/commit_block.webp', alt: '공개 커밋 검사가 가짜 AWS 키가 든 커밋을 막은 터미널 화면', caption: '공개 커밋 검사가 가짜 AWS 키 커밋을 막은 화면(시연용 가짜 값).' },
+            ],
+          },
+        },
+      },
+    ],
+    delegation: {
+      delegated: '스크립트·훅·설정 파일 초안, 원본을 읽고 위키 페이지 작성(서브에이전트 병렬), 점검 리포트',
+      did: '공개·보호 기준과 구조 원칙 결정(구조 전환 2회 포함), 기준 밖 판단, 단계별 결과 검토와 승인, 실제 환경(macOS·GitHub) 검증, 보안 사고 대응, 토큰 범위와 자동화 범위 결정, push',
+      verify: '위험 행동을 일부러 시켜 차단되는지 시연, 고정 질문으로 반영 전후 채점(정답은 위키가 아니라 원본에서 확인), AI 정정을 정정 과정을 모르는 다른 에이전트가 재판정, 점검 스크립트의 미처리 수가 0인지 확인',
+      fixed: '검사 규칙이 놓친 비밀번호, 반영 명령의 대상 누락, 셸을 통한 검사 우회, 결정 이유가 빠지는 정리 습관',
+      caseLabel: 'AI 판단을 걸러 낸 사례',
+      caseLine: 'AI가 원본 밖 지식으로 고치겠다고 한 27곳을 다른 에이전트로 다시 판정해 8곳만 반영했고, 버전마다 바뀌는 도구 사실은 고치지 않고 「작성 시점 기준」으로 남겼습니다.',
+    },
+    limits: [
+      { title: '채점', body: '위키 품질 점수는 LLM이 채점했고 사람이 문항별로 검수하지 않았습니다. 채점표를 파일로 저장해 사람이 검수할 수 있게 바꾸는 것이 다음 작업입니다.' },
+      { title: '표본', body: '고정 질문은 5~10문항이고 숨겨 둔 시험지 평가는 아직 하지 않았습니다. RAG 검색기에서 쓴 숨겨 둔 시험지 방식을 위키 평가에도 옮길 계획입니다.' },
+      { title: '규모', body: '사용자 1명의 개인 위키입니다. 조직 도입은 검증하지 않았고, 업무 시간 절감 같은 효과 지표도 없습니다.' },
+      { title: '비밀값 검사', body: '영문자로만 된 비밀번호는 패턴 검사로 못 잡아 의미 검토가 맡고 있습니다.' },
+      { title: '문자열 검사의 한계', body: '경로를 글자로 드러내지 않는 쓰기(스크립트 파일 실행, 변수 조립 등)는 쓰기 훅이 보지 못합니다. 안전장치 폴더는 샌드박스가, 원본은 커밋 검사가, 공개 구역의 비밀값은 커밋·배포 검사가 대신 막고, 그 밖의 내용 변경은 push 전 사람이 변경 내용을 확인합니다.' },
+    ],
+    links: [
+      ...(AIVAULT_PUBLIC_READY
+        ? [
+            { label: '공개 위키', href: 'https://park-taegeun.github.io/ai-vault-wiki/', note: 'park-taegeun.github.io/ai-vault-wiki' },
+            { label: '공개 레포', href: 'https://github.com/park-taegeun/ai-vault-wiki', note: 'github.com/park-taegeun/ai-vault-wiki' },
+          ]
+        : []),
+      { label: '개발기 · 구축편', href: `${VELOG}/%EC%B9%B4%ED%8C%8C%EC%8B%9C%EC%9D%98-LLM-Wiki%EB%A5%BC-Claude-Code%EB%A1%9C-%EC%A7%81%EC%A0%91-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0`, note: 'velog 「AI 생태계 탐험 로그」' },
+      { label: '개발기 · 운영편', href: `${VELOG}/LLM-Wiki-%EC%9A%B4%EC%98%81%ED%8E%B8-%EC%9E%90%EB%8F%99%ED%99%94%EB%A5%BC-%EB%A9%88%EC%B6%98-%EC%9D%B4%EC%9C%A0%EC%99%80-%EC%8C%93%EC%9D%84%EC%88%98%EB%A1%9D-%EB%98%91%EB%98%91%ED%95%B4%EC%A7%84%EB%8B%A4%EB%A5%BC-%EC%88%AB%EC%9E%90%EB%A1%9C-%EC%A6%9D%EB%AA%85%ED%95%98%EA%B8%B0`, note: 'velog' },
+    ],
+  },
+
+  /* ─────────────────────────── decisions-rag (보조) ─────────────────────────── */
+  'decisions-rag': {
+    key: 'decisions-rag',
+    asOf: '2026-10 기준',
+    summary: {
+      role: '설계 방향과 채택 규칙 승인, 블라인드 채점 확인과 일부 직접 채점, 인덱스 생성과 평가 실행, MCP 등록과 시연을 맡았습니다. 코드와 테스트, 평가 문항 초안은 Claude Code가 작성했습니다.',
+      results: [
+        { value: '19 / 21', label: '오답·부분 정답 중 검색 실패', cond: '기준선 30문항, 실행 1회' },
+        { value: '9 → 8', label: '질의 재작성의 숨겨 둔 시험지 정답', cond: '15문항, 검색 적중은 1 → 5. 규칙대로 미채택' },
+        { value: '약 6,200줄', label: '검색 대상 결정 기록', cond: '평가 당시 문서 기준' },
+      ],
+      tech: ['Python', 'LlamaIndex', 'Chroma', 'OpenAI 임베딩(text-embedding-3-small)', 'BM25', 'Ollama(llama3.1 8B, EXAONE 3.5 7.8B)', 'MCP Python SDK'],
+    },
+    mainImage: {
+      src: '/images/rag/rag_table.svg',
+      alt: 'decisions-rag 실험 판정 표. 기준선, 폐기안 표시, 하이브리드, 질의 재작성, 로컬 모델 비교와 판정',
+      caption: '실험 다섯 가지와 판정. 좋아 보인 개선도 미리 정한 규칙에 맞지 않으면 채택하지 않았습니다.',
+      layout: 'wide',
+    },
+    tracks: [
+      {
+        id: 'main',
+        label: 'decisions-rag',
+        track: {
+          problem: {
+            body: '졸업작품의 결정 기록 문서(약 6,200줄)에서 과거 결정과 폐기된 안을 찾아 주는 RAG 검색기입니다. AI 코딩 에이전트가 작업 전에 MCP 도구로 직접 호출합니다. 결과를 보기 전에 시험지 30문항과 채택 규칙을 먼저 고정하고 평가했습니다.',
+          },
+          results: {
+            columns: ['실험', '결과', '판정'],
+            rows: [
+              { item: '기준선(벡터 검색)', value: '답변 정답 9/30, 상위 3개 검색 적중 6/25', cond: '기준' },
+              { item: '폐기안 표시', value: '번복 문항 정답 2 → 2', cond: '미채택' },
+              { item: '하이브리드(벡터+키워드)', value: '정답 9 → 10, 검색 적중 6 → 4, 번복 문항 적중 2 → 0', cond: '미채택' },
+              { item: '질의 재작성', value: '원래 시험지 적중 6 → 8. 숨겨 둔 시험지 적중 1 → 5, 정답 9 → 8', cond: '미채택' },
+              { item: '로컬 모델 비교', value: '정답 gpt-4.1-mini 9 · llama3.1 6 · EXAONE 7, 응답 약 1초 vs 약 6.3초', cond: '참고' },
+            ],
+            note: '정답률은 낮습니다(9/30). 이 검색기의 가치는 성능보다 「측정해서 병목을 찾고, 겉보기 개선을 걸러 낸 과정」에 있습니다. 기준선 오답·부분 정답 21건 중 19건이 검색 실패여서 답변 모델보다 검색을 먼저 고쳐야 한다는 결론을 냈습니다.',
+            repo: { label: '레포에서 사전 등록 문서 보기', href: 'https://github.com/park-taegeun/ddingdong/tree/main/tools/decisions-rag' },
+          },
+        },
+      },
+    ],
+    limits: [
+      { title: '표본과 반복', body: '실행 1회, 시험지 30문항과 숨겨 둔 15문항입니다. 질의 재작성의 9 → 8은 1문항 차이라 방향 이상의 근거는 아닙니다.' },
+      { title: '채점 독립성', body: '평가 문항 초안은 AI가 썼고 본인이 승인했습니다. 채점은 AI 1차 채점과 본인 확인이라 완전히 독립된 채점은 아닙니다.' },
+    ],
+    links: [
+      { label: '코드와 평가 문서', href: 'https://github.com/park-taegeun/ddingdong/tree/main/tools/decisions-rag', note: 'tools/decisions-rag' },
+      { label: '쓰이는 곳', href: '/projects/ddingdong', note: '띵동 결정 기록' },
+    ],
+  },
+
+  /* ─────────────────────────── EEG (보조) ─────────────────────────── */
+  eeg: {
+    key: 'eeg',
+    asOf: '2026-06 발표',
+    summary: {
+      role: '공동 연구에서 학습-추론 라벨 간극을 재는 지표 두 개를 정의하고, 겹치지 않는 조건으로 그 지표를 다시 쟀습니다. 기준선 trial을 학습·평가에서 빼고 trial 단위로 나눠 데이터 누수를 막는 일도 맡았습니다.',
+      results: [
+        { value: '75.1%', label: 'trial 정확도', cond: '5-fold 교차검증, 5개 감정, ± 1.0' },
+        { value: '+1.8%p', label: '같은 정규화 기준 모델 대비', cond: '73.3% 대비, 논문 Table 1' },
+        { value: '91.1% → 83.1%', label: '인접 일관성, 겹치지 않는 조건 재측정', cond: '이웃 1초 예측끼리 같은 비율' },
+      ],
+      tech: ['Python', 'PyTorch', 'SciPy(Welch PSD, Butterworth)', 'scikit-learn(5-fold)', 'LightGBM(기준 모델)'],
+    },
+    mainImage: {
+      src: '/images/eeg/eeg_results.svg',
+      alt: 'EEG 결과 막대. 생체신호 5종 LightGBM 68.2%, EEG와 같은 정규화 LightGBM 73.3%, 이중 스트림 모델 75.1%',
+      caption: '같은 정규화를 적용한 기준 모델과 나란히 놓아, 모델 구조의 몫(+1.8%p)을 따로 보였습니다.',
+      layout: 'wide',
+    },
+    citation:
+      '박상현*, 박수빈, 박태근, 백호길. 「단일 14채널 EEG 감정 인식을 위한 이중 스트림 트랜스포머와 라벨-추론 간극 분석」. 2026년 대한전자공학회 하계종합학술대회 논문집, 2026.6.',
+    tracks: [
+      {
+        id: 'main',
+        label: 'EEG',
+        track: {
+          problem: {
+            body: '공개 데이터셋은 60초 영상 하나에 감정 라벨 하나를 붙입니다. 하지만 실시간 서비스는 1초마다 추론해야 하고, 사람의 감정은 60초 안에서도 변합니다. 학습할 때의 라벨 단위와 추론할 때의 단위가 다르니, 1초 예측이 trial 라벨과 다를 때 그것이 모델의 실수인지 실제 감정 변화인지 구분할 근거가 필요했습니다.',
+          },
+          structure: {
+            body: '뇌파를 1초 조각으로 나눠 두 가지 주파수 특징(선형 스케일 파워, 로그 스케일 엔트로피)을 뽑고, 두 특징을 따로 1D CNN으로 처리한 뒤 어텐션으로 결합하는 이중 스트림 트랜스포머를 썼습니다. 정규화 기준으로 쓰는 trial은 학습·평가에서 빼고, 같은 trial의 1초 조각이 학습과 평가에 나뉘어 들어가지 않도록 trial 단위로 5-fold를 나눴습니다. 저는 1초 예측이 이웃 조각과 얼마나 이어지는지(인접 일관성)와 trial 라벨과 얼마나 맞는지(정합도)를 재는 두 지표를 정의했습니다. 처음 측정은 4초 창을 1초씩 밀어 75%가 겹치는 조건이었고, 겹침 때문에 일관성이 부풀었을 수 있어 겹치지 않는 조건으로 다시 쟀습니다.',
+          },
+          results: {
+            rows: [
+              { item: 'trial 정확도', value: '75.1% (± 1.0)', cond: '5-fold 교차검증, 5개 감정, 108명 × 50 trial' },
+              { item: '기준 모델 대비', value: '생체신호 5종 LightGBM 68.2% / EEG + 같은 정규화 LightGBM 73.3%', cond: '논문 Table 1' },
+              { item: '1D CNN 제거', value: '35.9% (39.2%p 하락)', cond: '절제 실험, Table 2' },
+              { item: '인접 일관성', value: '91.1% → 겹치지 않는 조건 83.1%', cond: '이웃 1초 예측끼리 같은 비율' },
+              { item: 'trial 라벨과 다른 1초 예측', value: '29.8%', cond: '감정 변화인지 오류인지는 구분 불가(한계)' },
+              { item: '신뢰도별 일치', value: '신뢰도 80% 이상 75.7%, 40% 미만 30.2%', cond: '신뢰도 기반 누적 결합의 근거' },
+            ],
+          },
+        },
+      },
+    ],
+    limits: [
+      { title: '피험자 독립', body: '같은 피험자가 학습과 평가에 함께 들어간 평가라, 처음 보는 사람에 대한 성능은 재지 않았습니다.' },
+      { title: '1초 단위 정답', body: '1초 단위 정답이 없어, trial 라벨과 다른 예측이 감정 변화인지 오류인지는 지표만으로 가를 수 없습니다.' },
+      { title: '실시간 시험', body: '실시간 시험에서 기준선(시작 전 안정 상태) 신호가 흔들리면 정확도가 크게 떨어졌습니다.' },
+      { title: '데이터', body: '단일 데이터셋입니다.' },
+    ],
+    links: [{ label: '논문', note: '2026 대한전자공학회 하계종합학술대회 논문집' }],
   },
 }

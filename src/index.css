@@ -16,11 +16,12 @@
 
   --color-text-sub: #586173;     /* 서브 텍스트 (--muted) */
   --color-text-muted: #586173;
-  --color-text-faint: #8A93A3;
+  --color-text-faint: #8A93A3;   /* 장식 전용(대비 부족) — 글자에 쓰지 않는다 */
 
   /* 시그널 — "검증됨/측정됨" */
   --color-signal: #0E7C86;       /* 딥 틸 액센트 */
   --color-signal-soft: #E1F3F4;
+  --color-signal-deep: #0B6F79;  /* 틸 배경(signal-soft) 위 작은 글씨용 — 대비 4.5:1 이상 */
   --color-signal-bright: #3FD0E0; /* 네이비 배경 위 액센트 */
   --color-claimed: #9AA6B4;      /* "주장값/개입 전"의 회색 — 재측정 모티프 */
 
@@ -109,3 +110,7 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* 가로 칩 목차 — 스크롤바 숨김(스크롤은 유지) */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
