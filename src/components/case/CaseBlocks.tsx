@@ -13,7 +13,7 @@ import Reveal from '../room/Reveal'
 export function BlockHead({ id, no, children }: { id: string; no?: string; children?: ReactNode }) {
   return (
     <div className="flex items-baseline gap-3 border-t border-line pt-5">
-      {no && <span className="num font-semibold text-[13px] text-text-sub">{no}</span>}
+      {no && <span className="font-mono text-[12px] tabular-nums text-signal">{no}</span>}
       <h2 className="font-body font-bold text-ink text-[19px] sm:text-[21px] leading-[1.35] tracking-[-0.02em]">
         {children ?? SECTION_LABELS[id]}
       </h2>
@@ -35,9 +35,9 @@ export function RecordChip({ record }: { record: RecordLink }) {
       href={record.href}
       target="_blank"
       rel="noreferrer"
-      className="group inline-flex items-center gap-1.5 font-body font-semibold text-[13px] text-navy hover:text-ink transition-colors"
+      className="group inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-ink transition-colors"
     >
-      <span aria-hidden className="h-[5px] w-[5px] rounded-full bg-navy" />
+      <span aria-hidden className="h-[5px] w-[5px] rounded-full bg-signal" />
       <span className="underline-offset-4 group-hover:underline">{record.label}</span>
       <span aria-hidden className="transition-transform group-hover:translate-x-0.5">↗</span>
     </a>
@@ -63,7 +63,7 @@ export function SummaryBox({
       style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)', boxShadow: 'var(--shadow-soft)' }}
     >
       <div className="px-5 py-5 sm:px-7 sm:py-6 border-b border-line">
-        <p className="font-body font-semibold text-text-sub text-[13px]">담당 역할</p>
+        <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">담당 역할</p>
         <p className="font-body text-ink text-[15.5px] leading-[1.75] mt-2 max-w-[78ch] break-keep">
           <RichText text={s.role} />
         </p>
@@ -71,7 +71,7 @@ export function SummaryBox({
       <dl className="grid sm:grid-cols-3 gap-px bg-line">
         {s.results.map((r) => (
           <div key={r.label} className="bg-panel px-5 py-5 sm:px-6">
-            <dt className="num font-bold text-signal-deep text-[21px] sm:text-[22px] leading-[1.2] tracking-[-0.02em] break-keep">
+            <dt className="font-mono font-semibold text-navy text-[20px] sm:text-[21px] leading-[1.2] tracking-[-0.03em] tabular-nums break-keep">
               {r.value}
             </dt>
             <dd className="m-0 mt-2">
@@ -83,7 +83,7 @@ export function SummaryBox({
       </dl>
       <div className="px-5 py-4 sm:px-7 border-t border-line grid gap-4 md:grid-cols-[1fr_auto] md:items-start">
         <div>
-          <p className="font-body font-semibold text-text-sub text-[13px]">기술 스택</p>
+          <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">기술 스택</p>
           <ul className="mt-2.5 flex flex-wrap gap-1.5" aria-label="사용 기술">
             {s.tech.map((t) => (
               <li key={t} className="font-mono text-[11.5px] leading-none px-2 py-1.5 border border-line text-text-sub bg-base" style={{ borderRadius: 6 }}>
@@ -93,13 +93,13 @@ export function SummaryBox({
           </ul>
         </div>
         <nav aria-label="이 페이지 목차" className="md:max-w-[300px]">
-          <p className="font-body font-semibold text-text-sub text-[13px]">이 페이지</p>
+          <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">이 페이지</p>
           <ul className="mt-2.5 flex flex-wrap gap-x-3 gap-y-1.5">
             {toc
               .filter((t) => t.id !== 'summary')
               .map((t) => (
                 <li key={t.id}>
-                  <button type="button" onClick={() => onJump(t.id)} className="font-body text-[13px] text-navy underline decoration-line-strong underline-offset-4 hover:decoration-navy transition-colors">
+                  <button type="button" onClick={() => onJump(t.id)} className="font-body text-[13px] text-signal hover:text-ink transition-colors">
                     {t.label}
                   </button>
                 </li>
@@ -160,7 +160,7 @@ export function DecisionList({ items, onZoom }: { items: Decision[]; onZoom: (i:
           <Reveal>
             <article className={d.image ? 'grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start' : ''}>
               <div className="border-l-2 pl-5" style={{ borderColor: 'var(--color-navy)' }}>
-                <p className="num font-semibold text-[13px] text-text-sub">결정 {i + 1}</p>
+                <p className="font-mono text-[12px] text-signal tabular-nums">결정 {String(i + 1).padStart(2, '0')}</p>
                 <h3 className="font-body font-bold text-ink text-[17px] leading-[1.45] mt-1.5">{d.title}</h3>
                 <p className="font-body text-text-sub text-[15px] leading-[1.8] mt-3 break-keep">
                   <RichText text={d.body} />
@@ -199,7 +199,7 @@ function CheckItem({ check, index, defaultOpen }: { check: Check; index: number;
   return (
     <li id={`check-${index}`} className="scroll-mt-28 border-b border-line py-6">
       <div className="grid gap-2 sm:grid-cols-[44px_minmax(0,1fr)]">
-        <span className="num font-semibold text-[13px] text-text-sub pt-0.5">{index + 1}</span>
+        <span className="font-mono text-[13px] text-signal tabular-nums pt-0.5">{String(index + 1).padStart(2, '0')}</span>
         <div className="min-w-0">
           <h3 className="font-body font-bold text-ink text-[16.5px] leading-[1.45]">{check.title}</h3>
           <p className="font-body text-text-sub text-[15px] leading-[1.8] mt-2 max-w-[70ch] break-keep">
@@ -268,8 +268,8 @@ export function AiDelegation({ d }: { d: NonNullable<RoomData['delegation']> }) 
           </div>
         ))}
       </div>
-      <div className="mt-5 border-l-2 pl-5" style={{ borderColor: 'var(--color-navy)' }}>
-        <p className="font-body font-semibold text-[13px] text-navy">{d.caseLabel}</p>
+      <div className="mt-5 border-l-2 pl-5" style={{ borderColor: 'var(--color-signal)' }}>
+        <p className="font-body font-semibold text-[12.5px] tracking-[0.06em] text-signal">{d.caseLabel}</p>
         <p className="font-body text-ink text-[15px] leading-[1.8] mt-1.5 max-w-[70ch] break-keep">
           <RichText text={d.caseLine} />
         </p>
