@@ -11,6 +11,7 @@ import { SIDE_WORKS } from '../../data/sideWorks'
 import { ANCHOR_EVENT, type AnchorRequest } from '../../lib/lenis'
 import { onImgError } from '../../lib/placeholder'
 import { crossfadeToRoom } from '../../lib/signature'
+import Label from '../Label'
 import Marked from '../Mark'
 
 const SECTION_ID = 'projects'
@@ -49,7 +50,8 @@ export default function ProjectsShowcase() {
   return (
     <section id={SECTION_ID} aria-label="프로젝트" className="relative border-t border-line">
       <div className="mx-auto max-w-[1200px] container-pad" style={{ paddingBlock: 'clamp(56px, 6vw, 88px)' }}>
-        <h2 className="flex items-baseline gap-2.5 font-body font-bold text-ink tracking-[-0.03em]" style={{ fontSize: 'clamp(26px,3vw,34px)' }}>
+        <Label as="p">Projects</Label>
+        <h2 className="mt-3 flex items-baseline gap-2.5 font-body font-bold text-ink tracking-[-0.03em]" style={{ fontSize: 'clamp(24px,3vw,36px)' }}>
           프로젝트
           <span className="num font-semibold text-[17px] text-text-sub">{SHOWCASE.length}</span>
         </h2>

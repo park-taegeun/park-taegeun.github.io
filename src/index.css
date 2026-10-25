@@ -111,7 +111,16 @@ body {
   }
 }
 
-/* 숫자는 Pretendard 고정폭 숫자로(줄 맞춤). 고정폭 글꼴(mono)은 기술 스택 칩에만 쓴다. */
+/* 포인트 컬러 강조 — 핵심 구절만 틸 형광펜(아래쪽 띠)으로. 한 블록에 한 번만 쓴다. */
+.mark {
+  color: var(--color-signal-deep);
+  background: linear-gradient(to top, rgba(14, 124, 134, 0.16) 0 40%, transparent 40%);
+  padding-inline: 0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* 숫자를 본문 글꼴의 고정폭 숫자로(프로젝트 패널). */
 .num {
   font-family: var(--font-body);
   font-variant-numeric: tabular-nums;

@@ -126,7 +126,7 @@ export default function ProjectRoom() {
           <button
             type="button"
             onClick={() => void crossfadeToRoom(next, navigate)}
-            className="font-body font-semibold text-[13px] text-navy hover:text-ink transition-colors truncate"
+            className="font-body font-semibold text-[13px] text-signal hover:text-ink transition-colors truncate"
           >
             다음: {next.name} →
           </button>
@@ -304,7 +304,7 @@ export default function ProjectRoom() {
                     href={track.results.repo.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-4 inline-flex items-center gap-1.5 font-body font-semibold text-[13.5px] text-navy underline decoration-line-strong underline-offset-4 hover:decoration-navy transition-colors"
+                    className="mt-4 inline-flex items-center gap-1.5 font-body font-semibold text-[13.5px] text-signal hover:text-ink transition-colors"
                   >
                     {track.results.repo.label} <span aria-hidden>↗</span>
                   </a>
@@ -374,7 +374,7 @@ export default function ProjectRoom() {
         {/* 데스크톱 고정 목차 */}
         <aside className="hidden lg:block">
           <nav aria-label="이 페이지 목차" className="sticky top-24">
-            <p className="font-body font-semibold text-text-sub text-[13px]">이 페이지</p>
+            <p className="font-body font-semibold uppercase tracking-[0.18em] text-text-muted text-[11px]">On this page</p>
             {hasTabs && (
               <div className="mt-3 flex flex-col gap-1" aria-label="연구 주제 바꾸기">
                 {room.tracks.map((t) => (
@@ -426,7 +426,7 @@ export default function ProjectRoom() {
       {/* 다음 프로젝트 */}
       <section aria-label="다음 프로젝트" className="border-t border-line" style={{ background: next.tintSoft }}>
         <div className="mx-auto max-w-[1180px] py-16 sm:py-20" style={padX}>
-          <h2 className="font-body font-semibold text-text-sub text-[13px]">다음 프로젝트</h2>
+          <Label as="h2">Next</Label>
           <button
             type="button"
             onClick={() => void crossfadeToRoom(next, navigate)}
