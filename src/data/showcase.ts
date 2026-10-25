@@ -1,6 +1,7 @@
 // 랜딩 「프로젝트」 탭 데이터. 왼쪽 목록 + 오른쪽 패널(한눈에 보는 요약).
 // 문장은 projects.ts·rooms.ts·sideWorks.ts의 사이트 문장을 줄인 것이다. 새 사실·새 수치를 넣지 않는다.
-// 패널 규칙: 맡은 일 한 줄, 요약 한 줄(강조 1곳), 배경 2줄 이내, 진행 3~4단계, 결과 3줄 이내(강조 1곳).
+// 패널 규칙: 맡은 일 한 줄, 요약 한 줄, 배경 2줄 이내, 진행 3단계, 결과 3줄 이내.
+// results[].mark = 그 줄의 측정값(청록으로 표시). summaryMark는 지금 쓰지 않는다(색은 측정값 전용).
 import { projectByKey, type ProjectKey } from './projects'
 import { SIDE_WORKS } from './sideWorks'
 
@@ -42,7 +43,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     group: '대표 프로젝트',
     project: 'ddingdong',
     name: '띵동',
-    listMeta: '2026 · 졸업작품 · 주도',
+    listMeta: '졸업작품 · 2026.05 ~',
     ownership: '주도',
     chips: ['개인 졸업작품', '2026.05 ~ 진행 중', '11월 최종 발표'],
     role: '요구사항 정의, 설계 결정, 하드웨어 결선, 실기기 측정, 검증 설계. 코드는 Claude Code가 작성하고 PR 142건을 검토해 머지',
@@ -66,7 +67,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     group: '대표 프로젝트',
     project: 'voice',
     name: '멀티모달 LLM 음성 연구',
-    listMeta: '2026 · 정부 R&D 과제 · 참여',
+    listMeta: '정부 R&D 과제 · 2026.06 ~',
     ownership: '참여',
     chips: ['정부 R&D 과제 학부연구생', '2026.06 ~ 진행 중'],
     role: '음성 분석 파트의 실험 설계, 결과 검증과 해석, 랩미팅 발표 10회. 모델 본체와 융합 구조는 팀 담당',
@@ -89,7 +90,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     group: '대표 프로젝트',
     project: 'aivault',
     name: 'AI-Vault',
-    listMeta: '2026 · 개인 프로젝트 · 주도',
+    listMeta: '개인 프로젝트 · 2026.10 ~',
     ownership: '주도',
     chips: ['개인 프로젝트', '2026.10 구축 ~ 운영 중'],
     role: '공개 범위와 안전 원칙 설계, 공개 기준 승인, 실제 환경 검증, 보안 사고 대응, push. 위키 작성과 스크립트 초안은 Claude Code',
@@ -113,7 +114,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     group: '그 외 작업',
     project: 'decisions-rag',
     name: 'decisions-rag',
-    listMeta: '2026 · 띵동 개발 도구 · 주도',
+    listMeta: '띵동 개발 도구 · 2026.10',
     ownership: '주도',
     chips: ['띵동 개발 도구', '2026.10'],
     role: '설계 방향과 채택 규칙 승인, 블라인드 채점 확인, 평가 실행, MCP 등록. 코드와 평가 문항 초안은 Claude Code',
@@ -133,7 +134,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     group: '그 외 작업',
     project: 'eeg',
     name: 'EEG 감정 인식',
-    listMeta: '2026 · 공동 연구 · 참여',
+    listMeta: '공동 연구 · 2026.04 ~ 06',
     ownership: '참여',
     chips: ['학부연구생 공동 연구', '학회 논문 4인 중 3저자', '2026.04 ~ 06'],
     role: '라벨-추론 간극 지표 2개 정의, 겹치지 않는 조건에서 재측정, trial 단위 분할로 데이터 누수 방지',
@@ -152,7 +153,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     id: 'side-pickl',
     group: '그 외 작업',
     name: 'PICKL',
-    listMeta: '2025 · 해커톤 · 참여',
+    listMeta: '해커톤 · 2025',
     ownership: '참여',
     chips: ['5인 팀 프론트엔드', '멋쟁이사자처럼 13기 중앙 해커톤', '2025'],
     role: '지도, 검색, 포인트 전환, 마이페이지 화면 구현',
