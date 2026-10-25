@@ -60,8 +60,8 @@ export const PRINCIPLES: Principle[] = [
   {
     en: 'DOUBT',
     title: '잘 나온 결과를 먼저 의심한다',
-    body: '좋아 보이는 지표일수록 실제 개선인지 착시인지부터 확인합니다. 조건을 바꿔 다시 측정한 뒤에 결론을 냅니다.',
-    highlight: '조건을 바꿔 다시 측정한 뒤에 결론을 냅니다',
+    body: '좋아 보이는 지표일수록 조건을 바꿔 다시 측정한 뒤에 결론을 냅니다.',
+    highlight: '조건을 바꿔 다시 측정한 뒤에',
     evidence: [
       { label: '음성 연구 · 시드 3개 재측정', project: 'voice', tab: 'tone', anchor: 'check-0' },
       { label: '띵동 · 평가셋 누수 79건', project: 'ddingdong', anchor: 'check-0' },
@@ -80,8 +80,8 @@ export const PRINCIPLES: Principle[] = [
   {
     en: 'DELEGATE & VERIFY',
     title: 'AI에 맡기기 전에 검증 방법부터 정한다',
-    body: '구현은 AI 코딩 에이전트에 맡기되, 결과를 무엇으로 확인할지 먼저 정합니다. 실측, 대조 실험, 고정 질문 채점처럼 AI의 설명이 아니라 측정 결과로 판단합니다. 어기면 사고로 이어지는 규칙은 시스템이 막도록 만듭니다.',
-    highlight: 'AI의 설명이 아니라 측정 결과로 판단합니다',
+    body: '구현은 AI 코딩 에이전트에 맡기고, 결과는 실측과 대조 실험으로 판단합니다. 어기면 사고로 이어지는 규칙은 시스템이 막습니다.',
+    highlight: '실측과 대조 실험으로 판단합니다',
     evidence: [
       { label: 'AI-Vault · 5겹 차단 장치', project: 'aivault', anchor: 'decision-0' },
       { label: '띵동 · AI 활용과 검증 방식', project: 'ddingdong', anchor: 'ai' },
@@ -90,8 +90,8 @@ export const PRINCIPLES: Principle[] = [
   {
     en: 'RECORD',
     title: '실패와 철회까지 남긴다',
-    body: '성공한 결과뿐 아니라 틀렸던 판단과 직접 철회한 결론까지 날짜별로 기록합니다.',
-    highlight: '틀렸던 판단과 직접 철회한 결론까지',
+    body: '틀렸던 판단과 직접 철회한 결론까지 날짜별로 기록합니다.',
+    highlight: '직접 철회한 결론까지',
     evidence: [
       { label: '음성 연구 · 성공처럼 보인 결과를 철회', project: 'voice', tab: 'hallucination', anchor: 'check-0' },
       { label: '띵동 · 결정 기록 8,200여 줄', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md' },

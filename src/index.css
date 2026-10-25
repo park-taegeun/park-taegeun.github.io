@@ -111,6 +111,13 @@ body {
   }
 }
 
+/* 숫자는 Pretendard 고정폭 숫자로(줄 맞춤). 고정폭 글꼴(mono)은 기술 스택 칩에만 쓴다. */
+.num {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
 /* 가로 칩 목차 — 스크롤바 숨김(스크롤은 유지) */
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }

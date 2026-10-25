@@ -104,7 +104,7 @@ export default function Finale() {
   }, [])
 
   return (
-    <footer ref={root} className="relative overflow-hidden text-white">
+    <footer ref={root} id="finale" className="relative overflow-hidden text-white">
       <div ref={black} aria-hidden className="absolute inset-0 bg-[#0A0A0A]" />
 
       <div className="relative">
@@ -123,15 +123,11 @@ export default function Finale() {
           >
             틀린 결론은 직접 철회하고, 그 과정까지 기록합니다.
           </p>
-          <p data-finale-fade className="font-body text-white/65 text-[15px] leading-[1.85] mt-7 max-w-[58ch] break-keep">
-            음성 연구, 띵동, AI-Vault 모두 AI에 맡긴 작업을 실측과 대조 실험으로 검증했습니다.
-            AI-Vault에서는 사고를 막는 차단 장치까지 만들어 운영하고 있습니다.
-          </p>
         </section>
 
         <section id="contact" aria-label="연락처" className="mx-auto max-w-[1200px] container-pad pt-2 pb-0">
           <h2 className="sr-only">Contact</h2>
-          <p data-finale-fade className="font-body text-white/60 text-[11px] tracking-[0.14em] uppercase mb-5">Contact</p>
+          <p data-finale-fade className="font-body font-semibold text-white/60 text-[13px] mb-5">연락</p>
           <ul className="border-t border-white/15">
             {CONTACTS.map((c) => (
               <ContactRow key={c.label} {...c} />
