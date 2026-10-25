@@ -111,6 +111,22 @@ body {
   }
 }
 
+/* 포인트 컬러 강조 — 핵심 구절만 틸 형광펜(아래쪽 띠)으로. 한 블록에 한 번만 쓴다. */
+.mark {
+  color: var(--color-signal-deep);
+  background: linear-gradient(to top, rgba(14, 124, 134, 0.16) 0 40%, transparent 40%);
+  padding-inline: 0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.mark-strong {
+  color: var(--color-signal-deep);
+  background: linear-gradient(to top, rgba(14, 124, 134, 0.2) 0 34%, transparent 34%);
+  padding-inline: 0.04em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 /* 가로 칩 목차 — 스크롤바 숨김(스크롤은 유지) */
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }

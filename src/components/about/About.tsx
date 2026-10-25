@@ -1,5 +1,5 @@
-// About. 인물 소개(사진·연락처) + 소개 세 줄 + 일하는 원칙 4개(각각 근거 링크 2개) + 이력 요약.
-// 원칙은 주장만 두지 않고, 상세 페이지의 해당 블록으로 바로 이어진다(구성안 3절 3번).
+// 일하는 방식(About). 인물(사진·연락처) + 일하는 원칙 4개(각 한두 문장, 핵심 구절 틸 강조, 근거 링크 2개).
+// 원칙은 주장만 두지 않고, 상세 페이지의 해당 블록으로 바로 이어진다. 이력(Timeline)은 별도 섹션으로 뺐다.
 import { motion } from 'framer-motion'
 import { type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -8,10 +8,10 @@ import { projectByKey } from '../../data/projects'
 import { scrollToId } from '../../lib/lenis'
 import { onImgError } from '../../lib/placeholder'
 import { crossfadeToRoom } from '../../lib/signature'
-import { splitSentences } from '../../lib/text'
 import Label, { labelEnClass as labelEn } from '../Label'
+import Marked from '../Mark'
 
-const aboutPad = { paddingBlock: 'clamp(72px, 8vw, 120px)' }
+const aboutPad = { paddingBlock: 'clamp(64px, 8vw, 112px)' }
 
 function useEvidenceNav() {
   const navigate = useNavigate()
@@ -28,47 +28,19 @@ function useEvidenceNav() {
 
 export default function About() {
   return (
-    <section id="about" aria-label="소개" className="relative overflow-hidden border-t border-line">
+    <section id="about" aria-label="일하는 방식" className="relative overflow-hidden border-t border-line bg-soft/50">
       <div className="mx-auto max-w-[1200px] container-pad" style={aboutPad}>
-        <Label as="p">About</Label>
-        <Headline />
-        <div className="mt-5 max-w-[68ch]">
-          {PROFILE.intro.map((line) => (
-            <p key={line} className="font-body text-text-sub text-[16px] leading-[1.8] break-keep">
-              {line}
-            </p>
-          ))}
-        </div>
+        <Label as="p">How I work</Label>
+        <h2 className="font-body font-bold text-ink mt-3 tracking-[-0.03em]" style={{ fontSize: 'clamp(24px,3vw,36px)' }}>
+          일하는 방식
+        </h2>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[230px_minmax(0,1fr)] lg:items-start">
+        <div className="mt-9 grid gap-10 lg:grid-cols-[236px_minmax(0,1fr)] lg:items-start">
           <Identity />
           <Principles />
         </div>
-
-        <Timeline />
       </div>
     </section>
-  )
-}
-
-function Headline() {
-  const EMPH = PROFILE.headlineEmphasis
-  const [before, after] = PROFILE.headline.split(EMPH)
-  return (
-    <h2 className="font-body font-bold text-ink mt-4 leading-[1.4] break-keep" style={{ fontSize: 'clamp(24px,3.2vw,40px)', letterSpacing: '-0.03em' }}>
-      {before}
-      <span
-        style={{
-          textDecorationLine: 'underline',
-          textDecorationColor: 'var(--color-signal)',
-          textDecorationThickness: '3px',
-          textUnderlineOffset: '6px',
-        }}
-      >
-        {EMPH}
-      </span>
-      {after}
-    </h2>
   )
 }
 
@@ -129,105 +101,68 @@ function MetaRow({ k, v }: { k: string; v: ReactNode }) {
 
 function Principles() {
   return (
-    <div className="border-t border-line pt-6 lg:border-t-0 lg:pt-0">
-      <Label as="h3">How I work</Label>
-      <ul className="mt-3">
-        {PRINCIPLES.map((p, i) => (
-          <PrincipleRow key={p.en} item={p} n={i + 1} />
-        ))}
-      </ul>
-    </div>
+    <ul className="grid gap-3.5 sm:grid-cols-2">
+      {PRINCIPLES.map((p, i) => (
+        <PrincipleCard key={p.en} item={p} n={i + 1} />
+      ))}
+    </ul>
   )
 }
 
-function PrincipleBody({ body, highlight }: { body: string; highlight: string }) {
-  const sentences = splitSentences(body)
-  const multi = sentences.length > 1
-  return (
-    <>
-      {sentences.map((s, i) => {
-        const idx = s.indexOf(highlight)
-        const content =
-          idx === -1 ? (
-            s
-          ) : (
-            <>
-              {s.slice(0, idx)}
-              <strong className="font-semibold text-ink">{highlight}</strong>
-              {s.slice(idx + highlight.length)}
-            </>
-          )
-        return (
-          <span key={i} className={multi ? 'block' : undefined}>
-            {content}
-          </span>
-        )
-      })}
-    </>
-  )
-}
-
-function PrincipleRow({ item, n }: { item: Principle; n: number }) {
+function PrincipleCard({ item, n }: { item: Principle; n: number }) {
   const go = useEvidenceNav()
   return (
     <motion.li
-      initial={{ opacity: 0, y: 22 }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-10%' }}
-      transition={{ duration: 0.55, delay: n * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative border-t border-line py-6 grid gap-3 sm:grid-cols-[minmax(0,200px)_minmax(0,1fr)] sm:gap-7 lg:gap-9"
+      transition={{ duration: 0.5, delay: n * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      className="flex flex-col bg-panel p-5 sm:p-6"
+      style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)', boxShadow: 'var(--shadow-soft)' }}
     >
-      <span
-        aria-hidden
-        className="absolute left-0 top-6 bottom-6 w-[2px] origin-top scale-y-0 transition-transform duration-300 group-hover:scale-y-100"
-        style={{ background: 'var(--color-navy)' }}
-      />
-      <div className="flex items-baseline gap-3 sm:flex-col sm:gap-2 sm:pl-4">
-        <span className="font-display font-bold text-[40px] leading-[0.85] text-line-strong transition-colors duration-300 group-hover:text-[var(--color-signal)]" style={{ letterSpacing: '-0.04em' }} aria-hidden>
+      <div className="flex items-baseline gap-2.5">
+        <span className="font-mono font-semibold text-[13px] text-signal" aria-hidden>
           {String(n).padStart(2, '0')}
         </span>
-        <div className="sm:mt-1">
-          <p className="font-display font-semibold uppercase tracking-[0.12em] text-text-muted text-[11px]">{item.en}</p>
-          <p className="font-body font-bold text-ink text-[15px] leading-[1.35] mt-0.5">{item.title}</p>
-        </div>
+        <span className="font-display font-semibold uppercase tracking-[0.12em] text-text-muted text-[10.5px]">{item.en}</span>
       </div>
-      <div className="sm:pt-1.5">
-        <p className="font-body text-text-sub text-[14.5px] leading-[1.78] break-keep">
-          <PrincipleBody body={item.body} highlight={item.highlight} />
-        </p>
-        <ul className="mt-3 flex flex-wrap gap-2" aria-label={`${item.title} 근거`}>
-          <li className="font-body font-semibold text-[11.5px] text-text-muted self-center mr-1">근거 보기</li>
-          {item.evidence.map((e) => (
-            <li key={e.label}>
-              <button
-                type="button"
-                onClick={() => go(e)}
-                className="group/ev inline-flex items-center gap-1.5 font-body text-[12.5px] text-navy px-2.5 py-1.5 rounded-full border border-line bg-panel hover:border-navy transition-colors"
-              >
-                {e.label}
-                <span aria-hidden className="text-signal transition-transform group-hover/ev:translate-x-0.5">
-                  {e.href ? '↗' : '→'}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <p className="font-body font-bold text-ink text-[17px] leading-[1.4] mt-2 break-keep">{item.title}</p>
+      <p className="font-body text-text-sub text-[14.5px] leading-[1.7] mt-2 break-keep flex-1">
+        <Marked text={item.body} mark={item.highlight} />
+      </p>
+      <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${item.title} 근거`}>
+        {item.evidence.map((e) => (
+          <li key={e.label}>
+            <button
+              type="button"
+              onClick={() => go(e)}
+              className="group/ev inline-flex items-center gap-1.5 font-body text-[12.5px] text-navy px-2.5 py-1.5 rounded-full border border-line bg-base hover:border-navy transition-colors"
+            >
+              {e.label}
+              <span aria-hidden className="text-signal transition-transform group-hover/ev:translate-x-0.5">
+                {e.href ? '↗' : '→'}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
     </motion.li>
   )
 }
 
-function Timeline() {
+export function TimelineSection() {
   return (
-    <section aria-label="이력" className="mt-16">
-      <div className="flex items-baseline gap-3">
-        <Label as="h3">Timeline</Label>
-        <span className="font-body text-text-sub text-[13px]">연구·프로젝트와 학업·자격</span>
-      </div>
-      <div className="mt-6 grid gap-10 lg:grid-cols-[1.35fr_1fr]">
-        {TIMELINE.map((g) => (
-          <TimelineGroupView key={g.year} group={g} />
-        ))}
+    <section id="timeline" aria-label="이력" className="relative border-t border-line">
+      <div className="mx-auto max-w-[1200px] container-pad" style={aboutPad}>
+        <Label as="p">Timeline</Label>
+        <h2 className="font-body font-bold text-ink mt-3 tracking-[-0.03em]" style={{ fontSize: 'clamp(24px,3vw,36px)' }}>
+          이력
+        </h2>
+        <div className="mt-9 grid gap-10 lg:grid-cols-[1.35fr_1fr]">
+          {TIMELINE.map((g) => (
+            <TimelineGroupView key={g.year} group={g} />
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -104,7 +104,7 @@ export default function Finale() {
   }, [])
 
   return (
-    <footer ref={root} className="relative overflow-hidden text-white">
+    <footer ref={root} id="finale" className="relative overflow-hidden text-white">
       <div ref={black} aria-hidden className="absolute inset-0 bg-[#0A0A0A]" />
 
       <div className="relative">
