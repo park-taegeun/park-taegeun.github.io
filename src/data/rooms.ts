@@ -107,7 +107,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
         { value: '10.4~11.0초', label: '사진·자막 알림 처리 시간(목표 15초)', cond: '기기 기준, 노크 n=3' },
         { value: '누수 79건', label: '평가셋 누수를 찾아 정확도 정정', cond: '평가셋 424건 중' },
       ],
-      tech: ['ESP32-S3', 'C++(PlatformIO)', 'Python', 'TensorFlow(YAMNet)', 'Flask', 'SQLite', 'React', 'TypeScript', 'Kakao API', 'CLOVA Speech', 'Claude Code'],
+      tech: ['ESP32-S3', 'C++(PlatformIO)', 'Python', 'TensorFlow(YAMNet)', 'Flask', 'SQLite', 'React', 'TypeScript', 'Kakao API', 'CLOVA CSR', 'Claude Code'],
     },
     mainImage: {
       src: '/images/ddingdong/kakao_3cut.webp',
@@ -245,7 +245,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
       body: '원격 참여자의 대화 맥락을 이해하는 XR 텔레프레즌스 플랫폼 개발 과제(정부 R&D, 한국콘텐츠진흥원)에 학부연구생으로 참여하고 있습니다. 음성 분석 파트에서 두 가지를 맡았습니다. 2026년 6~7월에는 멀티모달 LLM의 받아쓰기 환각을 진단했고, 7월부터는 지도교수님 지시로 목소리 어조를 분석해 LLM에 전달하는 오디오 모듈을 실험하고 있습니다. 모델 본체와 여러 입력을 합치는 융합 구조, 화자 분리, 제스처 인식은 다른 파트에서 담당합니다.',
       image: {
         src: '/images/voice/project_map.svg',
-        alt: '과제 구성도. 음성에서 어조 분석(담당 부분), 영상에서 제스처 인식(다른 파트), 성문과 입 모양에서 화자 분리(다른 파트)가 모듈 통합으로 모여 다자 대화 타임라인을 만듦',
+        alt: '과제 구성도. 음성에서 어조 분석(참여 부분), 영상에서 제스처 인식(다른 파트), 성문과 입 모양에서 화자 분리(다른 파트)가 모듈 통합으로 모여 다자 대화 타임라인을 만듦',
         caption: '과제 ‘원격 다자 참여자의 대화 맥락인지를 위한 AI 에이전트 기반 XR 텔레프레즌스 플랫폼 개발’(RS-2026-25518171)에서 제가 맡은 부분',
         layout: 'wide',
       },
@@ -636,7 +636,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     mainImage: {
       src: '/images/eeg/eeg_results.svg',
       alt: 'EEG 결과 막대. 생체신호 5종 LightGBM 68.2%, 뇌파에 같은 정규화를 적용한 LightGBM 73.3%, 이중 스트림 모델 75.1%',
-      caption: '같은 정규화를 적용한 기준 모델과 비교해, 모델 구조만의 효과(+1.8%p)를 따로 보였습니다.',
+      caption: '논문은 같은 정규화를 적용한 기준 모델과 비교해 모델 구조만의 효과(+1.8%p)를 따로 보였습니다.',
       layout: 'wide',
     },
     citation:

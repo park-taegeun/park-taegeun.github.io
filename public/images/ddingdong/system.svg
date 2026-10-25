@@ -38,7 +38,7 @@
 <text x="383" y="560" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="600" fill="#101A2C" text-anchor="start">2차: 사진 1장 + 5초 녹음</text>
 <rect x="600" y="480" width="240" height="90" rx="12" fill="#E1F3F4" stroke="#0E7C86" stroke-width="3" opacity="1"/>
 <text x="720" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="21" font-weight="700" fill="#0E7C86" text-anchor="middle">음성 받아쓰기</text>
-<text x="720" y="548" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="middle">CLOVA Speech</text>
+<text x="720" y="548" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="middle">CLOVA CSR</text>
 <line x1="845" y1="525" x2="885" y2="525" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
 <rect x="890" y="480" width="210" height="90" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
 <text x="995" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="middle">사진 · 자막 발송</text>
