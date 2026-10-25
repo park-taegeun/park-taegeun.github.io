@@ -16,7 +16,7 @@
 <text x="465" y="668" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#9AA6B4" text-anchor="middle">철회한 방식</text>
 <line x1="60" y1="600" x2="560" y2="600" stroke="#DCE1E9" stroke-width="2"/>
 <text x="640" y="70" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="32" font-weight="700" fill="#101A2C" text-anchor="start">오디오 길이를 따라가는 정도</text>
-<text x="640" y="108" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="400" fill="#586173" text-anchor="start">오디오 길이와 출력 길이의 상관 · 높을수록 좋음</text>
+<text x="640" y="108" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="400" fill="#586173" text-anchor="start">길이 상관 · 정답 전사문(0.737)에 가까울수록 좋음</text>
 <rect x="660" y="588.24" width="110" height="11.760000000000002" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
 <text x="715" y="574.24" font-family="'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace" font-size="32" font-weight="700" fill="#1A2B4A" text-anchor="middle">0.021</text>
 <text x="715" y="638" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="600" fill="#101A2C" text-anchor="middle">원래 모델</text>

@@ -247,7 +247,7 @@ export const PROJECTS: Project[] = [
     previewImage: {
       src: '/images/eeg/eeg_results.svg',
       alt: 'EEG 결과 막대. 생체신호 5종 LightGBM 68.2%, 뇌파에 같은 정규화를 적용한 LightGBM 73.3%, 이중 스트림 모델 75.1%',
-      caption: '같은 정규화를 적용한 기준 모델과 비교해, 모델 구조만의 효과(+1.8%p)를 따로 보였습니다.',
+      caption: '논문은 같은 정규화를 적용한 기준 모델과 비교해 모델 구조만의 효과(+1.8%p)를 따로 보였습니다.',
     },
     og: {
       title: 'EEG 감정 인식 · 라벨-추론 간극 분석 | 박태근',
