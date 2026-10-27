@@ -102,12 +102,12 @@ export const SHOWCASE: ShowcaseItem[] = [
     ],
     steps: ['규칙서(부탁)와 시스템 차단(강제) 분리', '쓰는 순간부터 배포 직전까지 5겹 차단', '고정 질문으로 위키 품질 측정'],
     results: [
-      { text: '위험한 작업 5가지를 일부러 시킨 시연에서 5/5 차단 (시연 1회)', mark: '5/5 차단' },
+      { text: 'AI에게 위험한 작업 4가지를 일부러 시킨 시연에서 4/4 차단 (시연 1회)', mark: '4/4 차단' },
+      { text: '사람이 키가 든 파일을 직접 커밋해도 커밋 검사가 차단' },
       { text: '새 기록 반영 후 위키만으로 답한 고정 질문 1/5 → 5/5' },
-      { text: '공개 저장소 push는 항상 사람이 실행' },
     ],
     tech: ['Claude Code(훅·스킬·서브에이전트)', 'MCP', 'Python', 'Obsidian', 'Quartz', 'GitHub Actions'],
-    media: { kind: 'image', src: p('aivault').previewImage.src, alt: p('aivault').previewImage.alt, caption: '5번 모두 차단됐고, AI는 우회하지 않고 보고' },
+    media: { kind: 'image', src: p('aivault').previewImage.src, alt: p('aivault').previewImage.alt, caption: '4건 모두 실행 직전에 차단, 사람의 커밋 실수도 차단' },
   },
   {
     id: p('decisions-rag').anchorId,
