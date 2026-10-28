@@ -45,10 +45,11 @@ export default function About() {
 }
 
 function Identity() {
+  // 모바일·태블릿에서는 사진과 이름을 한 줄에 두어 원칙 카드가 첫 화면에 보이게 하고, 데스크톱에서는 세로 프로필.
   return (
-    <div>
-      <figure className="w-[150px] bg-panel overflow-hidden" style={{ borderRadius: 16, border: 'var(--frame-border)', boxShadow: 'var(--shadow-soft)' }}>
-        <div className="p-2">
+    <div className="grid grid-cols-[92px_minmax(0,1fr)] items-start gap-x-4 sm:grid-cols-[120px_minmax(0,1fr)] lg:block">
+      <figure className="w-full lg:w-[150px] bg-panel overflow-hidden" style={{ borderRadius: 16, border: 'var(--frame-border)', boxShadow: 'var(--shadow-soft)' }}>
+        <div className="p-1.5 lg:p-2">
           <img
             src={PROFILE.portrait}
             alt={`${PROFILE.name} 프로필 사진`}
@@ -63,7 +64,8 @@ function Identity() {
         </div>
       </figure>
 
-      <p className="font-display font-bold uppercase tracking-[-0.03em] text-ink text-[19px] mt-4">{PROFILE.romanized}</p>
+      <div className="min-w-0">
+      <p className="font-display font-bold uppercase tracking-[-0.03em] text-ink text-[19px] lg:mt-4">{PROFILE.romanized}</p>
       <p className="font-body text-text-sub text-[12.5px] mt-0.5">
         {PROFILE.name} · {PROFILE.role}
       </p>
@@ -86,6 +88,7 @@ function Identity() {
           }
         />
       </dl>
+      </div>
     </div>
   )
 }
@@ -190,35 +193,42 @@ function TimelineEntry({ item }: { item: TimelineItem }) {
     if (item.project) void crossfadeToRoom(projectByKey(item.project), navigate)
     else if (item.anchorId) scrollToId(item.anchorId)
   }
-  const head = (
-    <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-      <p className={`font-body text-[14.5px] leading-[1.45] ${linked ? 'font-bold text-ink group-hover/t:underline underline-offset-4' : 'font-semibold text-ink'}`}>{item.title}</p>
+  // 이력서처럼 왼쪽에 기간, 오른쪽에 내용. 기간 열 폭을 고정해 날짜가 한 줄로 내려 읽힌다.
+  const when = (
+    <div className="flex items-center gap-2 sm:block">
+      <p className="font-mono text-text-muted text-[12px] leading-[1.6] tabular-nums whitespace-nowrap">{item.period}</p>
       {item.ongoing && (
-        <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
+        <p className="inline-flex items-center gap-1.5 whitespace-nowrap sm:mt-1">
           <span aria-hidden className="h-[6px] w-[6px] rounded-full animate-pulse" style={{ background: 'var(--color-signal)' }} />
-          <span className="font-body font-semibold text-[10.5px] tracking-[0.04em] text-signal">진행 중</span>
-        </span>
+          <span className="font-body font-semibold text-[11px] text-signal">{item.ongoingLabel ?? '진행 중'}</span>
+        </p>
       )}
-      <span className="font-mono text-text-muted text-[11.5px] ml-auto whitespace-nowrap">{item.period}</span>
     </div>
   )
+  const body = (
+    <div className="min-w-0">
+      <p className={`font-body text-[14.5px] leading-[1.45] ${linked ? 'font-bold text-ink group-hover/t:underline underline-offset-4' : 'font-semibold text-ink'}`}>{item.title}</p>
+      {item.org && <p className="font-body text-text-muted text-[12.5px] leading-[1.5] mt-1">{item.org}</p>}
+      {item.note && (
+        <p className="font-body text-text-sub text-[13px] leading-[1.6] mt-1 max-w-[64ch]">
+          {item.note} {linked && <span aria-hidden className="text-signal">→</span>}
+        </p>
+      )}
+    </div>
+  )
+  const grid = 'grid gap-1.5 sm:grid-cols-[124px_minmax(0,1fr)] sm:gap-4'
   return (
     <li className="border-b border-line py-3.5">
       {linked ? (
-        <button type="button" onClick={open} className="group/t block w-full text-left">
-          {head}
-          {item.org && <p className="font-body text-text-muted text-[12px] leading-[1.5] mt-1">{item.org}</p>}
-          {item.note && (
-            <p className="font-body text-text-sub text-[13px] leading-[1.6] mt-1 max-w-[64ch]">
-              {item.note} <span aria-hidden className="text-signal">→</span>
-            </p>
-          )}
+        <button type="button" onClick={open} className={`group/t w-full text-left ${grid}`}>
+          {when}
+          {body}
         </button>
       ) : (
-        <>
-          {head}
-          {item.note && <p className="font-body text-text-sub text-[13px] leading-[1.6] mt-1 max-w-[64ch]">{item.note}</p>}
-        </>
+        <div className={grid}>
+          {when}
+          {body}
+        </div>
       )}
     </li>
   )

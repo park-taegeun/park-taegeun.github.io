@@ -272,7 +272,7 @@ export default function ProjectRoom() {
                   {track.problem.source && <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-4">{track.problem.source}</p>}
                 </div>
                 {track.problem.image && (
-                  <div className="mt-8 max-w-[680px]">
+                  <div className={`mt-8 ${track.problem.image.layout === 'wide' ? '' : 'max-w-[680px]'}`}>
                     <ZoomFrame item={track.problem.image} onZoom={setZoom} />
                   </div>
                 )}

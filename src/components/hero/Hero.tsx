@@ -60,22 +60,29 @@ export default function Hero() {
               <Marked text={PROFILE.headline} mark={PROFILE.headlineEmphasis} />
             </p>
 
-            <ul className="mt-9 grid gap-2.5 sm:grid-cols-3" aria-label="대표 증거">
+            {/* 모바일: 카드 3장을 한 묶음의 목록(행 3개)으로 접어 첫 화면 세로 길이를 줄인다. sm 이상은 카드 3장. */}
+            <ul
+              className="mt-8 sm:mt-9 grid overflow-hidden rounded-xl border border-line bg-panel divide-y divide-line shadow-[0_10px_30px_rgba(16,26,44,0.06)] sm:overflow-visible sm:rounded-none sm:border-0 sm:bg-transparent sm:shadow-none sm:divide-y-0 sm:gap-2.5 sm:grid-cols-3"
+              aria-label="대표 증거"
+            >
               {PROOFS.map((p) => (
                 <li key={p.key} data-hero-sub>
                   <button
                     type="button"
                     onClick={() => void crossfadeToRoom(projectByKey(p.key), navigate, '#results')}
-                    className="group w-full h-full text-left bg-panel px-4 py-3.5 transition-colors hover:border-navy"
-                    style={{ borderRadius: 12, border: '1px solid var(--color-line)', boxShadow: 'var(--shadow-soft)' }}
+                    className="group w-full h-full text-left bg-panel px-4 py-3 sm:py-3.5 transition-colors sm:rounded-xl sm:border sm:border-line sm:shadow-[0_10px_30px_rgba(16,26,44,0.06)] hover:border-navy"
                     aria-label={`${p.label} 결과 보기: ${p.metric}, ${p.cond}`}
                   >
-                    <span className="flex items-center justify-between font-body font-semibold text-[12px] text-text-sub">
-                      {p.label}
-                      <span aria-hidden className="text-text-muted transition-transform group-hover:translate-x-0.5">→</span>
+                    <span className="flex items-baseline justify-between gap-3 sm:block">
+                      <span className="flex items-center justify-between font-body font-semibold text-[12px] text-text-sub">
+                        {p.label}
+                        <span aria-hidden className="hidden sm:inline text-text-muted transition-transform group-hover:translate-x-0.5">→</span>
+                      </span>
+                      <span className="block font-mono font-semibold text-navy text-[15px] sm:text-[16px] leading-[1.3] sm:mt-1.5 tabular-nums text-right sm:text-left">
+                        {p.metric}
+                      </span>
                     </span>
-                    <span className="block font-mono font-semibold text-navy text-[16px] leading-[1.3] mt-1.5 tabular-nums">{p.metric}</span>
-                    <span className="block font-body text-text-muted text-[11.5px] leading-[1.5] mt-1">{p.cond}</span>
+                    <span className="block font-body text-text-muted text-[11.5px] leading-[1.5] mt-0.5 sm:mt-1">{p.cond}</span>
                   </button>
                 </li>
               ))}

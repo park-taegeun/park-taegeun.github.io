@@ -1,7 +1,7 @@
-// 블랙 피날레 — 3박자:
-// ① 검은 원확산(~0.7s, #0A0A0A)이 흰 세계를 삼킴 ② 연락처(호버 시 색 점등)
+// 마무리(딥 네이비) 3박자:
+// ① 네이비 원확산(~0.7s, --color-ink)이 밝은 화면을 덮음 ② 연락처(호버 시 색 점등)
 // ③ 마감 워드마크(VERIFIED.) 글자 하나씩 조용한 stagger + 마무리 한 줄.
-// 기본 마크업 = 완성 상태(검정 배경·콘텐츠 가시). JS 없거나 reduced-motion이면 그대로 보임.
+// 기본 마크업 = 완성 상태(네이비 배경·콘텐츠 가시). 순검정 대신 사이트 잉크색을 써서 팔레트 안에서 끝난다. JS 없거나 reduced-motion이면 그대로 보임.
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
 import { VELOG_URL } from '../../data/writing'
@@ -105,7 +105,7 @@ export default function Finale() {
 
   return (
     <footer ref={root} id="finale" className="relative overflow-hidden text-white">
-      <div ref={black} aria-hidden className="absolute inset-0 bg-[#0A0A0A]" />
+      <div ref={black} aria-hidden className="absolute inset-0 bg-ink" />
 
       <div className="relative">
         <section aria-label="마무리 문장" className="mx-auto max-w-[1200px] container-pad pt-24 pb-16">
@@ -124,7 +124,7 @@ export default function Finale() {
             틀린 결론은 직접 철회하고, 그 과정까지 기록합니다.
           </p>
           <p data-finale-fade className="font-body text-white/65 text-[15px] leading-[1.85] mt-7 max-w-[58ch] break-keep">
-            음성 연구, 띵동, AI-Vault 모두 AI에 맡긴 작업을 실측과 대조 실험으로 검증했습니다.
+            띵동, 전통주로, 음성 연구, AI-Vault 모두 AI에 맡긴 작업을 실측과 대조 실험으로 검증했습니다.
             AI-Vault에서는 사고를 막는 차단 장치까지 만들어 운영하고 있습니다.
           </p>
         </section>
@@ -139,7 +139,7 @@ export default function Finale() {
           </ul>
         </section>
 
-        <section aria-label="마무리" className="mx-auto max-w-[1200px] container-pad pb-32 pt-12">
+        <section aria-label="마무리" className="mx-auto max-w-[1200px] container-pad pb-16 pt-12">
           <p
             className="font-display font-bold uppercase tracking-[-0.04em] leading-[0.95]"
             style={{ fontSize: 'clamp(48px,8vw,120px)' }}
@@ -157,6 +157,15 @@ export default function Finale() {
             측정 조건까지 밝힌 숫자로 말하겠습니다.
           </p>
         </section>
+
+        <div className="mx-auto max-w-[1200px] container-pad pb-10">
+          <p className="border-t border-white/15 pt-5 flex flex-wrap justify-between gap-x-6 gap-y-1 font-body text-[12.5px] text-white/60">
+            <span>© 2026 {PROFILE.name}</span>
+            <span>
+              마지막 업데이트 <time className="font-mono tabular-nums">{__BUILD_DATE__}</time>
+            </span>
+          </p>
+        </div>
       </div>
     </footer>
   )

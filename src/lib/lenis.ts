@@ -28,15 +28,16 @@ export function useLenisRoot(): void {
 
 /** 10초 요약 → Selected 블록 앵커 스크롤 (시그니처 전환 아님 — §0.1).
  *  WCAG 2.4.3: 스크롤 후 대상으로 포커스 이동 */
-export function scrollToId(id: string): void {
+export function scrollToId(id: string, opts: { offset?: number } = {}): void {
+  const offset = opts.offset ?? NAV_OFFSET
   // 탭 안의 항목(프로젝트 탭 등)이면 그 탭을 먼저 열고, 탭 묶음의 시작점으로 스크롤한다.
   const detail: AnchorRequest = { id }
   window.dispatchEvent(new CustomEvent<AnchorRequest>(ANCHOR_EVENT, { detail }))
   const el = document.getElementById(detail.redirect ?? id)
   if (!el) return
   // 상단 고정 내비에 가리지 않게 위쪽 여백을 둔다
-  if (lenis) lenis.scrollTo(el, { offset: -NAV_OFFSET })
-  else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET, behavior: 'smooth' })
+  if (lenis) lenis.scrollTo(el, { offset: -offset })
+  else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' })
   if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1')
   el.focus({ preventScroll: true })
 }
