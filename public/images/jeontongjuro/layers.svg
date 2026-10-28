@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 545" width="1200" height="545" role="img" aria-label="필드별 적재, 노출, 응답 값. 홈페이지 58 58 53, 전화 52 51 52, 카카오 링크 55 54 55, 한 줄 요약 문구 8곳">
+<title>필드별 적재, 노출, 응답 값. 홈페이지 58 58 53, 전화 52 51 52, 카카오 링크 55 54 55, 한 줄 요약 문구 8곳</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker></defs>
+<rect width="1200" height="545" fill="#FFFFFF"/>
+<text x="40" y="54" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#101A2C" text-anchor="start">DB 값은 그대로, 화면 값만 응답 단계에서 바뀝니다</text>
+<text x="40" y="90" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">같은 필드를 세 층에서 따로 셉니다. 층 사이를 뺄셈으로 오가면 숫자가 틀립니다</text>
+<text x="40" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16.5" font-weight="700" fill="#586173" text-anchor="start">필드</text>
+<text x="330" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16.5" font-weight="700" fill="#586173" text-anchor="start">수집 (적재 59)</text>
+<text x="520" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16.5" font-weight="700" fill="#586173" text-anchor="start">영업 중단 제외 (노출 58)</text>
+<text x="720" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16.5" font-weight="700" fill="#586173" text-anchor="start">화면 (응답)</text>
+<text x="880" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16.5" font-weight="700" fill="#586173" text-anchor="start">차이가 생긴 이유</text>
+<line x1="40" y1="162" x2="1160" y2="162" stroke="#C3CAD6" stroke-width="1.5"/>
+<text x="40" y="210" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#101A2C" text-anchor="start">홈페이지 링크</text>
+<text x="330" y="210" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">58</text>
+<text x="520" y="210" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">58</text>
+<text x="720" y="210" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="700" fill="#0E7C86" text-anchor="start">53</text>
+<text x="880" y="206" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="600" fill="#101A2C" text-anchor="start">접속 불가 5곳을 내림</text>
+<text x="880" y="230" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="14.5" font-weight="400" fill="#586173" text-anchor="start">DNS·HTTP 전수 실측 57곳</text>
+<line x1="40" y1="246" x2="1160" y2="246" stroke="#E3E7ED" stroke-width="1"/>
+<text x="40" y="286" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#101A2C" text-anchor="start">전화번호</text>
+<text x="330" y="286" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">52</text>
+<text x="520" y="286" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">51</text>
+<text x="720" y="286" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="700" fill="#0E7C86" text-anchor="start">52</text>
+<text x="880" y="282" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="600" fill="#101A2C" text-anchor="start">누락 1곳 보충</text>
+<text x="880" y="306" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="14.5" font-weight="400" fill="#586173" text-anchor="start">원본이 비어 있을 때만 동작</text>
+<line x1="40" y1="322" x2="1160" y2="322" stroke="#E3E7ED" stroke-width="1"/>
+<text x="40" y="362" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#101A2C" text-anchor="start">카카오 장소 링크</text>
+<text x="330" y="362" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">55</text>
+<text x="520" y="362" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">54</text>
+<text x="720" y="362" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="700" fill="#0E7C86" text-anchor="start">55</text>
+<text x="880" y="358" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="600" fill="#101A2C" text-anchor="start">누락 1곳 보충</text>
+<text x="880" y="382" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="14.5" font-weight="400" fill="#586173" text-anchor="start">원본이 비어 있을 때만 동작</text>
+<line x1="40" y1="398" x2="1160" y2="398" stroke="#E3E7ED" stroke-width="1"/>
+<text x="40" y="438" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#101A2C" text-anchor="start">한 줄 요약 문구</text>
+<text x="330" y="438" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">-</text>
+<text x="520" y="438" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="600" fill="#586173" text-anchor="start">-</text>
+<text x="720" y="438" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="24" font-weight="700" fill="#0E7C86" text-anchor="start">8곳</text>
+<text x="880" y="434" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="600" fill="#101A2C" text-anchor="start">요약이 비던 곳에 카피</text>
+<text x="880" y="458" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="14.5" font-weight="400" fill="#586173" text-anchor="start">문구는 디자이너 작성</text>
+<line x1="40" y1="474" x2="1160" y2="474" stroke="#E3E7ED" stroke-width="1"/>
+<text x="40" y="520" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="600" fill="#101A2C" text-anchor="start">결과: 연락 수단(전화·홈페이지·카카오)이 하나도 없는 양조장 0곳, 한 줄 요약이 0줄인 양조장 0곳(응답 기준)</text>
+</svg>
