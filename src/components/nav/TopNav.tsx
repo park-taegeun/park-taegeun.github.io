@@ -1,5 +1,5 @@
 // 상단 카테고리 내비. 처음부터 보이고 스크롤해도 따라온다. 지금 보고 있는 섹션은 진한 알약으로 표시.
-// 검은 마무리 섹션 위에서는 어두운 유리로 바뀐다.
+// 어두운 마무리 섹션 위에서는 어두운 유리로 바뀐다. 「연락」은 마무리 섹션 맨 위로 바로 가서(여백 0) 밝은 띠가 남지 않게 한다.
 import { useEffect, useState } from 'react'
 import { PROFILE } from '../../data/about'
 import { scrollToId } from '../../lib/lenis'
@@ -40,10 +40,10 @@ export default function TopNav() {
     }
   }, [])
 
-  const go = (id: string) => scrollToId(id)
+  const go = (id: string) => scrollToId(id, id === 'finale' ? { offset: 0 } : {})
 
   const glass = dark
-    ? { background: 'rgba(16,16,16,0.72)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 6px 24px rgba(0,0,0,0.4)' }
+    ? { background: 'rgba(26,43,74,0.72)', border: '1px solid rgba(255,255,255,0.14)', boxShadow: '0 6px 24px rgba(5,10,20,0.35)' }
     : { background: 'rgba(255,255,255,0.86)', border: '1px solid var(--color-line)', boxShadow: '0 6px 24px rgba(16,26,44,0.07)' }
 
   return (

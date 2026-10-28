@@ -120,7 +120,23 @@ export function ResultsTable({
   columns?: [string, string, string]
 }) {
   return (
-    <div className="overflow-x-auto -mx-1 px-1">
+    <>
+      {/* 모바일: 표를 가로로 밀어야 조건이 보이던 문제 → 행마다 항목·결과·조건을 위아래로 쌓는다 */}
+      <dl className="sm:hidden border-t-2" style={{ borderColor: 'var(--color-navy)' }}>
+        {rows.map((r) => (
+          <div key={r.item} className="border-b border-line py-3.5">
+            <dt className="font-body font-semibold text-text-sub text-[12.5px] leading-[1.5]">{r.item}</dt>
+            <dd className="m-0 mt-1 font-body text-ink text-[15px] leading-[1.6] tabular-nums break-keep">
+              <RichText text={r.value} lines={false} />
+            </dd>
+            <dd className="m-0 mt-1.5 font-body text-text-muted text-[12.5px] leading-[1.6] break-keep">
+              <span className="sr-only">{columns[2]}: </span>
+              <RichText text={r.cond} lines={false} terms={false} />
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <div className="hidden sm:block overflow-x-auto -mx-1 px-1">
       <table className="w-full min-w-[560px] border-collapse text-left">
         <thead>
           <tr className="border-b-2" style={{ borderColor: 'var(--color-navy)' }}>
@@ -147,7 +163,8 @@ export function ResultsTable({
           ))}
         </tbody>
       </table>
-    </div>
+      </div>
+    </>
   )
 }
 
@@ -158,7 +175,12 @@ export function DecisionList({ items, onZoom }: { items: Decision[]; onZoom: (i:
       {items.map((d, i) => (
         <li key={d.title} id={`decision-${i}`} className="scroll-mt-28">
           <Reveal>
-            <article className={d.image ? 'grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start' : ''}>
+            {/* 넓은 그림(표·흐름도)은 옆 칸에 두면 글자가 읽히지 않아 본문 아래 전체 폭으로 둔다 */}
+            <article
+              className={
+                d.image ? (d.image.layout === 'wide' ? 'grid gap-6' : 'grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-start') : ''
+              }
+            >
               <div className="border-l-2 pl-5" style={{ borderColor: 'var(--color-navy)' }}>
                 <p className="font-mono text-[12px] text-signal tabular-nums">결정 {String(i + 1).padStart(2, '0')}</p>
                 <h3 className="font-body font-bold text-ink text-[17px] leading-[1.45] mt-1.5">{d.title}</h3>
@@ -217,7 +239,7 @@ function CheckItem({ check, index, defaultOpen }: { check: Check; index: number;
                     <RichText text={rest.join(' ')} />
                   </p>
                   {check.image && (
-                    <div className="mt-5 mb-1 max-w-[620px]">
+                    <div className={`mt-5 mb-1 ${check.image.layout === 'wide' ? '' : 'max-w-[620px]'}`}>
                       <EvidenceFrame item={check.image} large />
                     </div>
                   )}

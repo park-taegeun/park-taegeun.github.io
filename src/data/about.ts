@@ -74,7 +74,6 @@ export const PRINCIPLES: Principle[] = [
     highlight: '실제 원인을 좁혀 갑니다',
     evidence: [
       { label: '음성 연구 · 성능 저하 원인 분리', project: 'voice', tab: 'tone', anchor: 'check-1' },
-      { label: '띵동 · 학습과 실제 입력의 음량 불일치', project: 'ddingdong', anchor: 'check-2' },
       { label: '전통주로 · 배포 지연을 반증 실험으로 좁힘', project: 'jeontongjuro', anchor: 'check-3' },
     ],
   },
@@ -106,6 +105,8 @@ export interface TimelineItem {
   period: string
   note?: string
   ongoing?: boolean
+  /** 진행 중 배지 문구(기본: 진행 중) */
+  ongoingLabel?: string
   project?: ProjectKey
   /** 상세가 없는 항목(PICKL)은 랜딩 앵커로 */
   anchorId?: string
@@ -121,35 +122,29 @@ export const TIMELINE: TimelineGroup[] = [
     year: '연구 · 프로젝트',
     items: [
       {
-        title: '띵동 · 청각장애인 1인 가구를 위한 현관 소리 알림 시스템',
-        org: '졸업작품 · 주도',
-        period: '2026.05 ~ 진행 중 · 11월 최종 발표',
+        title: 'AI-Vault · AI 에이전트로 운영하는 개인 지식 위키',
+        org: '개인 프로젝트 · 주도',
+        period: '2026.10 ~',
         ongoing: true,
-        note: '요구사항 정의, 설계 결정, 실측과 검증 담당. 구현은 AI 코딩 에이전트에 맡기고 PR 142건 직접 검토',
-        project: 'ddingdong',
-      },
-      {
-        title: '전통주로 · 공공데이터 관광 서비스 백엔드',
-        org: '2026 관광데이터 활용 공모전 · 5인 팀 백엔드 참여',
-        period: '2026.07 ~ 09 · 심사 진행 중',
-        note: '4개 기관 데이터를 잇는 파이프라인과 조회 API 8개 담당. 원본은 보존하고 화면 값만 응답 단계에서 보정',
-        project: 'jeontongjuro',
+        ongoingLabel: '운영 중',
+        note: '5겹 차단 장치를 두고, 고정 질문으로 품질을 측정하며 운영',
+        project: 'aivault',
       },
       {
         title: '멀티모달 LLM 음성 연구',
         org: '정부 R&D 과제 · 학부연구생 참여',
-        period: '2026.06 ~ 진행 중',
+        period: '2026.06 ~',
         ongoing: true,
         note: '짧은 발화 받아쓰기 환각 진단, 목소리 어조를 LLM에 전달하는 오디오 모듈 검증',
         project: 'voice',
       },
       {
-        title: 'AI-Vault · AI 에이전트로 운영하는 개인 지식 위키',
-        org: '개인 프로젝트 · 주도',
-        period: '2026.10 구축 ~ 운영 중',
+        title: '띵동 · 청각장애인 1인 가구를 위한 현관 소리 알림 시스템',
+        org: '졸업작품 · 주도 · 11월 최종 발표',
+        period: '2026.05 ~',
         ongoing: true,
-        note: '5겹 차단 장치를 두고, 고정 질문으로 품질을 측정하며 운영',
-        project: 'aivault',
+        note: '요구사항 정의, 설계 결정, 실측과 검증 담당. 구현은 AI 코딩 에이전트에 맡기고 PR 142건 직접 검토',
+        project: 'ddingdong',
       },
       {
         title: 'decisions-rag · 결정 기록 검색기',
@@ -157,6 +152,13 @@ export const TIMELINE: TimelineGroup[] = [
         period: '2026.10',
         note: '채택 규칙을 먼저 고정한 평가로, 효과가 확인되지 않은 개선안을 걸러 냄',
         project: 'decisions-rag',
+      },
+      {
+        title: '전통주로 · 공공데이터 관광 서비스 백엔드',
+        org: '2026 관광데이터 활용 공모전 · 5인 팀 백엔드 참여 · 심사 진행 중',
+        period: '2026.07 ~ 09',
+        note: '4개 기관 데이터를 잇는 파이프라인과 조회 API 8개 담당. 원본은 보존하고 화면 값만 응답 단계에서 보정',
+        project: 'jeontongjuro',
       },
       {
         title: 'EEG 감정 인식 연구',
@@ -179,16 +181,16 @@ export const TIMELINE: TimelineGroup[] = [
     items: [
       {
         title: '학업',
-        period: '2027.02 졸업 예정',
-        note: '전자컴퓨터공학 전공 · 전체 평점 4.17/4.5(백분율 96.7) · 전공 평점 4.21/4.5',
+        period: '2021.03 ~ 2027.02',
+        note: '전자컴퓨터공학 전공, 2027년 2월 졸업 예정 · 전체 평점 4.17/4.5(백분율 96.7) · 전공 평점 4.21/4.5',
       },
       {
         title: '학기 성적',
-        period: '3-2 · 4-1',
+        period: '3-2 · 4-1 학기',
         note: '3학년 2학기 4.50(학기 석차 1/106), 4학년 1학기 4.50',
       },
-      { title: '자격', period: '취득', note: '정보처리기사 · SQLD' },
-      { title: '어학', period: '취득', note: 'TOEIC 845' },
+      { title: '자격', period: '2025.12 · 2026.06', note: 'SQLD(2025.12) · 정보처리기사(2026.06)' },
+      { title: '어학', period: '2025.02', note: 'TOEIC 845' },
       { title: '병역', period: '2022.03 ~ 2023.09', note: '육군 병장 만기 전역' },
     ],
   },
