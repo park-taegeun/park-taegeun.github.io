@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500" role="img" aria-label="배포 지연 원인을 좁힌 반증 실험 3개. CPU와 전송량을 배제하고 DB 왕복을 원인으로 특정">
+<title>배포 지연 원인을 좁힌 반증 실험 3개. CPU와 전송량을 배제하고 DB 왕복을 원인으로 특정</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker></defs>
+<rect width="1200" height="500" fill="#FFFFFF"/>
+<text x="40" y="54" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#101A2C" text-anchor="start">배포만 느린 이유: 가능성을 하나씩 지웠습니다</text>
+<text x="40" y="90" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">배포 응답 1.9~2.7초, 로컬의 약 100배. 원인을 단정하기 전에 반대 가능성부터 확인</text>
+<text x="40" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="700" fill="#586173" text-anchor="start">의심한 원인</text>
+<text x="230" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="700" fill="#586173" text-anchor="start">실험</text>
+<text x="600" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="700" fill="#586173" text-anchor="start">결과</text>
+<text x="900" y="146" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="700" fill="#586173" text-anchor="start">판정</text>
+<line x1="40" y1="162" x2="1160" y2="162" stroke="#C3CAD6" stroke-width="1.5"/>
+<text x="40" y="217" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#101A2C" text-anchor="start">서버 CPU</text>
+<text x="230" y="217" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#101A2C" text-anchor="start">같은 요청 5건, 병렬 vs 순차</text>
+<text x="600" y="217" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="start">2.18초 vs 9.53초</text>
+<text x="900" y="217" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#586173" text-anchor="start">CPU 아님</text>
+<text x="40" y="293" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#101A2C" text-anchor="start">전송량</text>
+<text x="230" y="293" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#101A2C" text-anchor="start">응답 크기 495B vs 47KB</text>
+<text x="600" y="293" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="start">걸린 시간 같음</text>
+<text x="900" y="293" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#586173" text-anchor="start">전송량 아님</text>
+<rect x="30" y="328" width="1140" height="64" rx="8" fill="#E1F3F4" stroke="#0E7C86" stroke-width="1.5"/>
+<text x="40" y="369" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="700" fill="#0E7C86" text-anchor="start">DB 왕복</text>
+<text x="230" y="369" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#101A2C" text-anchor="start">쿼리 0 · 1 · 2개인 요청</text>
+<text x="600" y="369" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="start">0.30 · 0.66 · 0.85초</text>
+<text x="900" y="369" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="700" fill="#0E7C86" text-anchor="start">쿼리당 190~230ms</text>
+<text x="40" y="444" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="start">원인은 앱 서버와 DB가 서로 다른 리전에 있던 것. 팀원이 리전을 맞춘 뒤 쿼리당 6ms</text>
+<text x="40" y="474" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15.5" font-weight="400" fill="#586173" text-anchor="start">병렬이 순차보다 훨씬 빠르면 계산이 아니라 기다림이 병목입니다. 배포 환경 실측(2026.09.20), 진단은 본인 · 리전 이전은 팀원</text>
+</svg>

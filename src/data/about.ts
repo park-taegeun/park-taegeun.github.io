@@ -75,6 +75,7 @@ export const PRINCIPLES: Principle[] = [
     evidence: [
       { label: '음성 연구 · 성능 저하 원인 분리', project: 'voice', tab: 'tone', anchor: 'check-1' },
       { label: '띵동 · 학습과 실제 입력의 음량 불일치', project: 'ddingdong', anchor: 'check-2' },
+      { label: '전통주로 · 배포 지연을 반증 실험으로 좁힘', project: 'jeontongjuro', anchor: 'check-3' },
     ],
   },
   {
@@ -126,6 +127,13 @@ export const TIMELINE: TimelineGroup[] = [
         ongoing: true,
         note: '요구사항 정의, 설계 결정, 실측과 검증 담당. 구현은 AI 코딩 에이전트에 맡기고 PR 142건 직접 검토',
         project: 'ddingdong',
+      },
+      {
+        title: '전통주로 · 공공데이터 관광 서비스 백엔드',
+        org: '2026 관광데이터 활용 공모전 · 5인 팀 백엔드 참여',
+        period: '2026.07 ~ 09 · 심사 진행 중',
+        note: '4개 기관 데이터를 잇는 파이프라인과 조회 API 8개 담당. 원본은 보존하고 화면 값만 응답 단계에서 보정',
+        project: 'jeontongjuro',
       },
       {
         title: '멀티모달 LLM 음성 연구',

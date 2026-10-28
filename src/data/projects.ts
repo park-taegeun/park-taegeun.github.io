@@ -1,7 +1,7 @@
 // 프로젝트 1층(카드) 데이터. 문장은 원천 문서 01~04의 「사이트 문장」만 옮긴다.
 // 문장 규칙: 합니다체, em-dash 금지, 내부 용어 금지, 숫자 옆에 조건. 빌드 때 scripts/check-content.mjs가 검사한다.
 
-export type ProjectKey = 'ddingdong' | 'voice' | 'aivault' | 'decisions-rag' | 'eeg'
+export type ProjectKey = 'ddingdong' | 'jeontongjuro' | 'voice' | 'aivault' | 'decisions-rag' | 'eeg'
 
 export interface Project {
   key: ProjectKey
@@ -95,9 +95,52 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    key: 'voice',
+    key: 'jeontongjuro',
     tier: 'main',
     room: '02',
+    name: '전통주로',
+    fullName: '공공데이터로 양조장 여행을 잇는 관광 서비스의 백엔드',
+    accent: SIGNAL,
+    ink: NAVY,
+    tone: '#EAEEF2',
+    tintSoft: '#F2F4F7',
+    anchorId: 'selected-jeontongjuro',
+    ownership: '참여',
+    kind: '공모전 5인 팀 · 백엔드 데이터 파트',
+    period: '2026.07 ~ 09',
+    status: '심사 진행 중',
+    oneLine:
+      '전국 양조장 59곳과 주변 식당·관광지·숙소를 지도와 여행 코스로 묶는 모바일 웹 서비스입니다. 백엔드 2명 중 데이터 파트를 맡아, 4개 기관의 공공데이터를 하나로 잇는 파이프라인과 조회 API 8개를 담당했습니다.',
+    result:
+      '원본은 고치지 않고 화면으로 나가는 값만 보정해, 접속되지 않는 홈페이지 링크 5곳을 내리면서도 연락 수단이 하나도 없는 양조장은 0곳으로 유지했습니다. 자동완성으로 고른 항목이 검색되지 않던 오류 23건을 없앴고, 조회 API 8개는 모두 배포했습니다.',
+    problem:
+      '양조장과 제품은 aT, 지정 정보는 농림축산식품부, 주변 관광지는 한국관광공사, 좌표와 연락처는 카카오에 흩어져 있었고 기관 사이에 공통 식별자가 없었습니다. 원본에는 79자에서 끊긴 제품 설명, 특수문자가 변환된 채 저장된 문장, 오타가 난 주소 같은 문제도 있었습니다.',
+    role:
+      '수집·적재 파이프라인 16단계, 조회 API 8개, 응답 보정 정책 3종, 검증 체계, 한국관광공사 데이터 저장 신청을 맡았습니다(백엔드 저장소 머지 PR 129건 중 55건). 로그인·회원·추천 코스와 배포는 팀원이 맡았습니다. 구현은 Claude Code에 맡기고, 설계 판단·검증·머지는 직접 했습니다.',
+    decision:
+      'DB에는 원본을 그대로 두고, 화면으로 나가는 값만 응답 단계에서 고쳤습니다. 어떤 값이 원본이고 어떤 값이 보정인지 항상 구분되고, 원본이 나중에 채워지면 보정이 스스로 꺼집니다.',
+    skills: ['데이터 파이프라인', 'REST API 설계', '데이터 정합성 검증', '쿼리 성능', '공공데이터 거버넌스', '다직군 협업'],
+    tech: ['Java 17', 'Spring Boot 4', 'Spring Data JPA', 'PostgreSQL 16', 'OpenAPI 3.1(springdoc)', 'JUnit 5', '한국관광공사 TourAPI', '공공데이터포털 odcloud', 'Kakao Local API', 'Claude Code'],
+    glance: {
+      metric: '연락 수단 없는 양조장 0곳',
+      metricCond: '응답 기준 · 접속 불가 링크 5곳을 내린 뒤',
+      verb: '4개 기관 데이터를 잇고, 원본은 그대로 둔 채 화면으로 나가는 값만 응답 단계에서 보정했습니다.',
+      jobTags: ['백엔드', '데이터'],
+    },
+    previewImage: {
+      src: '/images/jeontongjuro/screens.webp',
+      alt: '전통주로 실제 서비스 화면 4장. 취향 기반 양조장 추천 홈, 양조장과 주변 장소 지도, 양조장 상세 정보, 양조장 중심 주변 코스',
+      caption: '실제 서비스 화면입니다. 화면 디자인과 프론트엔드는 팀원이 맡았고, 상세 화면의 대표 주종, 방문 방식, 한 줄 요약, 연락 버튼은 제가 맡은 상세 API 응답으로 채워집니다.',
+    },
+    og: {
+      title: '전통주로 · 공공데이터 관광 서비스 백엔드 | 박태근',
+      description: '2026 관광데이터 활용 공모전 5인 팀 백엔드(데이터 파트). 4개 기관 데이터를 잇는 16단계 파이프라인과 조회 API 8개, 원본은 보존하고 화면 값만 응답 단계에서 보정.',
+    },
+  },
+  {
+    key: 'voice',
+    tier: 'main',
+    room: '03',
     name: '멀티모달 LLM 음성 연구',
     fullName: '짧은 발화 환각 진단과 어조 모듈 검증',
     accent: SIGNAL,
@@ -139,7 +182,7 @@ export const PROJECTS: Project[] = [
   {
     key: 'aivault',
     tier: 'main',
-    room: '03',
+    room: '04',
     name: 'AI-Vault',
     fullName: 'AI 에이전트로 운영하는 개인 지식 위키',
     accent: SIGNAL,

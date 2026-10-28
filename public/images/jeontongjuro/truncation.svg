@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="원본 제품 설명 길이 분포. 70~77자 합 10건, 78자 83건, 79자 248건">
+<title>원본 제품 설명 길이 분포. 70~77자 합 10건, 78자 83건, 79자 248건</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker></defs>
+<rect width="1200" height="440" fill="#FFFFFF"/>
+<text x="40" y="54" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#101A2C" text-anchor="start">원본 제품 설명이 78·79자에 몰려 있었습니다</text>
+<text x="40" y="90" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">자연스러운 분포라면 생기지 않는 모양: 원본이 79자에서 자른 흔적</text>
+<text x="40" y="172" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#101A2C" text-anchor="start">70~77자 (합계)</text>
+<rect x="230" y="135" width="32.25806451612903" height="54" rx="6" fill="#C3CAD6" stroke="#C3CAD6" stroke-width="0"/>
+<text x="276.258064516129" y="172" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#101A2C" text-anchor="start">10건</text>
+<text x="40" y="250" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#101A2C" text-anchor="start">78자</text>
+<rect x="230" y="213" width="267.741935483871" height="54" rx="6" fill="#0E7C86" stroke="#0E7C86" stroke-width="0"/>
+<text x="511.741935483871" y="250" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#0E7C86" text-anchor="start">83건</text>
+<text x="40" y="328" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="20" font-weight="600" fill="#101A2C" text-anchor="start">79자</text>
+<rect x="230" y="291" width="800.0" height="54" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="0"/>
+<text x="1044.0" y="328" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#1A2B4A" text-anchor="start">248건</text>
+<text x="40" y="392" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="600" fill="#101A2C" text-anchor="start">끊긴 설명은 마지막 완결 문장까지 되돌리고, 뒤를 지어 붙이지 않았습니다.</text>
+<text x="40" y="422" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="16" font-weight="400" fill="#586173" text-anchor="start">「단맛이 적고 산미가」처럼 부정문이 실제로 있어, 이어 붙이면 뜻이 뒤집힐 수 있습니다. 78자 포함은 기획 승인 기준</text>
+</svg>

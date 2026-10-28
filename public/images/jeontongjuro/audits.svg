@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" aria-label="감사 관점별 발견 건수. 기능 0, 기능 0, 운영 4, 연동·정합 3, 종합 5축 1, 회귀 0, 경계·전체 1">
+<title>감사 관점별 발견 건수. 기능 0, 기능 0, 운영 4, 연동·정합 3, 종합 5축 1, 회귀 0, 경계·전체 1</title>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#586173"/></marker></defs>
+<rect width="1200" height="520" fill="#FFFFFF"/>
+<text x="40" y="54" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="28" font-weight="700" fill="#101A2C" text-anchor="start">같은 관점으로 다시 보면 0건, 관점을 바꾸자 결함이 나왔습니다</text>
+<text x="40" y="90" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="19" font-weight="400" fill="#586173" text-anchor="start">전수 감사 8회 중 결과가 기록된 7회. 본인 담당 영역에서 찾은 건수</text>
+<rect x="70" y="396" width="96" height="4" rx="2" fill="#C3CAD6" stroke="#C3CAD6" stroke-width="0"/>
+<text x="118" y="386" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#586173" text-anchor="middle">0건</text>
+<text x="118" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">기능</text>
+<text x="118" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">8/21</text>
+<rect x="228" y="396" width="96" height="4" rx="2" fill="#C3CAD6" stroke="#C3CAD6" stroke-width="0"/>
+<text x="276" y="386" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#586173" text-anchor="middle">0건</text>
+<text x="276" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">기능</text>
+<text x="276" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">8/26</text>
+<rect x="386" y="152" width="96" height="248" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="0"/>
+<text x="434" y="138" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#101A2C" text-anchor="middle">4건</text>
+<text x="434" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">운영</text>
+<text x="434" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">9/07</text>
+<rect x="544" y="214" width="96" height="186" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="0"/>
+<text x="592" y="200" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#101A2C" text-anchor="middle">3건</text>
+<text x="592" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">연동·정합</text>
+<text x="592" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">9/11</text>
+<text x="592" y="480" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="13.5" font-weight="400" fill="#586173" text-anchor="middle">고정 수치 오류 1 포함</text>
+<rect x="702" y="338" width="96" height="62" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="0"/>
+<text x="750" y="324" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#101A2C" text-anchor="middle">1건</text>
+<text x="750" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">종합 5축</text>
+<text x="750" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">9/13</text>
+<rect x="860" y="396" width="96" height="4" rx="2" fill="#C3CAD6" stroke="#C3CAD6" stroke-width="0"/>
+<text x="908" y="386" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#586173" text-anchor="middle">0건</text>
+<text x="908" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">회귀</text>
+<text x="908" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">9/13</text>
+<text x="908" y="480" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="13.5" font-weight="400" fill="#586173" text-anchor="middle">의도된 변경 1</text>
+<rect x="1018" y="338" width="96" height="62" rx="6" fill="#1A2B4A" stroke="#1A2B4A" stroke-width="0"/>
+<text x="1066" y="324" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="22" font-weight="700" fill="#101A2C" text-anchor="middle">1건</text>
+<text x="1066" y="432" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="17" font-weight="700" fill="#101A2C" text-anchor="middle">경계·전체</text>
+<text x="1066" y="456" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="15" font-weight="400" fill="#586173" text-anchor="middle">9/17</text>
+<text x="1066" y="480" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="13.5" font-weight="400" fill="#586173" text-anchor="middle">팀원 영역 기록 14 별도</text>
+<line x1="50" y1="400" x2="1160" y2="400" stroke="#C3CAD6" stroke-width="1.5"/>
+</svg>
