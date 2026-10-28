@@ -84,7 +84,7 @@ export const SHOWCASE: ShowcaseItem[] = [
       { text: '조회 API 8개 배포, 불러오는 건수를 5배로 늘려도 쿼리 수가 늘지 않음 (9/13 측정)', mark: '쿼리 수가 늘지 않음' },
     ],
     tech: ['Java 17', 'Spring Boot 4', 'Spring Data JPA', 'PostgreSQL 16', 'OpenAPI 3.1', 'TourAPI · Kakao Local', 'Claude Code'],
-    media: { kind: 'image', src: p('jeontongjuro').previewImage.src, alt: p('jeontongjuro').previewImage.alt, caption: '화면 디자인: 팀 디자이너 시안. 상세 화면의 정보와 연락 버튼은 제가 맡은 API에서 나옵니다' },
+    media: { kind: 'image', src: p('jeontongjuro').previewImage.src, alt: p('jeontongjuro').previewImage.alt, caption: '실제 서비스 화면. 화면은 팀원 담당, 상세 화면의 정보와 연락 버튼은 제가 맡은 API에서 나옵니다' },
   },
   {
     id: p('voice').anchorId,
