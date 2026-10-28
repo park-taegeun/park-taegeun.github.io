@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T00:31:03Z",
+  "updatedAt": "2026-10-28T00:33:05Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
@@ -10,10 +10,10 @@
     },
     "graduation": {
       "name": "졸업작품 기록",
-      "count": 96,
-      "lastPost": "2026-10-21",
-      "latestTitle": "[ 졸업작품 기록 (95) ]",
-      "latestUrl": "https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-95"
+      "count": 97,
+      "lastPost": "2026-10-27",
+      "latestTitle": "[ 졸업작품 기록 (96) ]",
+      "latestUrl": "https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-96"
     },
     "ai-ecosystem": {
       "name": "AI 생태계 탐험 로그",
