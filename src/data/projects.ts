@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
     anchorId: 'selected-ddingdong',
     ownership: '주도',
     kind: '개인 졸업작품',
-    period: '2026.05 ~ 진행 중',
+    period: '2026.03 ~ 진행 중',
     status: '11월 최종 발표',
     oneLine:
       '현관에서 나는 초인종, 노크, 화재경보 소리를 구분해 카카오톡으로 알리고, 방문자 사진과 방문자가 한 말의 자막까지 보내는 IoT 시스템입니다.',
@@ -107,8 +107,8 @@ export const PROJECTS: Project[] = [
     anchorId: 'selected-jeontongjuro',
     ownership: '참여',
     kind: '공모전 5인 팀 · 백엔드 데이터 파트',
-    period: '2026.07 ~ 09',
-    status: '심사 진행 중',
+    period: '2026.03 ~ 09',
+    status: '출품',
     oneLine:
       '전국 양조장 59곳과 주변 식당·관광지·숙소를 지도와 여행 코스로 묶는 모바일 웹 서비스입니다. 백엔드 2명 중 데이터 파트를 맡아, 4개 기관의 공공데이터를 하나로 잇는 파이프라인과 조회 API 8개를 담당했습니다.',
     result:

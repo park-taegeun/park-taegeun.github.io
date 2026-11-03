@@ -357,7 +357,7 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     limits: [
       { title: '보정 목록이 코드에 있음', body: '응답 보정 3종은 코드에 적은 목록이라, 원본이 바뀌면 손으로 정리해야 합니다. 더하는 보정은 원본이 채워지면 스스로 꺼지지만 코드는 남고, 대상이 2곳 이상으로 늘면 별도 테이블로 옮기는 것이 맞습니다.' },
       { title: '출처 표시', body: '서버는 사진마다 공공누리 저작권 유형을 내려 주지만, 화면에는 아직 출처 표시가 없습니다.' },
-      { title: '사용 지표', body: '심사용 배포 단계라 실제 이용 데이터가 없습니다. 공모전 결과는 발표 전입니다.' },
+      { title: '사용 지표', body: '심사용 배포 단계라 실제 이용 데이터가 없습니다.' },
     ],
     links: [
       { label: '백엔드 저장소', href: 'https://github.com/2026-kto-data-contest/Backend', note: '팀 공개 저장소 · 본인 PR 55건' },
