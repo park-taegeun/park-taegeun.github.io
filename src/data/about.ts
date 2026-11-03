@@ -141,7 +141,7 @@ export const TIMELINE: TimelineGroup[] = [
       {
         title: '띵동 · 청각장애인 1인 가구를 위한 현관 소리 알림 시스템',
         org: '졸업작품 · 주도 · 11월 최종 발표',
-        period: '2026.05 ~',
+        period: '2026.03 ~',
         ongoing: true,
         note: '요구사항 정의, 설계 결정, 실측과 검증 담당. 구현은 AI 코딩 에이전트에 맡기고 PR 142건 직접 검토',
         project: 'ddingdong',
@@ -155,8 +155,8 @@ export const TIMELINE: TimelineGroup[] = [
       },
       {
         title: '전통주로 · 공공데이터 관광 서비스 백엔드',
-        org: '2026 관광데이터 활용 공모전 · 5인 팀 백엔드 참여 · 심사 진행 중',
-        period: '2026.07 ~ 09',
+        org: '2026 관광데이터 활용 공모전 · 5인 팀 백엔드 참여 · 출품',
+        period: '2026.03 ~ 09',
         note: '4개 기관 데이터를 잇는 파이프라인과 조회 API 8개 담당. 원본은 보존하고 화면 값만 응답 단계에서 보정',
         project: 'jeontongjuro',
       },
