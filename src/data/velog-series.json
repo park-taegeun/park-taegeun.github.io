@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-03T02:56:33Z",
+  "updatedAt": "2026-11-04T01:26:26Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
-      "count": 88,
-      "lastPost": "2026-10-16",
-      "latestTitle": "[ LAB ]  89. 실전 모듈이 학습 때와 똑같이 계산하는가",
-      "latestUrl": "https://velog.io/@xorms/LAB-89.-%EC%8B%A4%EC%A0%84-%EB%AA%A8%EB%93%88%EC%9D%B4-%ED%95%99%EC%8A%B5-%EB%95%8C%EC%99%80-%EB%98%91%EA%B0%99%EC%9D%B4-%EA%B3%84%EC%82%B0%ED%95%98%EB%8A%94%EA%B0%80"
+      "count": 89,
+      "lastPost": "2026-11-03",
+      "latestTitle": "[ LAB ] 90. 다시 학습해 보니",
+      "latestUrl": "https://velog.io/@xorms/LAB-90.-%EB%8B%A4%EC%8B%9C-%ED%95%99%EC%8A%B5%ED%95%B4-%EB%B3%B4%EB%8B%88"
     },
     "graduation": {
       "name": "졸업작품 기록",
