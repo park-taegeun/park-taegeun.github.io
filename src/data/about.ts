@@ -108,6 +108,8 @@ export interface TimelineItem {
   /** 진행 중 배지 문구(기본: 진행 중) */
   ongoingLabel?: string
   project?: ProjectKey
+  /** 상세 페이지 안 특정 상자로 바로 이동(예: 음성 연구 상세의 공동 연구 상자) */
+  anchor?: string
   /** 상세가 없는 항목(PICKL)은 랜딩 앵커로 */
   anchorId?: string
 }
@@ -137,6 +139,16 @@ export const TIMELINE: TimelineGroup[] = [
         ongoing: true,
         note: '짧은 발화 받아쓰기 환각 진단, 목소리 어조를 LLM에 전달하는 오디오 모듈 검증',
         project: 'voice',
+      },
+      {
+        title: '한국어 유해 표현 분류 연구(KcELECTRA)',
+        org: '음성 연구와 같은 정부 과제 · 연구실 공동 연구 참여 · 학회 포스터 4인 중 3저자',
+        period: '2026.11',
+        ongoing: true,
+        ongoingLabel: '발표 예정',
+        note: '2026 한국디지털콘텐츠학회 추계종합학술대회 포스터(11.19~20). 중간 점수를 뺀 이진 분류에서 TF-IDF 기준 모델보다 정확도 5.71%p 높음',
+        project: 'voice',
+        anchor: 'coresearch',
       },
       {
         title: '띵동 · 청각장애인 1인 가구를 위한 현관 소리 알림 시스템',

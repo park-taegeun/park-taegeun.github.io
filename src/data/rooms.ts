@@ -83,6 +83,8 @@ export interface RoomData {
   links: { label: string; href?: string; note?: string }[]
   /** 인용 표기(논문) */
   citation?: string
+  /** 같은 과제에서 연구실 공동 연구로 참여한 일. 관련 링크 구간에 상자로만 두고 독립 카드로 만들지 않음 */
+  related?: { id: string; title: string; meta: string; body: string }[]
 }
 
 const VELOG = 'https://velog.io/@xorms'
@@ -572,6 +574,14 @@ export const ROOMS: Record<ProjectKey, RoomData> = {
     links: [
       { label: '실험 일지', href: `${VELOG}/series/AILAB`, note: 'velog ‘AI_LAB’' },
       { label: '코드', note: '과제 소속이라 비공개' },
+    ],
+    related: [
+      {
+        id: 'coresearch',
+        title: '같은 과제의 공동 연구 · 한국어 유해 표현 분류(KcELECTRA)',
+        meta: '연구실 공동 연구 참여 · 4인 중 3저자 · 2026 한국디지털콘텐츠학회 추계종합학술대회 포스터 · 2026.11.19~20 발표 예정',
+        body: '금칙어 목록만으로는 신조어나 문맥에 따라 뜻이 달라지는 유해 표현을 걸러 내기 어려워, 문맥을 반영하는 언어 모델로 판별하는 연구입니다. 한국어 뉴스 댓글(K-HATERS)에 사람이 모욕·욕설·위협·외설 항목별로 매긴 0~2점 중 가장 높은 값을 문장 점수로 삼았습니다. 예비 3분류 실험에서 중간 점수(1점) 문장은 55.1%만 1점으로 분류돼, 1점을 모든 분할에서 빼고 0점과 2점을 가르는 이진 분류로 문제를 다시 정의했습니다. KcELECTRA를 미세조정한 모델은 테스트 6,226건에서 정확도 88.93%, Macro-F1 0.8874로, 같은 정제·분할 조건의 TF-IDF+로지스틱 회귀(83.22%, 0.8294)보다 높았습니다. 1점 문장의 판별과 실제 대화·회의 환경에서의 성능은 평가하지 않았습니다. 포스터는 대화 맥락과 화자의 감정 변화 같은 멀티모달 정보를 더하는 것을 다음 단계로 제시했고, 이 가운데 목소리로 드러나는 변화는 위 ‘어조 모듈’이 다루는 정보입니다.',
+      },
     ],
   },
 
