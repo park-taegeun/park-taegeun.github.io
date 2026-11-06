@@ -223,19 +223,6 @@ export default function ProjectRoom() {
                   <ZoomFrame item={room.context.image} onZoom={setZoom} />
                 </div>
               )}
-              {room.context.related?.map((r) => (
-                <div
-                  key={r.title}
-                  className="mt-8 bg-panel px-5 py-5 sm:px-6"
-                  style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)' }}
-                >
-                  <p className="font-body font-bold text-ink text-[15px] break-keep">{r.title}</p>
-                  <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-1 break-keep">{r.meta}</p>
-                  <p className="font-body text-text-sub text-[14.5px] leading-[1.8] mt-3 max-w-[70ch] break-keep">
-                    <RichText text={r.body} lines={false} />
-                  </p>
-                </div>
-              ))}
             </section>
           )}
 
@@ -378,6 +365,21 @@ export default function ProjectRoom() {
 
           <section id="links" aria-label="관련 링크" className="scroll-mt-28">
             <BlockHead id="links" />
+            {/* 같은 과제의 공동 연구: 본인 담당 범위와 섞이지 않도록 관련 링크 구간에만 둔다 */}
+            {room.related?.map((r) => (
+              <div
+                key={r.id}
+                id={r.id}
+                className="mt-6 scroll-mt-28 bg-panel px-5 py-5 sm:px-6"
+                style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)' }}
+              >
+                <p className="font-body font-bold text-ink text-[15px] break-keep">{r.title}</p>
+                <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-1 break-keep">{r.meta}</p>
+                <p className="font-body text-text-sub text-[14.5px] leading-[1.8] mt-3 max-w-[70ch] break-keep">
+                  <RichText text={r.body} lines={false} />
+                </p>
+              </div>
+            ))}
             <div className="mt-6">
               <LinksBlock items={room.links} citation={room.citation} />
             </div>

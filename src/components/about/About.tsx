@@ -190,7 +190,7 @@ function TimelineEntry({ item }: { item: TimelineItem }) {
   const navigate = useNavigate()
   const linked = !!item.project || !!item.anchorId
   const open = () => {
-    if (item.project) void crossfadeToRoom(projectByKey(item.project), navigate)
+    if (item.project) void crossfadeToRoom(projectByKey(item.project), navigate, item.anchor ? `#${item.anchor}` : '')
     else if (item.anchorId) scrollToId(item.anchorId)
   }
   // 이력서처럼 왼쪽에 기간, 오른쪽에 내용. 기간 열 폭을 고정해 날짜가 한 줄로 내려 읽힌다.
