@@ -139,6 +139,15 @@ export const TIMELINE: TimelineGroup[] = [
         project: 'voice',
       },
       {
+        title: '한국어 유해 표현 분류 연구(KcELECTRA)',
+        org: '같은 정부 과제 · 연구실 공동 연구 참여 · 학회 포스터 4인 중 3저자',
+        period: '2026.11',
+        ongoing: true,
+        ongoingLabel: '발표 예정',
+        note: '2026 한국디지털콘텐츠학회 추계종합학술대회 포스터(11.19~20). 테스트 6,226건 정확도 88.93% · Macro-F1 0.8874',
+        project: 'voice',
+      },
+      {
         title: '띵동 · 청각장애인 1인 가구를 위한 현관 소리 알림 시스템',
         org: '졸업작품 · 주도 · 11월 최종 발표',
         period: '2026.03 ~',
