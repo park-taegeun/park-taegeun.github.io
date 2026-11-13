@@ -13,7 +13,7 @@
 <text x="325" y="162" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">음 높이 · 음색 · 그 변화량</text>
 <rect x="305" y="250" width="330" height="100" rx="12" fill="#FFFFFF" stroke="#1A2B4A" stroke-width="2" opacity="1"/>
 <text x="325" y="288" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="23" font-weight="700" fill="#1A2B4A" text-anchor="start">평소 대비 변화 63개</text>
-<text x="325" y="322" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">같은 사람 평소 목소리와의 차이</text>
+<text x="325" y="322" font-family="Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', sans-serif" font-size="18" font-weight="400" fill="#586173" text-anchor="start">같은 사람 평소와의 차이(믿는 만큼만)</text>
 <path d="M640,140 C680,140 680,215 715,215" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
 <path d="M640,300 C680,300 680,215 715,215" fill="none" stroke="#586173" stroke-width="2.5" marker-end="url(#ah)"/>
 <rect x="720" y="165" width="130" height="100" rx="12" fill="#EEF1F5" stroke="#DCE1E9" stroke-width="2" opacity="1"/>
