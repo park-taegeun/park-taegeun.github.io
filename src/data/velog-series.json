@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-13T01:53:27Z",
+  "updatedAt": "2026-11-14T01:28:33Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
-      "count": 89,
-      "lastPost": "2026-11-03",
-      "latestTitle": "[ LAB ] 90. 다시 학습해 보니",
-      "latestUrl": "https://velog.io/@xorms/LAB-90.-%EB%8B%A4%EC%8B%9C-%ED%95%99%EC%8A%B5%ED%95%B4-%EB%B3%B4%EB%8B%88"
+      "count": 91,
+      "lastPost": "2026-11-13",
+      "latestTitle": "[ LAB ] 92. 장면 탓을 빼고 보니",
+      "latestUrl": "https://velog.io/@xorms/LAB-92.-%EC%9E%A5%EB%A9%B4-%ED%83%93%EC%9D%84-%EB%B9%BC%EA%B3%A0-%EB%B3%B4%EB%8B%88"
     },
     "graduation": {
       "name": "졸업작품 기록",
