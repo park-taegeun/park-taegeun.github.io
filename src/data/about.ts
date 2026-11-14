@@ -201,7 +201,7 @@ export const TIMELINE: TimelineGroup[] = [
         period: '3-2 · 4-1 학기',
         note: '3학년 2학기 4.50(학기 석차 1/106), 4학년 1학기 4.50',
       },
-      { title: '자격', period: '2025.12 · 2026.06', note: 'SQLD(2025.12) · 정보처리기사(2026.06)' },
+      { title: '자격', period: '2025.12 ~ 2026.10', note: 'SQLD(2025.12) · 정보처리기사(2026.06) · AICE Associate(2026.10, KT·한국경제신문)' },
       { title: '어학', period: '2025.02', note: 'TOEIC 845' },
       { title: '병역', period: '2022.03 ~ 2023.09', note: '육군 병장 만기 전역' },
     ],
