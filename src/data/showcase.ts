@@ -43,10 +43,10 @@ export const SHOWCASE: ShowcaseItem[] = [
     group: '대표 프로젝트',
     project: 'ddingdong',
     name: '띵동',
-    listMeta: '졸업작품 · 2026.03 ~',
+    listMeta: '졸업작품 · 2026.03 ~ 11',
     ownership: '주도',
-    chips: ['개인 졸업작품', '2026.03 ~ 진행 중', '11월 최종 발표'],
-    role: '요구사항 정의, 설계 결정, 하드웨어 결선, 실기기 측정, 검증 설계. 코드는 Claude Code가 작성하고 PR 142건을 검토해 머지',
+    chips: ['개인 졸업작품', '2026.03 ~ 11', '2026.11 마감'],
+    role: '요구사항 정의, 설계 결정, 하드웨어 결선, 실기기 측정, 검증 설계. 코드는 Claude Code가 작성하고 PR 150여 건을 검토해 머지',
     summary: '현관 소리를 구분해 방문자 사진과 한 말의 자막까지 카카오톡으로 보내는 IoT 알림 시스템',
     summaryMark: '방문자 사진과 한 말의 자막까지',
     background: [
@@ -55,7 +55,7 @@ export const SHOWCASE: ShowcaseItem[] = [
     ],
     steps: ['소리 감지 시 2초 녹음과 거리 센서 값 전송', '서버가 4종 분류 후 소리별 발송 규칙 판정', '텍스트 알림 → 사진·음성 자막'],
     results: [
-      { text: '4종 소리 분류 macro F1 0.82 (평가 703클립, 개발 중 값)', mark: 'macro F1 0.82' },
+      { text: '4종 소리 분류 macro F1 0.82 (평가 703클립, 최종 모델 오프라인 값)', mark: 'macro F1 0.82' },
       { text: '평가셋 누수 79건을 찾아 정확도 정정' },
       { text: '사진·자막 알림 10.4~11.0초 (목표 15초, 노크 n=3)' },
     ],
