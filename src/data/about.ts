@@ -94,7 +94,7 @@ export const PRINCIPLES: Principle[] = [
     highlight: '직접 철회한 결론까지',
     evidence: [
       { label: '음성 연구 · 성공처럼 보인 결과를 철회', project: 'voice', tab: 'hallucination', anchor: 'check-0' },
-      { label: '띵동 · 결정 기록 8,200여 줄', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md' },
+      { label: '띵동 · 결정 기록 9,100여 줄', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md' },
     ],
   },
 ]
@@ -152,10 +152,9 @@ export const TIMELINE: TimelineGroup[] = [
       },
       {
         title: '띵동 · 청각장애인 1인 가구를 위한 현관 소리 알림 시스템',
-        org: '졸업작품 · 주도 · 11월 최종 발표',
-        period: '2026.03 ~',
-        ongoing: true,
-        note: '요구사항 정의, 설계 결정, 실측과 검증 담당. 구현은 AI 코딩 에이전트에 맡기고 PR 142건 직접 검토',
+        org: '졸업작품 · 주도 · 2026.11 마감',
+        period: '2026.03 ~ 11',
+        note: '요구사항 정의, 설계 결정, 실측과 검증 담당. 구현은 AI 코딩 에이전트에 맡기고 PR 150여 건 직접 검토',
         project: 'ddingdong',
       },
       {

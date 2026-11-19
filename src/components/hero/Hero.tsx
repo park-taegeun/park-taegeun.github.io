@@ -13,7 +13,7 @@ import Marked from '../Mark'
 import HeroVisual from './HeroVisual'
 
 const PROOFS: { key: ProjectKey; label: string; metric: string; cond: string }[] = [
-  { key: 'ddingdong', label: '띵동', metric: 'macro F1 0.82', cond: '평가 703클립 · 개발 중 값' },
+  { key: 'ddingdong', label: '띵동', metric: 'macro F1 0.82', cond: '평가 703클립 · 최종 모델' },
   { key: 'voice', label: '음성 연구', metric: 'CER 0.31 → 0.21', cond: '168발화 · 학습 1회' },
   { key: 'aivault', label: 'AI-Vault', metric: '위험 시도 4/4 차단', cond: '시연 1회 · 사람 커밋도 차단' },
 ]
