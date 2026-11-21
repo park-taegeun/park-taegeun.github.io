@@ -373,11 +373,20 @@ export default function ProjectRoom() {
                 className="mt-6 scroll-mt-28 bg-panel px-5 py-5 sm:px-6"
                 style={{ borderRadius: 'var(--frame-radius)', border: 'var(--frame-border)' }}
               >
-                <p className="font-body font-bold text-ink text-[15px] break-keep">{r.title}</p>
-                <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-1 break-keep">{r.meta}</p>
-                <p className="font-body text-text-sub text-[14.5px] leading-[1.8] mt-3 max-w-[70ch] break-keep">
-                  <RichText text={r.body} lines={false} />
-                </p>
+                <div className={r.image ? 'sm:grid sm:grid-cols-[minmax(0,1fr)_200px] sm:gap-6' : undefined}>
+                  <div>
+                    <p className="font-body font-bold text-ink text-[15px] break-keep">{r.title}</p>
+                    <p className="font-body text-text-muted text-[12.5px] leading-[1.6] mt-1 break-keep">{r.meta}</p>
+                    <p className="font-body text-text-sub text-[14.5px] leading-[1.8] mt-3 max-w-[70ch] break-keep">
+                      <RichText text={r.body} lines={false} />
+                    </p>
+                  </div>
+                  {r.image && (
+                    <div className="mt-5 sm:mt-0">
+                      <EvidenceFrame item={r.image} thumb onExpand={() => setZoom(r.image!)} />
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
             <div className="mt-6">
