@@ -94,7 +94,7 @@ export const PRINCIPLES: Principle[] = [
     highlight: '직접 철회한 결론까지',
     evidence: [
       { label: '음성 연구 · 성공처럼 보인 결과를 철회', project: 'voice', tab: 'hallucination', anchor: 'check-0' },
-      { label: '띵동 · 결정 기록 9,100여 줄', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md' },
+      { label: '띵동 · 결정 기록 9,600여 줄', href: 'https://github.com/park-taegeun/ddingdong/blob/main/docs/decisions.md' },
     ],
   },
 ]
