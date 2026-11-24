@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-23T01:47:26Z",
+  "updatedAt": "2026-11-24T05:21:07Z",
   "series": {
     "ai-lab": {
       "name": "AI_LAB",
-      "count": 91,
-      "lastPost": "2026-11-13",
-      "latestTitle": "[ LAB ] 92. 장면 탓을 빼고 보니",
-      "latestUrl": "https://velog.io/@xorms/LAB-92.-%EC%9E%A5%EB%A9%B4-%ED%83%93%EC%9D%84-%EB%B9%BC%EA%B3%A0-%EB%B3%B4%EB%8B%88"
+      "count": 92,
+      "lastPost": "2026-11-23",
+      "latestTitle": "[ LAB ] 93. 정답을 바꿔 학습해 보니",
+      "latestUrl": "https://velog.io/@xorms/LAB-93.-%EC%A0%95%EB%8B%B5%EC%9D%84-%EB%B0%94%EA%BF%94-%ED%95%99%EC%8A%B5%ED%95%B4-%EB%B3%B4%EB%8B%88"
     },
     "graduation": {
       "name": "졸업작품 기록",
-      "count": 100,
-      "lastPost": "2026-11-05",
-      "latestTitle": "[ 졸업작품 기록 (99) ]",
-      "latestUrl": "https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-99"
+      "count": 102,
+      "lastPost": "2026-11-24",
+      "latestTitle": "[ 졸업작품 기록 (101) ]  ",
+      "latestUrl": "https://velog.io/@xorms/%EC%A1%B8%EC%97%85%EC%9E%91%ED%92%88-%EA%B8%B0%EB%A1%9D-101"
     },
     "ai-ecosystem": {
       "name": "AI 생태계 탐험 로그",
